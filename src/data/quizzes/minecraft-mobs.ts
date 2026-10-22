@@ -11,14 +11,14 @@ export const minecraftMobs: Quiz = {
       name: 'Creeper',
       emoji: '💥',
       description:
-        "Discret, un peu timide, tu gardes tout pour toi… jusqu'au moment où ça explose. Tu as un cœur immense, tu veux juste des câlins, mais tu as du mal à gérer tes émotions. Les gens se méfient de toi, à tort.",
+        "Discret·ète, un peu timide, tu gardes tout pour toi… jusqu'au moment où ça explose. Tu as un cœur immense, tu veux juste des câlins, mais tu as du mal à gérer tes émotions. Les gens se méfient de toi, à tort.",
     },
     {
       id: 'enderman',
       name: 'Enderman',
       emoji: '👁️',
       description:
-        "Mystérieux et insaisissable, tu apparais et disparais quand ça te chante. Tu collectionnes des choses étranges et tu n'aimes pas qu'on te dévisage. Les gens ne te comprennent pas toujours, et c'est très bien comme ça.",
+        "Mystérieux·se et insaisissable, tu apparais et disparais quand ça te chante. Tu collectionnes des choses étranges et tu n'aimes pas qu'on te dévisage. Les gens ne te comprennent pas toujours, et c'est très bien comme ça.",
     },
     {
       id: 'cow',
@@ -39,7 +39,7 @@ export const minecraftMobs: Quiz = {
       name: 'Zombie',
       emoji: '🧟',
       description:
-        "Pas du matin, toujours affamé·e, tu avances lentement mais tu ne lâches jamais rien. Tu suis le mouvement et tu es bien entouré·e. Certains appellent ça de la paresse, toi tu appelles ça économiser ton énergie.",
+        "Pas du matin, toujours affamé·e, tu avances lentement mais tu ne lâches jamais rien. Tu suis le mouvement et tu es bien entouré·e. Certaines personnes appellent ça de la paresse, toi tu appelles ça économiser ton énergie.",
     },
     {
       id: 'skeleton',
@@ -67,7 +67,7 @@ export const minecraftMobs: Quiz = {
       name: 'Golem de fer',
       emoji: '🛡️',
       description:
-        'Protecteur·rice, solide et fiable, tu veilles sur ceux qui en ont besoin. Impressionnant·e de loin, tu offres des coquelicots de près. Ton sens de la justice est inébranlable.',
+        'Protecteur·rice, solide et fiable, tu veilles sur les personnes qui en ont besoin. Impressionnant·e de loin, tu offres des coquelicots de près. Ton sens de la justice est inébranlable.',
     },
     {
       id: 'bee',
@@ -106,7 +106,7 @@ export const minecraftMobs: Quiz = {
         { id: 'explore', text: 'Partir explorer droit devant, sans jamais te retourner.', weights: { enderman: 0.7, cat: 0.6 } },
         { id: 'trade', text: 'Trouver un village et faire du commerce.', weights: { villager: 1 } },
         { id: 'garden', text: 'Construire une jolie maison avec un jardin fleuri.', weights: { bee: 1, cow: 0.5 } },
-        { id: 'team-up', text: 'Trouver d’autres joueurs et faire équipe.', weights: { wolf: 1, zombie: 0.4, bee: 0.4 } },
+        { id: 'team-up', text: 'Trouver d’autres joueur·euses et faire équipe.', weights: { wolf: 1, zombie: 0.4, bee: 0.4 } },
         { id: 'nothing', text: 'Rien. Tu regardes le soleil se coucher et tu attends.', weights: { bat: 1, cow: 0.3 } },
       ],
     },
@@ -142,7 +142,7 @@ export const minecraftMobs: Quiz = {
         { id: 'cozy-shelter', text: 'T’es déjà fait un petit abri confortable, tu attends le matin au chaud.', weights: { villager: 1, bee: 0.5 } },
         { id: 'hole', text: 'Creuses un trou, t’enfermes dedans et fixes le mur jusqu’au matin. Problème réglé.', weights: { zombie: 1, bat: 0.5 } },
         { id: 'night-walk', text: 'En profites pour partir seul·e explorer, la nuit c’est plus intéressant.', weights: { enderman: 1, cat: 0.4 } },
-        { id: 'stick-together', text: 'Restes collé·e aux autres joueurs, on est plus forts ensemble.', weights: { wolf: 1, zombie: 0.4 } },
+        { id: 'stick-together', text: 'Restes collé·e aux autres, on est plus fort·es ensemble.', weights: { wolf: 1, zombie: 0.4 } },
         { id: 'guard', text: 'Montes la garde pendant que les autres dorment.', weights: { 'iron-golem': 1, wolf: 0.4 } },
         { id: 'jumpy', text: 'Sursautes à chaque bruit, mais tu fais comme si de rien n’était.', weights: { creeper: 1 } },
       ],
@@ -192,7 +192,7 @@ export const minecraftMobs: Quiz = {
       text: 'Tu tombes sur un énorme tas de diamants. Tu…',
       answers: [
         { id: 'share', text: 'Les partages avec toute ta bande.', weights: { wolf: 1, cow: 0.5 } },
-        { id: 'armor', text: 'Fabriques des armures pour ceux qui en ont besoin.', weights: { 'iron-golem': 1, cow: 0.4 } },
+        { id: 'armor', text: 'Fabriques des armures pour les personnes qui en ont besoin.', weights: { 'iron-golem': 1, cow: 0.4 } },
         { id: 'hide', text: 'Les caches quelque part et n’en parles à personne.', weights: { enderman: 1, creeper: 0.3 } },
         { id: 'show-off', text: 'Te fabriques une épée en diamant et la montres à tout le monde.', weights: { cat: 1, skeleton: 0.4 } },
         { id: 'few', text: 'En prends quelques-uns et laisses le reste. Pas besoin de plus.', weights: { cow: 1 } },
@@ -216,7 +216,7 @@ export const minecraftMobs: Quiz = {
       category: 'values',
       text: 'Tu ne peux garder qu’une seule chose de ta vie actuelle. Laquelle ?',
       answers: [
-        { id: 'friends', text: 'Tes amis.', weights: { wolf: 1, bee: 0.5, villager: 0.3 } },
+        { id: 'friends', text: 'Tes ami·es.', weights: { wolf: 1, bee: 0.5, villager: 0.3 } },
         { id: 'peace', text: 'Ta tranquillité.', weights: { cat: 0.8, cow: 0.8, bat: 0.5, enderman: 0.4 } },
         { id: 'treasures', text: 'Tes petits trésors : souvenirs, collections, objets que personne d’autre ne comprend.', weights: { enderman: 1 } },
         { id: 'routine', text: 'Ta routine. Sans elle, c’est le chaos.', weights: { villager: 1, bee: 0.5, 'iron-golem': 0.4 } },
@@ -229,7 +229,7 @@ export const minecraftMobs: Quiz = {
       category: 'absurd-scenario',
       text: 'Une apocalypse zombie commence. Ton plan ?',
       answers: [
-        { id: 'lead', text: 'Tu prends la tête de la résistance et tu protèges les survivants.', weights: { 'iron-golem': 1, wolf: 0.6 } },
+        { id: 'lead', text: 'Tu prends la tête de la résistance et tu protèges les survivant·es.', weights: { 'iron-golem': 1, wolf: 0.6 } },
         { id: 'crowd', text: 'Tu suis le plus gros groupe, c’est sûrement le plus sûr.', weights: { zombie: 1, cow: 0.4 } },
         { id: 'watch', text: 'Tu observes de loin et tu attends le bon moment.', weights: { skeleton: 1, enderman: 0.4 } },
         { id: 'chaos', text: 'Tu paniques, tu cours partout… et ça marche étonnamment bien.', weights: { creeper: 1 } },
@@ -253,9 +253,9 @@ export const minecraftMobs: Quiz = {
       category: 'social',
       text: 'Quelqu’un te dévisage dans le métro. Tu…',
       answers: [
-        { id: 'stare-back', text: 'Le fixes en retour jusqu’à ce qu’il détourne les yeux.', weights: { enderman: 1, skeleton: 0.6 } },
+        { id: 'stare-back', text: 'Fixes en retour jusqu’à ce qu’iel détourne les yeux.', weights: { enderman: 1, skeleton: 0.6 } },
         { id: 'panic', text: 'Paniques intérieurement et fais semblant de lire tes messages.', weights: { creeper: 1 } },
-        { id: 'smile', text: 'Lui souris. Il veut peut-être devenir ton ami.', weights: { villager: 1, cow: 0.5 } },
+        { id: 'smile', text: 'Lui souris. Iel veut peut-être devenir ton ami·e.', weights: { villager: 1, cow: 0.5 } },
         { id: 'oblivious', text: 'Ne remarques rien, tu es dans ton monde.', weights: { bat: 1, zombie: 0.5 } },
         { id: 'check', text: 'Vérifies discrètement que tout le monde autour de toi va bien.', weights: { 'iron-golem': 1, wolf: 0.4 } },
       ],
@@ -275,7 +275,7 @@ export const minecraftMobs: Quiz = {
     {
       id: 'friends-say',
       category: 'introspection',
-      text: 'Qu’est-ce que tes amis disent de toi quand tu n’es pas là ?',
+      text: 'Qu’est-ce que tes ami·es disent de toi quand tu n’es pas là ?',
       answers: [
         { id: 'reliable', text: "Qu'on peut toujours compter sur toi.", weights: { 'iron-golem': 1, wolf: 0.8 } },
         { id: 'unpredictable', text: 'Que tu es adorable, mais imprévisible.', weights: { creeper: 1, cat: 0.5 } },

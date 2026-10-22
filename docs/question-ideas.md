@@ -1,6 +1,6 @@
 # Question ideas
 
-Unscored writing material. Copy a question into a quiz, adapt the answers to its personalities, then weight them. Headings are the `category` values.
+Unscored writing material. Pick an idea no other quiz already uses, adapt the answers to the quiz's personalities, then weight them. Headings are the `category` values.
 
 ## funny
 
@@ -13,7 +13,7 @@ Unscored writing material. Copy a question into a quiz, adapt the answers to its
 ## introspection
 
 - Quand tu es en colère, ça ressemble à quoi ?
-- Qu'est-ce que tes amis disent de toi quand tu n'es pas là ?
+- Qu'est-ce que tes ami·es disent de toi quand tu n'es pas là ?
 - Ta plus grande qualité ?
 - Le défaut que tu refuses d'admettre ?
 - Qu'est-ce qui te recharge vraiment : être seul·e ou entouré·e ?
@@ -39,8 +39,8 @@ Unscored writing material. Copy a question into a quiz, adapt the answers to its
 
 - Tu arrives à une soirée où tu ne connais presque personne.
 - Dans un projet de groupe, tu es…
-- Dans ton groupe d'amis, tu es…
-- Un ami a 30 minutes de retard. Ta réaction ?
+- Dans ton groupe d'ami·es, tu es…
+- Un·e ami·e a 30 minutes de retard. Ta réaction ?
 - Quelqu'un raconte une blague pas drôle. Tu…
 
 ## stress

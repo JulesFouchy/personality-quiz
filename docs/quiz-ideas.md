@@ -9,3 +9,5 @@ Quizzes to build later.
 - Quel courant littéraire es-tu ?
 - Quel super-héros ou super-héroïne es-tu ?
 - Quel langage de programmation es-tu ?
+- Quel animal es-tu ?
+- Quel collègue es-tu ?

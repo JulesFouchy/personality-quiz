@@ -39,6 +39,8 @@ export interface Quiz {
   title: string;
   emoji: string;
   description: string;
+  /** Not listed or playable on the deployed site yet; still available in `npm run dev`. */
+  hidden?: boolean;
   personalities: Personality[];
   questions: Question[];
 }

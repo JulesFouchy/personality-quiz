@@ -9,7 +9,7 @@ Static Vite + TypeScript site, no backend. Each quiz is a self-contained file in
 - `npm run balance`: win frequency per personality over random playthroughs (informational)
 - `npm run build`: typecheck + static build into `dist/`
 
-Every push to `main` deploys the site to GitHub Pages (`.github/workflows/deploy.yml`).
+Every push to `main` deploys the site to GitHub Pages (`.github/workflows/deploy.yml`). A quiz with `hidden: true` stays off the deployed site but is listed in `npm run dev`.
 
 ## Committing (Claude)
 
@@ -18,7 +18,8 @@ In this repo Claude commits and pushes itself, but only once the user has valida
 ## Conventions
 
 - Code is English only, with American spelling (identifiers, ids, file names, comments). Only user-facing text is French.
-- Questions are not shared between quizzes: copy one and adapt it. `docs/question-ideas.md` is the pool of unscored ideas.
+- User-facing French is inclusive everywhere, with no exception: never default to the masculine for the player or for unspecified people. Prefer neutral wording ("les personnes qui…", "ton équipe") "iel" for il/elle and "le.a" for le/la, otherwise use the point médian (`ami·e`, `ami·es`, `fort·es`).
+- Don't reuse a question, or a close variant of its situation, from another quiz: people play them all and each quiz should feel fresh. Reuse is only acceptable between quizzes released about a month apart. `docs/question-ideas.md` is the pool of unscored ideas.
 
 ## Writing questions
 

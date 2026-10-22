@@ -1,4 +1,4 @@
-import { quizzes } from '../quizzes';
+import { playableQuizzes } from '../quizzes';
 import { answerContributions, personalitiesFor, score, winners, type PersonalityWeight } from '../scoring';
 import type { Quiz } from '../types';
 import { animateDetails } from './details';
@@ -13,11 +13,11 @@ export function homeView(): Node {
     'main',
     { class: 'page' },
     el('h1', { class: 'site-title' }, 'Quiz de personnalité'),
-    el('p', { class: 'muted' }, 'Réponds honnêtement… ou pas. Puis compare avec tes amis.'),
+    el('p', { class: 'muted' }, 'Réponds honnêtement… ou pas. Puis compare avec tes ami·es.'),
     el(
       'ul',
       { class: 'quiz-list' },
-      ...quizzes.map((quiz) =>
+      ...playableQuizzes.map((quiz) =>
         el(
           'li',
           {},

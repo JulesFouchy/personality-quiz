@@ -18,7 +18,7 @@ export const elements: Quiz = {
       name: 'Eau',
       emoji: '🌊',
       description:
-        "Sensible et profond·e, tu ressens tout et tu comprends les autres mieux qu'eux-mêmes. Tu t'adaptes à tout, mais n'oublie pas : l'eau finit toujours par creuser la pierre.",
+        "Sensible et profond·e, tu ressens tout et tu comprends les autres mieux que personne. Tu t'adaptes à tout, mais n'oublie pas : l'eau finit toujours par creuser la pierre.",
     },
     {
       id: 'earth',
@@ -44,14 +44,15 @@ export const elements: Quiz = {
   ],
   questions: [
     {
-      id: 'weekend',
+      id: 'rainy-day',
       category: 'habits',
-      text: 'Ton week-end idéal ?',
+      text: 'Il pleut toute la journée. Tu…',
       answers: [
-        { id: 'party', text: 'Faire la fête jusqu’au bout de la nuit.', weights: { fire: 1 } },
-        { id: 'deep-talk', text: 'Une longue discussion avec un·e ami·e autour d’un café.', weights: { water: 1, earth: 0.3 } },
-        { id: 'home', text: 'Jardiner, cuisiner, rester tranquille à la maison.', weights: { earth: 1 } },
-        { id: 'whim', text: 'Partir sur un coup de tête, on verra bien où.', weights: { air: 1 } },
+        { id: 'go-out', text: 'Sors quand même. Ce n’est pas la pluie qui va t’arrêter.', weights: { fire: 1 } },
+        { id: 'watch-rain', text: 'Regardes la pluie tomber, une musique douce dans les oreilles.', weights: { water: 1 } },
+        { id: 'tidy-up', text: 'En profites pour ranger et bricoler.', weights: { earth: 1 } },
+        { id: 'rabbit-hole', text: 'Te perds pendant des heures dans un sujet au hasard sur internet.', weights: { air: 1 } },
+        { id: 'invent', text: 'Inventes un jeu complètement nouveau.', weights: { lightning: 1, air: 0.4 } },
       ],
     },
     {
@@ -80,7 +81,7 @@ export const elements: Quiz = {
     {
       id: 'life-tradeoff',
       category: 'dilemma',
-      text: 'Tu préfères…',
+      text: 'Quelle vie choisirais-tu ?',
       answers: [
         { id: 'know-all', text: 'Tout savoir, mais ne rien pouvoir changer.', weights: { air: 1, water: 0.4 } },
         { id: 'change-all', text: 'Tout pouvoir changer, mais ne rien savoir.', weights: { fire: 1 } },
@@ -89,14 +90,15 @@ export const elements: Quiz = {
       ],
     },
     {
-      id: 'group-role',
+      id: 'new-city',
       category: 'social',
-      text: 'Dans ton groupe d’amis, tu es…',
+      text: 'Tu emménages dans une ville où tu ne connais personne. Premier réflexe ?',
       answers: [
-        { id: 'hype', text: 'La personne qui met l’ambiance.', weights: { fire: 1 } },
-        { id: 'confidant', text: 'La personne à qui on se confie.', weights: { water: 1 } },
-        { id: 'organizer', text: 'La personne qui organise tout.', weights: { earth: 1 } },
-        { id: 'ideas', text: 'La personne qui a toujours de nouvelles idées.', weights: { air: 1 } },
+        { id: 'party', text: 'Organiser une soirée pour rencontrer du monde.', weights: { fire: 1 } },
+        { id: 'call-home', text: 'Appeler tes proches pour tout leur raconter.', weights: { water: 1 } },
+        { id: 'nest', text: 'Installer ton chez-toi avant tout le reste.', weights: { earth: 1 } },
+        { id: 'explore', text: 'Partir explorer chaque rue.', weights: { air: 1 } },
+        { id: 'crazy-project', text: 'Lancer un projet fou dont toute la ville parlera.', weights: { lightning: 1, fire: 0.4 } },
       ],
     },
     {
@@ -127,7 +129,7 @@ export const elements: Quiz = {
       category: 'absurd-scenario',
       text: 'Tu deviens magicien·ne pour une journée. Tu…',
       answers: [
-        { id: 'revenge', text: 'Te venges gentiment de tous ceux qui t’ont embêté·e.', weights: { fire: 1, lightning: 0.3 } },
+        { id: 'revenge', text: 'Te venges gentiment de toutes les personnes qui t’ont embêté·e.', weights: { fire: 1, lightning: 0.3 } },
         { id: 'wishes', text: 'Exauces un vœu pour chacun de tes proches.', weights: { water: 1, earth: 0.4 } },
         { id: 'fix-home', text: 'Répares tout ce qui est cassé chez toi.', weights: { earth: 1 } },
         { id: 'world-tour', text: 'Fais le tour du monde en une journée.', weights: { air: 1 } },
@@ -135,14 +137,15 @@ export const elements: Quiz = {
       ],
     },
     {
-      id: 'childhood-memory',
-      category: 'nostalgia',
-      text: 'Ton meilleur souvenir d’enfance ressemble à…',
+      id: 'holiday-photos',
+      category: 'habits',
+      text: 'Sur tes photos de vacances, on voit surtout…',
       answers: [
-        { id: 'treehouse', text: 'Des journées entières à construire des cabanes.', weights: { earth: 1 } },
-        { id: 'best-friend', text: 'Des heures à parler avec ton ou ta meilleur·e ami·e.', weights: { water: 1 } },
-        { id: 'travels', text: 'Des voyages, des nouvelles villes, des nouvelles têtes.', weights: { air: 1 } },
-        { id: 'mischief', text: 'Les bêtises que tu faisais avec ta bande.', weights: { fire: 1, lightning: 0.4 } },
+        { id: 'dancing', text: 'Toi, en train de danser.', weights: { fire: 1 } },
+        { id: 'loved-ones', text: 'Les gens que tu aimes.', weights: { water: 1 } },
+        { id: 'same-places', text: 'Des paysages calmes, souvent les mêmes endroits.', weights: { earth: 1 } },
+        { id: 'new-places', text: 'Un endroit différent sur chaque photo.', weights: { air: 1 } },
+        { id: 'weird', text: 'Des trucs bizarres que personne d’autre n’aurait photographiés.', weights: { lightning: 1, air: 0.4 } },
       ],
     },
     {
