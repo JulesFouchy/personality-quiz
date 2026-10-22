@@ -2,7 +2,7 @@ import type { Quiz } from '../../types';
 
 export const minecraftMobs: Quiz = {
   id: 'minecraft-mobs',
-  title: 'Quel mob de Minecraft es-tu ?',
+  title: 'Quel mob Minecraft es-tu ?',
   emoji: '⛏️',
   description: 'Creeper explosif, enderman mystérieux ou vache zen ? Découvre quel mob se cache en toi.',
   personalities: [
