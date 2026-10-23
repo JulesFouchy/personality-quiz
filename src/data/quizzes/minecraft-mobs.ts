@@ -235,7 +235,8 @@ export const minecraftMobs: Quiz = {
       text: 'Une apocalypse zombie commence. Ton plan ?',
       answers: [
         { id: 'lead', text: 'Tu prends la tête de la résistance et tu protèges les survivant·es.', weights: { 'iron-golem': 1, wolf: 0.6 } },
-        { id: 'business-as-usual', text: 'Tu continues ta vie comme si de rien n’était, on verra bien.', weights: { zombie: 0.7, bat: 0.4 } },
+        { id: 'loved-ones', text: 'Tu fonces retrouver tes proches, le reste attendra.', weights: { wolf: 1 } },
+        { id: 'give-up', text: 'Autant devenir un zombie tout de suite, de toute façon c’est perdu d’avance.', weights: { zombie: 0.8, bat: 0.6 } },
         { id: 'watch', text: 'Tu observes de loin et tu attends le bon moment.', weights: { skeleton: 1, enderman: 0.4 } },
         { id: 'chaos', text: 'Tu paniques, tu cours partout… et ça marche étonnamment bien.', weights: { bat: 0.8, creeper: 0.5 } },
         { id: 'solo', text: 'Tu pars discrètement et tu te débrouilles seul·e.', weights: { enderman: 1 } },
