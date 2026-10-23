@@ -2,8 +2,6 @@ import type { Answers, Quiz } from '../types';
 
 export interface Progress {
   answers: Answers;
-  /** Index of the question being shown; equals the question count once the quiz is finished. */
-  index: number;
 }
 
 const storageKey = (quiz: Quiz) => `quiz-progress:${quiz.id}`;
@@ -21,8 +19,7 @@ export function loadProgress(quiz: Quiz): Progress {
     const answerId = saved.answers?.[question.id];
     if (question.answers.some((a) => a.id === answerId)) answers[question.id] = answerId!;
   }
-  const index = typeof saved.index === 'number' ? Math.min(Math.max(0, saved.index), quiz.questions.length) : 0;
-  return { answers, index };
+  return { answers };
 }
 
 export function saveProgress(quiz: Quiz, progress: Progress): void {

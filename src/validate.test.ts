@@ -47,6 +47,16 @@ describe('validateQuiz', () => {
     expect(errors.join('\n')).toMatch(/unknown personality "c"/);
   });
 
+  it('rejects an answer that points at no personality', () => {
+    const errors = validateQuiz(
+      withAnswers([
+        { id: 'x', text: '', weights: { a: 1, b: 1 } },
+        { id: 'y', text: '', weights: { a: 0 } },
+      ]),
+    );
+    expect(errors.join('\n')).toMatch(/q1.y: points at no personality/);
+  });
+
   it('rejects a personality no question tells apart', () => {
     const errors = validateQuiz(
       withAnswers([
@@ -67,9 +77,24 @@ describe('validateQuiz', () => {
         { id: 'y', text: '', weights: {} },
       ],
     });
-    const errors = validateQuiz({ ...base, questions: [...base.questions, onlyA('q2'), onlyA('q3')] });
-    expect(errors.join('\n')).toMatch(/b: weighted on only 1\/3 questions, needs 2/);
+    const errors = validateQuiz({ ...base, questions: [...base.questions, onlyA('q2'), onlyA('q3'), onlyA('q4')] });
+    expect(errors.join('\n')).toMatch(/b: weighted on only 1\/4 questions, needs 2/);
     expect(errors.join('\n')).not.toMatch(/a: weighted/);
+  });
+
+  it('rejects a personality that wins far more or less than its fair share', () => {
+    const mostlyA = (id: string): Quiz['questions'][number] => ({
+      id,
+      text: '',
+      category: 'funny',
+      answers: [
+        ...['w', 'x', 'y', 'z'].map((answerId) => ({ id: answerId, text: '', weights: { a: 1 } })),
+        { id: 'v', text: '', weights: { b: 1 } },
+      ],
+    });
+    const errors = validateQuiz({ ...base, questions: ['q1', 'q2', 'q3'].map(mostlyA) }).join('\n');
+    expect(errors).toMatch(/a: wins \d+\.\d % of random playthroughs/);
+    expect(errors).toMatch(/b: wins \d+\.\d % of random playthroughs/);
   });
 
   it('rejects a personality that can only tie', () => {
@@ -86,5 +111,12 @@ describe('validateQuiz', () => {
 describe('quiz data', () => {
   it('is valid', () => {
     expect(validateQuizzes(quizzes)).toEqual([]);
+  });
+
+  it('has between 10 and 20 questions per quiz', () => {
+    for (const quiz of quizzes) {
+      expect(quiz.questions.length, quiz.id).toBeGreaterThanOrEqual(10);
+      expect(quiz.questions.length, quiz.id).toBeLessThanOrEqual(20);
+    }
   });
 });

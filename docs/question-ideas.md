@@ -18,6 +18,8 @@ Unscored writing material. Pick an idea no other quiz already uses, adapt the an
 - Le défaut que tu refuses d'admettre ?
 - Qu'est-ce qui te recharge vraiment : être seul·e ou entouré·e ?
 - Quand tu doutes, tu demandes conseil à qui ?
+- On vient surtout te voir pour…
+- Tu as blessé quelqu'un sans le vouloir. Tu…
 
 ## dilemma
 
@@ -33,7 +35,7 @@ Unscored writing material. Pick an idea no other quiz already uses, adapt the an
 - Tu deviens magicien·ne pour une journée. Tu…
 - Tu te réveilles dans la peau de ton animal de compagnie. Tu…
 - Tu es échoué·e sur une île déserte avec un seul objet. Lequel ?
-- Un extraterrestre te demande de lui présenter l'humanité. Tu l'emmènes où ?
+- Un·e extraterrestre te demande de lui présenter l'humanité. Tu l'emmènes où ?
 
 ## social
 
@@ -42,6 +44,8 @@ Unscored writing material. Pick an idea no other quiz already uses, adapt the an
 - Dans ton groupe d'ami·es, tu es…
 - Un·e ami·e a 30 minutes de retard. Ta réaction ?
 - Quelqu'un raconte une blague pas drôle. Tu…
+- Premier jour dans un nouveau travail. Tu…
+- Pour l'anniversaire d'un·e ami·e, tu…
 
 ## stress
 
@@ -49,6 +53,7 @@ Unscored writing material. Pick an idea no other quiz already uses, adapt the an
 - Un problème imprévu te tombe dessus. Tu…
 - Tu as raté ton train. Tu…
 - La veille d'un examen important, tu…
+- Tu attends depuis une heure dans une salle d'attente. Tu…
 
 ## aesthetic
 
@@ -56,6 +61,7 @@ Unscored writing material. Pick an idea no other quiz already uses, adapt the an
 - Choisis un son.
 - Choisis une couleur.
 - Choisis une saison.
+- Ce que tu écoutes en boucle en ce moment ?
 - Choisis une odeur.
 
 ## habits
@@ -65,6 +71,8 @@ Unscored writing material. Pick an idea no other quiz already uses, adapt the an
 - Ton week-end idéal ?
 - L'écran d'accueil de ton téléphone ressemble à quoi ?
 - Combien d'onglets ouverts en ce moment ?
+- Sur tes photos de vacances, on voit surtout…
+- Tu te lances dans un gros projet. Ça ressemble à quoi ?
 
 ## values
 
@@ -78,4 +86,4 @@ Unscored writing material. Pick an idea no other quiz already uses, adapt the an
 - Enfant, ton jeu préféré, c'était…
 - Ton meilleur souvenir d'enfance ressemble à…
 - Le dessin animé qui t'a marqué·e ?
-- Ce que tu voulais faire plus tard quand tu étais petit·e ?
+- Quel était ton métier de rêve quand tu étais enfant ? (déjà utilisée par le quiz astrologie)

@@ -1,10 +1,15 @@
+import { winRates } from './balance';
 import { score, weightOf, winners } from './scoring';
 import type { Answers, Question, Quiz } from './types';
 
 /** A question only steadies a personality's score if its answers differ by at least this much for it. */
 const MIN_WEIGHT_SPREAD = 0.5;
-/** Share of the questions that must weigh on each personality. Fewer make its score swing, so it wins more often than it should. */
-const MIN_COVERAGE = 0.5;
+/** Share of the questions that must weigh on each personality, so its result is never decided by a handful of answers. */
+const MIN_COVERAGE = 1 / 3;
+/** Allowed range for each personality's random-playthrough win rate, as a multiple of its fair share. */
+const MIN_WIN_SHARE = 0.5;
+const MAX_WIN_SHARE = 1.6;
+const PLAYTHROUGHS = 4000;
 
 export function weighsOn(question: Question, personalityId: string): boolean {
   const weights = question.answers.map((a) => weightOf(a, personalityId));
@@ -56,6 +61,14 @@ export function validateQuiz(quiz: Quiz): string[] {
   // The checks below score the quiz, which assumes the structure above is sound.
   if (errors.length > 0) return errors;
 
+  for (const question of quiz.questions) {
+    for (const answer of question.answers) {
+      if (!Object.values(answer.weights).some((w) => w > 0)) {
+        at(`${question.id}.${answer.id}`, 'points at no personality, so the recap shows it with no chip');
+      }
+    }
+  }
+
   const requiredCoverage = Math.ceil(MIN_COVERAGE * quiz.questions.length);
   for (const personality of quiz.personalities) {
     const coverage = quiz.questions.filter((q) => weighsOn(q, personality.id)).length;
@@ -73,6 +86,14 @@ export function validateQuiz(quiz: Quiz): string[] {
       at(personality.id, `can never win: even its best answers make ${top.map((s) => s.personality.id).join(', ')} win`);
     } else if (top.length > 1) {
       at(personality.id, `can only ever tie with ${top.filter((s) => s.personality.id !== personality.id).map((s) => s.personality.id).join(', ')}`);
+    }
+  }
+
+  const fairShare = 1 / quiz.personalities.length;
+  for (const [personalityId, rate] of winRates(quiz, PLAYTHROUGHS)) {
+    const share = rate / fairShare;
+    if (share < MIN_WIN_SHARE || share > MAX_WIN_SHARE) {
+      at(personalityId, `wins ${(100 * rate).toFixed(1)} % of random playthroughs, fair share is ${(100 * fairShare).toFixed(1)} % (allowed ${MIN_WIN_SHARE}× to ${MAX_WIN_SHARE}×)`);
     }
   }
   return errors;

@@ -5,8 +5,22 @@ import { animateDetails } from './details';
 import { el } from './dom';
 import { isComplete, loadProgress, saveProgress } from './progress';
 
+/** Resolved by the router through `resumeHash`, from the first question, so a link to it is never stale. */
 export const playHash = (quiz: Quiz) => `#/quiz/${quiz.id}`;
+/** Question numbers in the URL start at 1. */
+export const questionHash = (quiz: Quiz, index: number) => `#/quiz/${quiz.id}/${index + 1}`;
 export const resultHash = (quiz: Quiz) => `#/quiz/${quiz.id}/result`;
+
+/** The first unanswered question from `from` on, wrapping around to the start, or the result once there is none. */
+export function resumeHash(quiz: Quiz, from = 0): string {
+  const progress = loadProgress(quiz);
+  const total = quiz.questions.length;
+  for (let offset = 0; offset < total; offset++) {
+    const index = (from + offset) % total;
+    if (progress.answers[quiz.questions[index]!.id] === undefined) return questionHash(quiz, index);
+  }
+  return resultHash(quiz);
+}
 
 export function homeView(): Node {
   return el(
@@ -65,62 +79,59 @@ export function notFoundView(): Node {
   return el('main', { class: 'page' }, el('h1', {}, 'Quiz introuvable'), el('a', { href: '#/' }, '← Retour aux quiz'));
 }
 
-export function playView(quiz: Quiz): Node {
+/** Shows question `index`; each question has its own history entry, so the browser's back and forward buttons move between them. */
+export function playView(quiz: Quiz, index: number): Node {
   const progress = loadProgress(quiz);
-  const root = el('main', { class: 'page' });
-
-  const render = () => {
-    const question = quiz.questions[progress.index];
-    if (!question) {
-      location.replace(resultHash(quiz));
-      return;
-    }
-    const choose = (answerId: string) => {
-      progress.answers[question.id] = answerId;
-      progress.index += 1;
-      saveProgress(quiz, progress);
-      if (progress.index >= quiz.questions.length) location.hash = resultHash(quiz);
-      else render();
-    };
-    const back = () => {
-      progress.index -= 1;
-      saveProgress(quiz, progress);
-      render();
-    };
-    const total = quiz.questions.length;
-    root.replaceChildren(
-      el('a', { class: 'back-link', href: '#/' }, '← Tous les quiz'),
-      el('p', { class: 'quiz-name' }, `${quiz.emoji} ${quiz.title}`),
-      el(
-        'div',
-        { class: 'progress', role: 'progressbar', 'aria-valuemin': 0, 'aria-valuemax': total, 'aria-valuenow': progress.index },
-        el('div', { class: 'progress-fill', style: `width: ${(100 * progress.index) / total}%` }),
-      ),
-      el('p', { class: 'meta' }, `Question ${progress.index + 1} / ${total}`),
-      el('h1', { class: 'question' }, question.text),
-      el(
-        'div',
-        { class: 'answers' },
-        ...question.answers.map((answer) =>
-          el(
-            'button',
-            { class: `card answer${progress.answers[question.id] === answer.id ? ' selected' : ''}`, type: 'button', onclick: () => choose(answer.id) },
-            answer.text,
-          ),
-        ),
-      ),
-      el(
-        'div',
-        { class: 'play-nav' },
-        progress.index > 0 ? el('button', { class: 'link-button', type: 'button', onclick: back }, '← Question précédente') : '',
-        isComplete(quiz, progress) ? el('a', { class: 'link-button', href: resultHash(quiz) }, 'Voir mon résultat →') : '',
-      ),
-    );
-    window.scrollTo(0, 0);
+  const question = quiz.questions[index]!;
+  const total = quiz.questions.length;
+  // Goes to the next unanswered question, or the result once there is none. Only when changing an answer in a
+  // finished quiz does it step to the next question instead, so the answers can be reviewed one by one.
+  const choose = (answerId: string) => {
+    const reviewing = isComplete(quiz, progress);
+    progress.answers[question.id] = answerId;
+    saveProgress(quiz, progress);
+    location.hash = reviewing && index + 1 < total ? questionHash(quiz, index + 1) : resumeHash(quiz, index + 1);
   };
 
-  render();
-  return root;
+  return el(
+    'main',
+    { class: 'page' },
+    el('a', { class: 'back-link', href: '#/' }, '← Tous les quiz'),
+    el('p', { class: 'quiz-name' }, `${quiz.emoji} ${quiz.title}`),
+    el(
+      'nav',
+      { class: 'progress', 'aria-label': 'Questions' },
+      ...quiz.questions.map((q, i) => {
+        const answered = progress.answers[q.id] !== undefined;
+        const label = `Question ${i + 1}${answered ? ' (répondue)' : ''}`;
+        const dot = el('a', { class: `progress-dot${answered ? ' answered' : ''}`, href: questionHash(quiz, i), 'aria-label': label, title: label });
+        if (i === index) dot.setAttribute('aria-current', 'step');
+        return dot;
+      }),
+      resultFlag(quiz, isComplete(quiz, progress)),
+    ),
+    el('p', { class: 'meta' }, `Question ${index + 1} / ${total}`),
+    el('h1', { class: 'question' }, question.text),
+    el(
+      'div',
+      { class: 'answers' },
+      ...question.answers.map((answer) =>
+        el(
+          'button',
+          { class: `card answer${progress.answers[question.id] === answer.id ? ' selected' : ''}`, type: 'button', onclick: () => choose(answer.id) },
+          answer.text,
+        ),
+      ),
+    ),
+  );
+}
+
+/** Ends the row of question dots; opens the result once every question is answered. */
+function resultFlag(quiz: Quiz, complete: boolean): Node {
+  const label = complete ? 'Voir mon résultat' : 'Réponds à toutes les questions pour voir ton résultat';
+  const flag = el('button', { class: 'progress-flag', type: 'button', 'aria-label': label, title: label, onclick: () => (location.hash = resultHash(quiz)) }, '🏁');
+  if (!complete) flag.disabled = true;
+  return flag;
 }
 
 function chips(weights: PersonalityWeight[]): Node {
@@ -139,11 +150,6 @@ export function resultView(quiz: Quiz): Node {
   }
   const ranking = score(quiz, progress.answers);
   const top = winners(ranking);
-  // Goes back to the first question but keeps the answers, so you can confirm or change each one.
-  const restart = () => {
-    saveProgress(quiz, { ...progress, index: 0 });
-    location.hash = playHash(quiz);
-  };
 
   return el(
     'main',
@@ -241,7 +247,8 @@ export function resultView(quiz: Quiz): Node {
     el(
       'div',
       { class: 'actions' },
-      el('button', { class: 'button secondary', type: 'button', onclick: restart }, 'Refaire le quiz'),
+      // Keeps the answers, so you can confirm or change each one.
+      el('a', { class: 'button secondary', href: questionHash(quiz, 0) }, 'Refaire le quiz'),
       el('a', { class: 'button', href: '#/' }, 'Autres quiz'),
     ),
   );

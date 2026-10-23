@@ -3,6 +3,7 @@ const EASING = 'cubic-bezier(0.2, 0.8, 0.2, 1)';
 
 /**
  * Animates a <details> element's height when it opens or closes, and fades its content in.
+ * An open element also closes when its content is clicked, not just its summary.
  * Native <details> toggles instantly, and CSS can't yet animate to `height: auto` in every browser.
  */
 export function animateDetails(details: HTMLDetailsElement): HTMLDetailsElement {
@@ -10,8 +11,7 @@ export function animateDetails(details: HTMLDetailsElement): HTMLDetailsElement 
   if (!summary) return details;
   let running: Animation | undefined;
 
-  summary.addEventListener('click', (event) => {
-    event.preventDefault();
+  const toggle = () => {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
       details.open = !details.open;
       return;
@@ -43,6 +43,17 @@ export function animateDetails(details: HTMLDetailsElement): HTMLDetailsElement 
       details.style.overflow = '';
       running = undefined;
     };
+  };
+
+  summary.addEventListener('click', (event) => {
+    event.preventDefault();
+    toggle();
+  });
+  // Once open, a click anywhere in the content closes it too, unless it ends a text selection.
+  details.addEventListener('click', (event) => {
+    if (!details.open || summary.contains(event.target as Node)) return;
+    if (!getSelection()?.isCollapsed) return;
+    toggle();
   });
   return details;
 }
