@@ -1,7 +1,7 @@
 import { playableQuizzes } from '../quizzes';
 import { answerContributions, compatibility, personalitiesFor, score, winners, type PersonalityScore, type PersonalityWeight } from '../scoring';
-import { decodeAnswers, encodeAnswers, MAX_NAME_LENGTH } from '../share';
-import type { Answers, Quiz } from '../types';
+import { decodeAnswers, encodeAnswers, MAX_NAME_LENGTH, previewPath } from '../share';
+import type { Answers, Personality, Quiz } from '../types';
 import { animateDetails } from './details';
 import { el, frenchSpacing } from './dom';
 import { isComplete, loadProgress, loadSharedResult, loadShareName, saveProgress, saveSharedResult, saveShareName, type SharedResult } from './progress';
@@ -11,8 +11,9 @@ export const playHash = (quiz: Quiz) => `#/quiz/${quiz.id}`;
 /** Question numbers in the URL start at 1. */
 export const questionHash = (quiz: Quiz, index: number) => `#/quiz/${quiz.id}/${index + 1}`;
 export const resultHash = (quiz: Quiz) => `#/quiz/${quiz.id}/result`;
-export const sharedHash = (quiz: Quiz, { code, name }: SharedResult) =>
-  `#/quiz/${quiz.id}/shared/${code}${name ? `/${encodeURIComponent(name)}` : ''}`;
+/** A shared result as it follows "#" in a share link: the answers' code, then the sender's name if any. */
+const sharedFragment = ({ code, name }: SharedResult) => `${code}${name ? `/${encodeURIComponent(name)}` : ''}`;
+export const sharedHash = (quiz: Quiz, shared: SharedResult) => `#/quiz/${quiz.id}/shared/${sharedFragment(shared)}`;
 
 /** Where `playHash` leads: the first unanswered question, or the result once there is none. */
 export function resumeHash(quiz: Quiz): string {
@@ -36,7 +37,7 @@ export function homeView(): Node {
           {},
           el(
             'a',
-            { class: 'card quiz-card', href: playHash(quiz) },
+            { class: `card quiz-card${isComplete(quiz, loadProgress(quiz)) ? ' done' : ''}`, href: playHash(quiz) },
             el('span', { class: 'quiz-emoji', 'aria-hidden': 'true' }, quiz.emoji),
             el(
               'span',
@@ -306,8 +307,8 @@ function recapList(quiz: Quiz, answers: Answers, shared?: SharedRecap): Node {
   );
 }
 
-/** A link to these answers, copied or handed to the system share sheet. */
-function shareSection(quiz: Quiz, answers: Answers): Node {
+/** A link to these answers, copied or handed to the system share sheet; its preview shows `personality`, the sender's top match. */
+function shareSection(quiz: Quiz, answers: Answers, personality: Personality): Node {
   const code = encodeAnswers(quiz, answers);
   // The share sheet beats the clipboard on phones; on desktop it's an unexpected dialog.
   const useShareSheet = 'share' in navigator && matchMedia('(pointer: coarse)').matches;
@@ -324,7 +325,7 @@ function shareSection(quiz: Quiz, answers: Answers): Node {
   button.addEventListener('click', async () => {
     const name = input.value.trim();
     saveShareName(name);
-    const url = new URL(sharedHash(quiz, { code, name }), location.href).href;
+    const url = new URL(`${previewPath(quiz, personality)}#${sharedFragment({ code, name })}`, location.href).href;
     if (useShareSheet) {
       try {
         await navigator.share({ title: quiz.title, text: 'Compare ton résultat avec le mien !', url });
@@ -373,7 +374,7 @@ export function resultView(quiz: Quiz): Node {
     rankingList({ yours: ranking }, 'yours'),
     canCompare &&
       el('a', { class: 'card compare-link', href: sharedHash(quiz, shared) }, shared.name ? `Compare tes résultats avec ${shared.name} →` : 'Compare ton résultat avec celui de la personne qui t’a envoyé le lien →'),
-    shareSection(quiz, progress.answers),
+    shareSection(quiz, progress.answers, top[0]!.personality),
     el('h2', {}, 'Tes réponses'),
     el('p', { class: 'hint' }, 'Touche une question pour revoir toutes les réponses possibles.'),
     recapList(quiz, progress.answers),
