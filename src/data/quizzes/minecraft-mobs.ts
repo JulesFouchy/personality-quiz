@@ -275,7 +275,6 @@ export const minecraftMobs: Quiz = {
         { id: 'rebuild', text: 'Reconstruis tout, en mieux, dès ce soir.', weights: { bee: 1, 'iron-golem': 0.5 } },
         { id: 'walls', text: 'Construis des murs tout autour pour que ça n’arrive plus jamais.', weights: { 'iron-golem': 0.7, creeper: 0.4 } },
         { id: 'justice', text: 'Pars régler leur compte à tous les creepers du coin. Ça ne restera pas impuni.', weights: { 'iron-golem': 1, wolf: 0.4 } },
-        { id: 'sarcasm', text: 'Lâches un commentaire sarcastique, puis tu te remets au travail.', weights: { skeleton: 1 } },
         { id: 'quit', text: 'Éteins le jeu. Ça suffit pour aujourd’hui.', weights: { creeper: 0.6, piglin: 0.5 } },
         { id: 'tell-everyone', text: 'En parles à tout le monde pendant des semaines.', weights: { phantom: 1 } },
         { id: 'pool', text: 'Trouves que le cratère ferait une super piscine.', weights: { 'glow-squid': 1 } },

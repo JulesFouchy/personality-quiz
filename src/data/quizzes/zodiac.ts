@@ -182,7 +182,7 @@ export const zodiac: Quiz = {
     {
       id: 'failed-creation',
       category: 'social',
-      text: 'Ton ou ta meilleur·e ami·e te montre une création dont iel est très fier·ère, et c’est raté. Tu…',
+      text: 'Ton·ta meilleur·e ami·e te montre une création dont iel est très fier·ère, et c’est raté. Tu…',
       answers: [
         { id: 'honest-fixes', text: 'Lui dis franchement ce qui ne va pas, et comment l’améliorer.', weights: { sagittarius: 0.7, virgo: 0.7 } },
         { id: 'gentle', text: 'Commences par ce qui est réussi, puis glisses une ou deux pistes.', weights: { libra: 0.8, virgo: 0.3, cancer: 0.3 } },
@@ -273,7 +273,7 @@ export const zodiac: Quiz = {
       answers: [
         { id: 'no-one', text: 'À personne : tu te débrouilles seul·e.', weights: { capricorn: 0.7, aquarius: 0.5, scorpio: 0.5 } },
         { id: 'family', text: 'À ta famille, toujours.', weights: { cancer: 1 } },
-        { id: 'best-friend', text: 'À ton ou ta meilleur·e ami·e.', weights: { cancer: 0.5, gemini: 0.4 } },
+        { id: 'best-friend', text: 'À ton·ta meilleur·e ami·e.', weights: { cancer: 0.5, gemini: 0.4 } },
         { id: 'everyone', text: 'À tout le monde. Puis tu fais la moyenne des avis.', weights: { libra: 1, gemini: 0.4 } },
         { id: 'intuition', text: 'À ton intuition.', weights: { pisces: 0.8, scorpio: 0.3 } },
         { id: 'go-ahead', text: 'Tu ne doutes pas longtemps : tu te lances.', weights: { aries: 1, sagittarius: 0.3 } },

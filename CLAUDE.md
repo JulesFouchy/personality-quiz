@@ -18,7 +18,7 @@ In this repo Claude commits and pushes itself, but only once the user has valida
 ## Conventions
 
 - Code is English only, with American spelling (identifiers, ids, file names, comments). Only user-facing text is French.
-- User-facing French is inclusive everywhere, with no exception: never default to the masculine for the player or for unspecified people. Prefer neutral wording ("les personnes qui…", "ton équipe"), "iel" for il/elle and "la·le" for le/la, otherwise use the point médian (`ami·e`, `ami·es`, `fort·es`). Always the point médian (·), never a period.
+- User-facing French is inclusive everywhere, with no exception: never default to the masculine for the player or for unspecified people. Prefer neutral wording ("les personnes qui…", "ton équipe"), "iel" for il/elle and "la·le" for le/la, otherwise use the point médian (`ami·e`, `ami·es`, `fort·es`). Always the point médian (·): never a period, and never "X ou Y" pairs (`ton·ta`, `la·le`, `chez ellui`, not "ton ou ta", "le ou la", "chez lui ou chez elle"). Use the established inclusive form for each word (e.g. "iel" as subject, "ellui" after a preposition) and look it up when unsure.
 - Use the typographic apostrophe (’) in user-facing French.
 - Don't reuse a question, or a close variant of its situation, from another quiz: people play them all and each quiz should feel fresh. Reuse is only acceptable between quizzes released about a month apart; hidden quizzes count, since their release order isn't known yet. `docs/question-ideas.md` is the pool of unscored ideas.
 

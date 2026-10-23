@@ -240,7 +240,7 @@ export const sports: Quiz = {
     {
       id: 'pe-teacher',
       category: 'nostalgia',
-      text: 'Au collège, ton ou ta prof de sport disait de toi…',
+      text: 'Au collège, ton·ta prof de sport disait de toi…',
       answers: [
         { id: 'observes-first', text: '« Observe longtemps avant de tenter quoi que ce soit. »', weights: { climbing: 0.8, chess: 0.5 } },
         { id: 'bird', text: '« S’arrête au milieu du cross pour regarder un oiseau. »', weights: { hiking: 1 } },
