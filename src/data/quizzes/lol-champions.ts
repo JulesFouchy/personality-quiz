@@ -12,91 +12,91 @@ export const lolChampions: Quiz = {
       name: 'Teemo',
       emoji: '🍄',
       description:
-        'Toujours de bonne humeur, petit·e mais futé·e, tu adores jouer des tours dont personne ne trouve jamais la·le responsable. Certaines personnes te trouvent adorable, d’autres insupportable. Les deux ont raison.',
+        'Toujours de bonne humeur, petit·e et mignon·ne, tu as l’air de la personne la plus inoffensive du monde. Grave erreur. Tu adores jouer des tours, et personne n’en trouve jamais la·le responsable. Tu agaces avec un talent rare, tu le sais, et ça t’amuse encore plus. Certaines personnes te trouvent adorable, d’autres te détestent sincèrement, et les deux ont raison.',
     },
     {
       id: 'yasuo',
       name: 'Yasuo',
       emoji: '🌪️',
       description:
-        'Solitaire et fier·ère, tu préfères avancer seul·e que dépendre des autres. Derrière ton air détaché, tu portes un passé lourd que tu ne montres à personne.',
+        'Solitaire et fier·ère, tu préfères avancer seul·e que dépendre des autres, et tu es persuadé·e de pouvoir tout régler tout·e seul·e. Dix échecs d’affilée ne te feraient pas changer d’avis : tu fonces encore, certain·e que ton heure de gloire arrive à la prochaine tentative. Tu pars sans dire au revoir, et tu reviens quand on ne t’attend plus.',
     },
     {
       id: 'jinx',
       name: 'Jinx',
       emoji: '💣',
       description:
-        'Impulsif·ve, imprévisible, tu as horreur de l’ennui et des règles. Tu mets le bazar partout où tu passes… et derrière tout ce bruit, tu doutes plus de toi que tu ne le laisses paraître.',
+        'Impulsif·ve et imprévisible, tu as horreur de l’ennui, des règles et des gens qui te disent de te calmer. Tu mets le bazar partout où tu passes, tu donnes des petits noms à tes affaires, et tes idées les plus folles sont toujours tes préférées. Un premier succès, et plus rien ne t’arrête. Mais derrière tout ce bruit, une petite voix te répète que tu gâches tout ce que tu touches : tu doutes de toi bien plus que tu ne le laisses paraître.',
     },
     {
       id: 'braum',
       name: 'Braum',
       emoji: '🛡️',
       description:
-        'Un cœur immense dans un corps de roc. Tu protèges tout le monde, tu remontes le moral des troupes, et ta porte est toujours ouverte. On se sent en sécurité avec toi.',
+        'Un cœur immense dans un corps de roc. Tu protèges tout le monde, toujours le sourire aux lèvres, quitte à encaisser les coups à la place de tes proches. Ta porte est toujours ouverte, ta cuisine aussi. Tu n’as pas besoin de briller : ton plaisir, c’est de voir les autres réussir grâce à toi. On se sent en sécurité avec toi, même les animaux, qui te suivent partout.',
     },
     {
       id: 'lux',
       name: 'Lux',
       emoji: '✨',
       description:
-        'Optimiste et lumineux·se, tu crois au meilleur chez les autres, parfois un peu naïvement, et tu inspires les gens qui t’entourent. Tu caches pourtant un talent dont peu de gens se doutent.',
+        'Optimiste et lumineux·se, tu crois au meilleur chez les autres, parfois un peu naïvement, et ton enthousiasme finit toujours par gagner les gens qui t’entourent. Mais tu caches aussi un talent, ou une passion, dont personne ne se doute.',
     },
     {
       id: 'ezreal',
       name: 'Ezreal',
       emoji: '🧭',
       description:
-        'Aventurier·ère et insouciant·e, tu pars explorer sans plan et tu t’en sors toujours avec panache. Ta curiosité et ta confiance en toi t’emmènent partout.',
+        'Aventurier·ère et insouciant·e, tu pars explorer sans plan, sans carte et souvent sans prévenir, persuadé·e que tu improviseras sur place. Et le pire, c’est que ça marche : tu tombes toujours sur le bon trésor, la bonne personne ou le bon raccourci, et tu repars avec une anecdote de plus. Tu es doué·e, tu le sais, et tu ne te prives pas de le rappeler, avec un sourire si charmeur qu’on te le pardonne. Et quand ça tourne mal, tu as toujours une porte de sortie.',
     },
     {
       id: 'nasus',
       name: 'Nasus',
       emoji: '📚',
       description:
-        'Sage et patient·e, tu as soif de savoir et tu prends le temps de comprendre. Tu avances lentement, mais sûrement : à la fin, c’est toi qui as raison.',
+        'Sage et patient·e, tu as soif de savoir et tu prends le temps de comprendre avant de parler. Ta bibliothèque déborde, tu retiens tout, et tu donnes des conseils que les gens regrettent toujours de ne pas avoir suivis. Tu avances lentement, mais sûrement, et rien ne te presse : les autres peuvent courir, tu sais que le temps joue pour toi.',
     },
     {
       id: 'jhin',
       name: 'Jhin',
       emoji: '🎭',
       description:
-        'Perfectionniste et artiste dans l’âme, tu veux que chaque détail soit parfait. Tu as le sens du spectacle… et une intensité qui peut parfois faire un peu peur.',
+        'Perfectionniste et artiste dans l’âme, tu veux que chaque détail soit parfait, et tu préfères ne rien faire plutôt que mal faire. Tu as le sens du spectacle et du timing : tout est mis en scène, et tu attends le moment parfait, quitte à laisser passer toutes les autres occasions. Les gens admirent ce que tu crées… et s’inquiètent parfois un peu de l’intensité que tu y mets.',
     },
     {
       id: 'yuumi',
       name: 'Yuumi',
       emoji: '🐱',
       description:
-        'Câlin·e et un peu paresseux·se, tu préfères que les autres s’occupent de tout. Tu es adorable, collant·e, et tu ne refuses jamais une sieste.',
+        'Câlin·e et un peu paresseux·se, tu préfères que les autres s’occupent de tout, et tu as un vrai talent pour trouver la personne sur qui te reposer. Une fois choisie, tu ne la lâches plus : tu la suis partout, tu t’installes sur ses genoux, sur son canapé, dans sa vie, et tu fais semblant d’aider avec beaucoup de conviction, si discrètement qu’on se demande parfois si tu es vraiment là. Tu es adorable, tu le sais, et ça te sauve d’à peu près toutes les situations.',
     },
     {
       id: 'darius',
       name: 'Darius',
       emoji: '🪓',
       description:
-        'Autoritaire et exigeant·e, tu prends les choses en main et tu ne tolères pas la faiblesse. On te suit parce que tu ne recules jamais. Certaines personnes te trouvent dur·e, tu préfères dire efficace.',
+        'Autoritaire et exigeant·e, tu prends les choses en main sans attendre qu’on te le demande, et tu ne tolères ni la faiblesse ni les excuses. Tu respectes les personnes qui ont mérité leur place, d’où qu’elles viennent, et tu n’as que du mépris pour celles qui l’ont eue par piston. Franc·he jusqu’à la brutalité, tu dis ce que tu penses, et on s’en souvient longtemps. On te suit parce que tu ne recules jamais, et une fois que tu tiens quelqu’un, tu ne le lâches plus. Certaines personnes te trouvent dur·e, tu préfères dire efficace.',
     },
     {
       id: 'cassiopeia',
       name: 'Cassiopeia',
       emoji: '🐍',
       description:
-        'Ambitieux·se et rusé·e, tu sais exactement ce que tu veux et comment l’obtenir. Élégant·e, la répartie cinglante, tu contournes les règles avec un talent certain.',
+        'Ambitieux·se et rusé·e, tu sais exactement ce que tu veux et comment l’obtenir. Élégant·e, la répartie cinglante, tu manies le charme et les secrets des autres mieux que n’importe quelle arme, et tu contournes les règles avec un talent certain. Issu·e d’un monde où tout se négocie, tu as appris tôt que les relations valent plus que l’or, et tu sais toujours qui te doit un service. Ton venin agit à petit feu, et un seul de tes regards suffit à glacer une pièce.',
     },
     {
       id: 'lee-sin',
       name: 'Lee Sin',
       emoji: '🥋',
       description:
-        'Discipliné·e, tu t’entraînes sans relâche pour devenir la meilleure version de toi-même. Quand tu te trompes, tu l’assumes jusqu’au bout et tu fais tout pour réparer. Humble et dévoué·e, tu te sacrifierais pour les autres.',
+        'Discipliné·e, tu t’entraînes sans relâche pour devenir la meilleure version de toi-même, et tu ne comptes pas tes heures. Quand tu touches un Q, tu as du mal à résister, et les plays flashy sont ta spécialité. Un jour, ta fougue t’a fait commettre une grave erreur : depuis, tu l’assumes jusqu’au bout et tu fais tout pour la réparer.',
     },
     {
       id: 'miss-fortune',
       name: 'Miss Fortune',
       emoji: '🏴‍☠️',
       description:
-        'Charismatique et sûr·e de toi, tu attires tous les regards et tu le sais. Tu n’oublies jamais un affront : tu prépares ta revanche avec patience, et le sourire.',
+        'Charismatique et sûr·e de toi, tu attires tous les regards et tu le sais : tu entres dans une pièce comme sur une scène, avec la démarche qui va avec. Tu as le sens de la fête, de la répartie et des affaires, et n’importe quelle soirée finit par devenir la tienne. Mais derrière le sourire, tu n’oublies rien. Chaque affront est noté, et tu prépares ta revanche.',
     },
   ],
   questions: [
@@ -114,14 +114,14 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'losing-game',
-      text: 'Ton équipe perd 0-10 à la 15e minute. Tu…',
+      text: 'Ton équipe perd 0-10 à la 15e minute, et quelqu’un propose de FF. Tu…',
       answers: [
-        { id: 'give-up', text: 'Arrêtes de forcer et attends que ça passe.', weights: { yuumi: 1 } },
+        { id: 'vote-yes', text: 'Votes oui, soulagé·e.', weights: { yuumi: 1 } },
         { id: 'orders', text: 'Prends les choses en main et donnes des ordres à tout le monde.', weights: { darius: 1, 'miss-fortune': 0.3 } },
         { id: 'cheer', text: 'Encourages tout le monde : on peut encore la gagner !', weights: { lux: 1, braum: 0.6 } },
         { id: 'late-game', text: 'Rappelles à tout le monde que vous scalez mieux : tout se jouera en late game.', weights: { nasus: 1, lux: 0.3 } },
-        { id: 'own-it', text: 'Assumes tes erreurs dans le chat et promets de te rattraper.', weights: { 'lee-sin': 1 } },
-        { id: 'solo', text: 'Pars farmer de ton côté. Tu vas les carry toi-même.', weights: { yasuo: 1 } },
+        { id: 'never-ff', text: 'Refuses : tu ne FF jamais, par principe.', weights: { 'lee-sin': 1, yasuo: 0.5 } },
+        { id: 'blame', text: 'Fais remarquer que ton·ta jungler n’est jamais venu·e.', weights: { yasuo: 1 } },
         { id: 'chaos', text: 'Fais des blagues dans le chat pour détendre tout le monde.', weights: { teemo: 0.8, jinx: 0.5, lux: 0.4 } },
       ],
     },
@@ -132,7 +132,7 @@ export const lolChampions: Quiz = {
         { id: 'mic', text: 'Prends le micro en premier et ne le lâches plus.', weights: { 'miss-fortune': 1, ezreal: 0.4 } },
         { id: 'ballad', text: 'Chantes une ballade avec tant d’émotion que tout le monde se tait.', weights: { jhin: 1 } },
         { id: 'encourage', text: 'Pousses tout le monde à monter sur scène.', weights: { lux: 1, braum: 0.5 } },
-        { id: 'off-key', text: 'Chantes faux, très fort, et tu t’en fiches complètement.', weights: { jinx: 1, teemo: 0.5 } },
+        { id: 'off-key', text: 'Chantes très faux, très fort, et tu t’en fiches complètement.', weights: { jinx: 1, teemo: 0.5 } },
         { id: 'watch', text: 'Regardes de loin. Jamais tu ne chanteras.', weights: { yasuo: 0.8 } },
       ],
     },
@@ -140,7 +140,7 @@ export const lolChampions: Quiz = {
       id: 'queue-jumper',
       text: 'Quelqu’un te passe devant dans une file d’attente. Tu…',
       answers: [
-        { id: 'politely', text: 'Le lui fais remarquer, poliment mais fermement.', weights: { 'lee-sin': 0.5, braum: 0.4 } },
+        { id: 'politely', text: 'Le lui fais remarquer, poliment mais fermement.', weights: { braum: 0.4 } },
         { id: 'cut-back', text: 'Te replaces devant sans un mot. Personne ne proteste.', weights: { darius: 0.8, cassiopeia: 0.4 } },
         { id: 'remember', text: 'Ne dis rien… mais tu ne l’oublieras pas.', weights: { 'miss-fortune': 1, cassiopeia: 0.4 } },
         { id: 'good-reason', text: 'Te dis qu’iel a sûrement une bonne raison.', weights: { lux: 1, braum: 0.3 } },
@@ -167,7 +167,7 @@ export const lolChampions: Quiz = {
         { id: 'irony', text: 'Réponds par un pavé plein d’ironie.', weights: { cassiopeia: 1 } },
         { id: 'mute', text: 'Coupes le chat : la fin de partie lui donnera tort.', weights: { nasus: 0.8, 'lee-sin': 0.6 } },
         { id: 'kind', text: 'Envoies un message gentil pour calmer le jeu.', weights: { braum: 1, lux: 0.5 } },
-        { id: 'flame-back', text: 'Flames encore plus fort.', weights: { darius: 0.8, jinx: 0.6 } },
+        { id: 'swear', text: 'Réponds avec un langage fleuri.', weights: { jinx: 0.8, darius: 0.6 } },
         { id: 'tilted', text: 'Ne réponds rien, mais ça te travaille toute la partie.', weights: { jinx: 0.8, yasuo: 0.6 } },
       ],
     },
@@ -178,7 +178,7 @@ export const lolChampions: Quiz = {
         { id: 'schedule', text: 'Qui respecte le planning de ménage à la lettre.', weights: { 'lee-sin': 0.8 } },
         { id: 'cook', text: 'Qui cuisine pour tout le monde.', weights: { braum: 1 } },
         { id: 'never-seen', text: 'Qu’on ne voit presque jamais.', weights: { yasuo: 0.7, ezreal: 0.4 } },
-        { id: 'messy', text: 'Dont les affaires traînent partout.', weights: { jinx: 1, yuumi: 0.4 } },
+        { id: 'messy', text: 'Qui laisse traîner ses affaires partout.', weights: { jinx: 1, yuumi: 0.4 } },
         { id: 'squatter', text: 'Qui squatte le canapé et les lits des autres.', weights: { yuumi: 1 } },
       ],
     },
@@ -197,12 +197,13 @@ export const lolChampions: Quiz = {
       id: 'favorite-moment',
       text: 'Ton moment préféré dans une partie :',
       answers: [
-        { id: 'thanked', text: 'Le moment où ton équipe te remercie de l’avoir sauvée.', weights: { braum: 1, lux: 0.3 } },
+        { id: 'save-ally', text: 'Sauver de justesse un·e coéquipier·ère que tout le monde croyait condamné·e.', weights: { braum: 1, lux: 0.3 } },
         { id: 'tilt-enemies', text: 'Faire rager l’équipe adverse sans qu’elle comprenne ce qui lui arrive.', weights: { teemo: 1, cassiopeia: 0.3 } },
-        { id: 'perfect-play', text: 'Réussir une action parfaite, que tu reverras en boucle dans le replay.', weights: { jhin: 1, 'lee-sin': 0.6 } },
+        { id: 'perfect-play', text: 'Réussir une action parfaite, que tu reverras en boucle dans le replay.', weights: { jhin: 1, 'lee-sin': 0.8 } },
         { id: 'teamfight', text: 'Le gros combat d’équipe où tout part dans tous les sens.', weights: { jinx: 1 } },
-        { id: 'solo-show', text: 'Partir en solo et faire le show.', weights: { yasuo: 0.8, ezreal: 0.8 } },
-        { id: 'quiet', text: 'Les moments calmes, où tu peux souffler.', weights: { yuumi: 1 } },
+        { id: 'comeback', text: 'Faire enfin la grosse action après une partie catastrophique, et prouver que tu avais raison de continuer à go in.', weights: { yasuo: 1 } },
+        { id: 'escape', text: 'T’échapper d’un piège avec un rien de vie, sous le nez de tout le monde.', weights: { ezreal: 1 } },
+        { id: 'quiet', text: 'Gagner une partie sans avoir eu grand-chose à faire.', weights: { yuumi: 1 } },
       ],
     },
     {
@@ -225,7 +226,7 @@ export const lolChampions: Quiz = {
         { id: 'mysterious', text: 'Le personnage mystérieux qui n’apparaît que deux fois.', weights: { yasuo: 0.8 } },
         { id: 'sidekick', text: 'L’acolyte qui fait rire toute la salle.', weights: { teemo: 1 } },
         { id: 'revenge', text: 'Le personnage qui a une revanche à prendre.', weights: { 'miss-fortune': 1 } },
-        { id: 'mentor', text: 'La·le mentor·e qui guide le personnage principal.', weights: { nasus: 1, 'lee-sin': 0.5 } },
+        { id: 'mentor', text: 'La·le mentor·e qui guide le personnage principal.', weights: { nasus: 1 } },
       ],
     },
     {
@@ -234,7 +235,7 @@ export const lolChampions: Quiz = {
       answers: [
         { id: 'hug', text: 'Débarques chez ellui avec à manger et un gros câlin.', weights: { braum: 1 } },
         { id: 'hype-up', text: 'Lui remontes le moral en lui rappelant à quel point iel est génial·e.', weights: { 'miss-fortune': 0.6, lux: 0.5, braum: 0.3 } },
-        { id: 'advice', text: 'Lui donnes un conseil, puis lui laisses le temps de réfléchir.', weights: { nasus: 0.8, 'lee-sin': 0.7 } },
+        { id: 'advice', text: 'Lui donnes un conseil, puis lui laisses le temps de réfléchir.', weights: { nasus: 0.8 } },
         { id: 'silent', text: 'Restes à ses côtés, sans rien dire.', weights: { yuumi: 0.7, yasuo: 0.5 } },
         { id: 'frank', text: 'Lui dis franchement ce que tu en penses, même si ça pique.', weights: { darius: 0.6 } },
       ],
@@ -243,9 +244,9 @@ export const lolChampions: Quiz = {
       id: 'pentakill',
       text: 'Un pentakill t’attend, mais ton support est en danger à l’autre bout de la map. Tu…',
       answers: [
-        { id: 'save', text: 'Fonces sauver ton support. Le pentakill attendra.', weights: { braum: 1, 'lee-sin': 0.6, lux: 0.5 } },
+        { id: 'save', text: 'Fonces sauver ton support. Le pentakill attendra.', weights: { braum: 1, lux: 0.5 } },
         { id: 'take-it', text: 'Prends le pentakill. Le support comprendra.', weights: { yasuo: 0.8, darius: 0.4 } },
-        { id: 'both', text: 'Prends le pentakill ET sauves le support. Facile.', weights: { ezreal: 1, jinx: 0.4 } },
+        { id: 'both', text: 'Prends le pentakill ET sauves le support. Facile.', weights: { ezreal: 1, 'lee-sin': 0.5, jinx: 0.4 } },
         { id: 'minimap', text: 'Quel support ? Tu ne regardes jamais la mini-map.', weights: { jinx: 0.6 } },
         { id: 'profit', text: 'Fais ce qui rapporte le plus, sans état d’âme.', weights: { cassiopeia: 1 } },
         { id: 'stylish', text: 'Prends le pentakill, mais seulement s’il est spectaculaire.', weights: { jhin: 1, 'miss-fortune': 0.4 } },
@@ -255,12 +256,12 @@ export const lolChampions: Quiz = {
       id: 'secret',
       text: 'Un secret que tu caches :',
       answers: [
-        { id: 'pretend-fine', text: 'Tu fais semblant que tout va bien plus souvent qu’on ne le croit.', weights: { yasuo: 0.8, jinx: 0.6, lux: 0.3 } },
+        { id: 'pretend-fine', text: 'Tu fais semblant que tout va bien plus souvent qu’on ne le croit.', weights: { jinx: 0.6 } },
         { id: 'secret-hobby', text: 'Tu as un hobby dont tu n’as jamais parlé à personne.', weights: { lux: 0.7, jhin: 0.4 } },
         { id: 'cheated', text: 'Tu as déjà triché à un jeu de société… et gagné.', weights: { cassiopeia: 0.6, teemo: 0.6 } },
-        { id: 'self-doubt', text: 'Tu doutes énormément de toi.', weights: { jinx: 0.8, yasuo: 0.3 } },
+        { id: 'self-doubt', text: 'Tu doutes énormément de toi.', weights: { jinx: 0.8 } },
         { id: 'grudge-list', text: 'Tu tiens une liste mentale des gens qui t’ont vexé·e.', weights: { 'miss-fortune': 0.8, cassiopeia: 0.5 } },
-        { id: 'old-mistake', text: 'Tu t’en veux encore d’une erreur que tout le monde a oubliée.', weights: { 'lee-sin': 0.8, yasuo: 0.4 } },
+        { id: 'old-mistake', text: 'Tu t’en veux encore d’une erreur que tout le monde a oubliée.', weights: { 'lee-sin': 0.8 } },
       ],
     },
     {
@@ -268,7 +269,7 @@ export const lolChampions: Quiz = {
       text: 'On te demande ton avis sur un sujet que tu ne connais pas du tout. Tu…',
       answers: [
         { id: 'confident', text: 'Donnes ton avis quand même, avec aplomb.', weights: { ezreal: 0.8, darius: 0.5 } },
-        { id: 'learn', text: 'Dis que tu n’en sais rien et demandes qu’on t’explique.', weights: { nasus: 1, 'lee-sin': 0.5 } },
+        { id: 'learn', text: 'Dis que tu n’en sais rien et demandes qu’on t’explique.', weights: { nasus: 1 } },
         { id: 'deflect', text: 'Retournes la question pour faire parler l’autre.', weights: { cassiopeia: 1 } },
         { id: 'joke', text: 'Inventes une réponse pour faire rire tout le monde.', weights: { teemo: 1, jinx: 0.4 } },
         { id: 'spotlight', text: 'Ramènes habilement la conversation sur toi.', weights: { 'miss-fortune': 1 } },
@@ -302,7 +303,7 @@ export const lolChampions: Quiz = {
       answers: [
         { id: 'luxury', text: 'Un objet magnifique et hors de prix.', weights: { cassiopeia: 1, 'miss-fortune': 0.5 } },
         { id: 'blanket', text: 'Un plaid tout doux.', weights: { yuumi: 1 } },
-        { id: 'useful', text: 'Un truc utile dont tu avais vraiment besoin.', weights: { 'lee-sin': 0.5, nasus: 0.4 } },
+        { id: 'useful', text: 'Un truc utile dont tu avais vraiment besoin.', weights: { nasus: 0.4 } },
         { id: 'handmade', text: 'Une œuvre unique, faite à la main.', weights: { jhin: 1 } },
         { id: 'time', text: 'Rien. Un moment passé ensemble suffit.', weights: { braum: 1 } },
       ],
