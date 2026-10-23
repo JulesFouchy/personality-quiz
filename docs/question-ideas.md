@@ -1,6 +1,6 @@
 # Question ideas
 
-Unscored writing material. Pick an idea no other quiz already uses, adapt the answers to the quiz's personalities, then weight them. Headings are the `category` values.
+Unscored writing material. Pick an idea no other quiz already uses, adapt the answers to the quiz's personalities, then weight them.
 
 ## funny
 

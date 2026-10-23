@@ -16,7 +16,6 @@ const base: Quiz = {
     {
       id: 'q1',
       text: '',
-      category: 'funny',
       answers: [
         { id: 'x', text: '', weights: { a: 1 } },
         { id: 'y', text: '', weights: { b: 1 } },
@@ -71,7 +70,6 @@ describe('validateQuiz', () => {
     const onlyA = (id: string): Quiz['questions'][number] => ({
       id,
       text: '',
-      category: 'funny',
       answers: [
         { id: 'x', text: '', weights: { a: 1, b: 0.3 } },
         { id: 'y', text: '', weights: {} },
@@ -86,7 +84,6 @@ describe('validateQuiz', () => {
     const mostlyA = (id: string): Quiz['questions'][number] => ({
       id,
       text: '',
-      category: 'funny',
       answers: [
         ...['w', 'x', 'y', 'z'].map((answerId) => ({ id: answerId, text: '', weights: { a: 1 } })),
         { id: 'v', text: '', weights: { b: 1 } },

@@ -81,7 +81,6 @@ export const frenchSongs: Quiz = {
   questions: [
     {
       id: 'solo-concert',
-      category: 'themed',
       text: 'Ton artiste préféré·e passe en concert près de chez toi, mais personne ne peut t’accompagner. Tu…',
       answers: [
         { id: 'go-alone', text: 'Y vas seul·e, et c’est très bien comme ça.', weights: { 'walk-alone': 0.9 } },
@@ -94,7 +93,6 @@ export const frenchSongs: Quiz = {
     },
     {
       id: 'train-neighbor',
-      category: 'social',
       text: 'Dans le train, la personne assise à côté de toi engage la conversation. Tu…',
       answers: [
         { id: 'swap-numbers', text: 'Discutes tout le trajet, comme avec un·e vieil·le ami·e.', weights: { 'champs-elysees': 1 } },
@@ -106,7 +104,6 @@ export const frenchSongs: Quiz = {
     },
     {
       id: 'bad-haircut',
-      category: 'funny',
       text: 'Ta nouvelle coupe de cheveux est franchement ratée. Tu…',
       answers: [
         { id: 'own-it', text: 'Défends ton choix jusqu’au bout.', weights: { 'no-regrets': 1 } },
@@ -118,7 +115,6 @@ export const frenchSongs: Quiz = {
     },
     {
       id: 'time-of-day',
-      category: 'aesthetic',
       text: 'Choisis un moment de la journée.',
       answers: [
         { id: 'dawn', text: 'Tôt le matin, quand les rues sont encore vides.', weights: { 'walk-alone': 0.8, 'the-south': 0.2 } },
@@ -131,7 +127,6 @@ export const frenchSongs: Quiz = {
     },
     {
       id: 'mocked-relative',
-      category: 'social',
       text: 'Quelqu’un se moque d’un·e de tes proches devant toi. Tu…',
       answers: [
         { id: 'step-in', text: 'Interviens tout de suite, et fermement.', weights: { 'my-fight': 1 } },
@@ -143,7 +138,6 @@ export const frenchSongs: Quiz = {
     },
     {
       id: 'lost-in-town',
-      category: 'stress',
       text: 'Tu te perds dans une ville que tu ne connais pas. Tu…',
       answers: [
         { id: 'ask-stranger', text: 'Demandes ton chemin, et repars avec trois adresses à ne pas manquer.', weights: { 'champs-elysees': 0.9 } },
@@ -156,7 +150,6 @@ export const frenchSongs: Quiz = {
     },
     {
       id: 'resolutions',
-      category: 'introspection',
       text: 'Le 31 décembre, tes bonnes résolutions ?',
       answers: [
         { id: 'long-list', text: 'Une longue liste, pour changer ta vie de A à Z.', weights: { 'another-world': 0.8 } },
@@ -170,7 +163,6 @@ export const frenchSongs: Quiz = {
     },
     {
       id: 'lyrics',
-      category: 'themed',
       text: 'Les paroles des chansons, pour toi…',
       answers: [
         { id: 'louder', text: 'Tu les connais par cœur, et tu les chantes plus fort que l’artiste.', weights: { 'light-the-fire': 0.9 } },
@@ -183,7 +175,6 @@ export const frenchSongs: Quiz = {
     },
     {
       id: 'stuck-paperwork',
-      category: 'stress',
       text: 'Le dossier d’un·e proche est bloqué par une administration depuis des mois. Tu…',
       answers: [
         { id: 'call-yourself', text: 'Appelles toi-même, et insistes jusqu’à obtenir une réponse.', weights: { 'my-fight': 1 } },
@@ -196,7 +187,6 @@ export const frenchSongs: Quiz = {
     },
     {
       id: 'show-love',
-      category: 'values',
       text: 'Comment montres-tu à quelqu’un que tu l’aimes ?',
       answers: [
         { id: 'little-surprises', text: 'Par de petites surprises : son dessert préféré, un mot glissé dans son sac.', weights: { 'into-the-wind': 1 } },
@@ -208,7 +198,6 @@ export const frenchSongs: Quiz = {
     },
     {
       id: 'insomnia',
-      category: 'habits',
       text: 'Il est 2 h du matin, et tu n’arrives pas à dormir. Tu…',
       answers: [
         { id: 'tomorrow', text: 'Ressasses tout ce qui t’attend demain.', weights: { 'so-we-dance': 0.6, 'another-world': 0.3 } },
@@ -222,7 +211,6 @@ export const frenchSongs: Quiz = {
     },
     {
       id: 'risky-project',
-      category: 'dilemma',
       text: 'Tout le monde te déconseille un projet qui te tient à cœur. Tu…',
       answers: [
         { id: 'do-it', text: 'Le fais quand même.', weights: { 'no-regrets': 1, 'another-world': 0.4 } },

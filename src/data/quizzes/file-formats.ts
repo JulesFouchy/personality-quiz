@@ -102,7 +102,6 @@ export const fileFormats: Quiz = {
   questions: [
     {
       id: 'long-train',
-      category: 'habits',
       text: 'Tu as trois heures de train devant toi. Tu…',
       answers: [
         { id: 'playlist', text: 'Mets tes écouteurs et lances ta playlist du moment.', weights: { mp3: 1 } },
@@ -116,7 +115,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'family-computer',
-      category: 'nostalgia',
       text: 'Petit·e, sur l’ordinateur familial, tu…',
       answers: [
         { id: 'games', text: 'Jouais à tous les jeux installés, même aux démos.', weights: { sav: 1 } },
@@ -129,7 +127,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'bad-day',
-      category: 'introspection',
       text: 'Tu rentres après une journée pourrie. Tu…',
       answers: [
         { id: 'call', text: 'Appelles un·e proche pour tout lui raconter.', weights: { jpg: 0.7 } },
@@ -142,7 +139,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'new-phone',
-      category: 'values',
       text: 'Tu dois changer de téléphone. Tu…',
       answers: [
         { id: 'reviews', text: 'Lis tous les tests et compares leurs notes avant de trancher.', weights: { csv: 0.8, md: 0.3, flac: 0.3 } },
@@ -155,7 +151,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'party-music',
-      category: 'social',
       text: 'En soirée, on te laisse choisir la musique. Tu…',
       answers: [
         { id: 'prepared', text: 'Lances la playlist que tu as préparée pour l’occasion.', weights: { md: 0.6, mp3: 0.5 } },
@@ -169,7 +164,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'downloads-folder',
-      category: 'themed',
       text: 'Ton dossier « Téléchargements », c’est…',
       answers: [
         { id: 'empty', text: 'Vide : tu ranges chaque fichier dès qu’il arrive.', weights: { md: 0.8, txt: 0.5 } },
@@ -182,7 +176,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'magician',
-      category: 'absurd-scenario',
       text: 'Tu deviens magicien·ne pour une journée. Tu…',
       answers: [
         { id: 'library', text: 'Fais apparaître une bibliothèque sans fin.', weights: { epub: 1 } },
@@ -195,7 +188,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'big-project',
-      category: 'habits',
       text: 'Tu te lances dans un gros projet. Tu…',
       answers: [
         { id: 'plan', text: 'Écris un plan détaillé avant de commencer.', weights: { md: 1 } },
@@ -209,7 +201,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'first-visit',
-      category: 'social',
       text: 'Tu entres chez quelqu’un pour la première fois. Tu remarques d’abord…',
       answers: [
         { id: 'books', text: 'Sa bibliothèque.', weights: { epub: 1 } },
@@ -223,7 +214,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'favorite-sound',
-      category: 'aesthetic',
       text: 'Choisis un son.',
       answers: [
         { id: 'page', text: 'Une page qu’on tourne.', weights: { epub: 0.8 } },
@@ -235,7 +225,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'low-battery',
-      category: 'stress',
       text: 'Ton téléphone est à 10 %, et tu ne rentres pas avant ce soir. Tu…',
       answers: [
         { id: 'calculate', text: 'Calcules combien de temps il tiendra si tu fermes tout.', weights: { csv: 0.8, md: 0.3 } },
@@ -248,7 +237,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'new-favorite',
-      category: 'themed',
       text: 'Tu découvres une série, un album ou un jeu qui te plaît vraiment. Tu…',
       answers: [
         { id: 'tell-everyone', text: 'En parles à tout le monde.', weights: { mp3: 0.7, mp4: 0.4 } },
@@ -259,7 +247,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'wifi-name',
-      category: 'funny',
       text: 'Le nom de ton wifi, c’est…',
       answers: [
         { id: 'default', text: 'Celui d’origine, jamais changé.', weights: { txt: 0.8 } },
@@ -269,7 +256,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'group-chat',
-      category: 'social',
       text: 'Dans la conversation de groupe de tes ami·es, tu es la personne qui…',
       answers: [
         { id: 'jokes', text: 'Fait dériver chaque conversation vers une blague.', weights: { gif: 0.8 } },
@@ -282,7 +268,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'open-tabs',
-      category: 'themed',
       text: 'Combien d’onglets as-tu ouverts en ce moment ?',
       answers: [
         { id: 'few', text: 'Deux ou trois, que tu fermes au fur et à mesure.', weights: { txt: 0.8, md: 0.4 } },
@@ -293,7 +278,6 @@ export const fileFormats: Quiz = {
     },
     {
       id: 'holiday-photos',
-      category: 'habits',
       text: 'Sur tes photos de vacances, on voit surtout…',
       answers: [
         { id: 'loved-ones', text: 'Tes proches, au centre de chaque photo.', weights: { jpg: 1 } },

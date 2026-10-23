@@ -1,16 +1,3 @@
-export type Category =
-  | 'funny'
-  | 'introspection'
-  | 'dilemma'
-  | 'absurd-scenario'
-  | 'social'
-  | 'stress'
-  | 'aesthetic'
-  | 'habits'
-  | 'values'
-  | 'nostalgia'
-  | 'themed';
-
 /** How much an answer corresponds to each personality, in [0, 1]. Missing personalities count as 0. */
 export type Weights = Record<string, number>;
 
@@ -23,7 +10,6 @@ export interface Answer {
 export interface Question {
   id: string;
   text: string;
-  category: Category;
   answers: Answer[];
 }
 

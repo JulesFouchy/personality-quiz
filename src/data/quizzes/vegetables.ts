@@ -81,7 +81,6 @@ export const vegetables: Quiz = {
   questions: [
     {
       id: 'shopping-cart',
-      category: 'habits',
       text: 'Au supermarché, ton chariot ressemble à quoi ?',
       answers: [
         { id: 'same-list', text: 'Exactement la même liste que la semaine dernière.', weights: { pea: 1 } },
@@ -92,7 +91,6 @@ export const vegetables: Quiz = {
     },
     {
       id: 'bad-joke',
-      category: 'social',
       text: 'Quelqu’un raconte une blague pas drôle. Tu…',
       answers: [
         { id: 'polite-laugh', text: 'Ris poliment.', weights: { pea: 0.8, potato: 0.4, onion: 0.4 } },
@@ -106,7 +104,6 @@ export const vegetables: Quiz = {
     },
     {
       id: 'vegetable-garden',
-      category: 'themed',
       text: 'Tu as un petit potager. Il ressemble à quoi ?',
       answers: [
         { id: 'straight-rows', text: 'Des rangs bien droits, et un arrosage à heure fixe.', weights: { broccoli: 0.8, pea: 0.5 } },
@@ -119,7 +116,6 @@ export const vegetables: Quiz = {
     },
     {
       id: 'noisy-neighbor',
-      category: 'stress',
       text: 'Dimanche, 8 h : ton·ta voisin·e commence des travaux. Tu…',
       answers: [
         { id: 'knock', text: 'Vas frapper chez ellui en pyjama, très remonté·e.', weights: { chili: 1 } },
@@ -132,7 +128,6 @@ export const vegetables: Quiz = {
     },
     {
       id: 'life-tradeoff',
-      category: 'dilemma',
       text: 'Tu préfères…',
       answers: [
         { id: 'no-surprises', text: 'Une vie sans aucune surprise, ni bonne ni mauvaise.', weights: { pea: 1 } },
@@ -144,7 +139,6 @@ export const vegetables: Quiz = {
     },
     {
       id: 'wardrobe',
-      category: 'aesthetic',
       text: 'Ta garde-robe, c’est plutôt…',
       answers: [
         { id: 'basics', text: 'Des basiques qui vont avec tout, sans te poser de questions.', weights: { pea: 1 } },
@@ -157,7 +151,6 @@ export const vegetables: Quiz = {
     },
     {
       id: 'family-debate',
-      category: 'social',
       text: 'Au repas de famille, la conversation tourne au débat. Tu…',
       answers: [
         { id: 'raise-voice', text: 'Hausses le ton, et ne lâches rien.', weights: { chili: 1 } },
@@ -171,7 +164,6 @@ export const vegetables: Quiz = {
     },
     {
       id: 'blamed-mistake',
-      category: 'stress',
       text: 'Ton·ta responsable te reproche une erreur qui n’est pas la tienne. Tu…',
       answers: [
         { id: 'snap', text: 'Réponds sèchement, sans réfléchir.', weights: { chili: 1 } },
@@ -185,7 +177,6 @@ export const vegetables: Quiz = {
     },
     {
       id: 'vegetable-election',
-      category: 'absurd-scenario',
       text: 'Tu es candidat·e à l’élection du légume de l’année. Ta campagne ?',
       answers: [
         { id: 'program', text: 'Un programme détaillé de quarante pages.', weights: { carrot: 0.9 } },
@@ -199,7 +190,6 @@ export const vegetables: Quiz = {
     },
     {
       id: 'sad-movie',
-      category: 'introspection',
       text: 'Un film triste passe à la télé. Tu…',
       answers: [
         { id: 'shaken', text: 'Es bouleversé·e pour le reste de la soirée.', weights: { onion: 1 } },
@@ -212,7 +202,6 @@ export const vegetables: Quiz = {
     },
     {
       id: 'school-canteen',
-      category: 'nostalgia',
       text: 'À la cantine, quand tu étais petit·e, tu…',
       answers: [
         { id: 'seconds', text: 'Demandais toujours du rab.', weights: { potato: 1 } },
@@ -225,7 +214,6 @@ export const vegetables: Quiz = {
     },
     {
       id: 'cant-stand',
-      category: 'values',
       text: 'Ce que tu ne supportes pas ?',
       answers: [
         { id: 'confident-nonsense', text: 'Les gens qui affirment n’importe quoi avec assurance.', weights: { carrot: 1, tomato: 0.4 } },
@@ -239,7 +227,6 @@ export const vegetables: Quiz = {
     },
     {
       id: 'friend-birthday',
-      category: 'social',
       text: 'Pour l’anniversaire d’un·e ami·e, tu…',
       answers: [
         { id: 'big-meal', text: 'Cuisines un énorme repas.', weights: { potato: 1 } },

@@ -16,7 +16,6 @@ const quiz: Quiz = {
     {
       id: 'q1',
       text: '',
-      category: 'funny',
       answers: [
         { id: 'x', text: '', weights: { a: 1, generous: 0.6 } },
         { id: 'y', text: '', weights: { b: 1, generous: 0.5 } },
@@ -25,7 +24,6 @@ const quiz: Quiz = {
     {
       id: 'q2',
       text: '',
-      category: 'funny',
       answers: [
         { id: 'x', text: '', weights: { a: 1, generous: 0.6 } },
         { id: 'y', text: '', weights: { b: 1, generous: 0.5 } },

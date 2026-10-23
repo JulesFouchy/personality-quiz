@@ -88,7 +88,6 @@ export const sports: Quiz = {
   questions: [
     {
       id: 'cooking-for-friends',
-      category: 'habits',
       text: 'Tu invites des ami·es à dîner. Ça ressemble à quoi ?',
       answers: [
         { id: 'shared-dish', text: 'Un grand plat au milieu de la table, et tout le monde se sert.', weights: { petanque: 0.8, handball: 0.5 } },
@@ -99,7 +98,6 @@ export const sports: Quiz = {
     },
     {
       id: 'new-sport',
-      category: 'themed',
       text: 'Tu essaies un sport pour la première fois. Tu…',
       answers: [
         { id: 'learn-on-the-go', text: 'Te lances sans attendre les explications, et apprends sur le tas.', weights: { 'video-games': 0.8, climbing: 0.4 } },
@@ -112,7 +110,6 @@ export const sports: Quiz = {
     },
     {
       id: 'missed-train',
-      category: 'stress',
       text: 'Tu as raté ton train. Tu…',
       answers: [
         { id: 'other-way', text: 'Trouves un autre moyen d’arriver à l’heure.', weights: { chess: 0.8, hiking: 0.6 } },
@@ -126,7 +123,6 @@ export const sports: Quiz = {
     },
     {
       id: 'old-mistake',
-      category: 'introspection',
       text: 'Une erreur que tu as faite il y a longtemps te revient en tête. Tu…',
       answers: [
         { id: 'still-annoyed', text: 'T’en veux encore : tu détestes avoir eu tort.', weights: { 'ping-pong': 0.8 } },
@@ -138,7 +134,6 @@ export const sports: Quiz = {
     },
     {
       id: 'cellar-door',
-      category: 'funny',
       text: 'Tu trouves une porte mystérieuse dans ta cave. Tu…',
       answers: [
         { id: 'hesitate', text: 'Hésites longtemps, la main sur la poignée, puis ouvres quand même.', weights: { climbing: 1 } },
@@ -151,7 +146,6 @@ export const sports: Quiz = {
     },
     {
       id: 'pouring-rain',
-      category: 'habits',
       text: 'Il pleut des cordes, et tu avais prévu de sortir. Tu…',
       answers: [
         { id: 'go-anyway', text: 'Y vas quand même, trempé·e mais content·e.', weights: { running: 0.8, boxing: 0.4, hiking: 0.4 } },
@@ -163,7 +157,6 @@ export const sports: Quiz = {
     },
     {
       id: 'lottery',
-      category: 'values',
       text: 'Tu gagnes au loto. Ta première dépense ?',
       answers: [
         { id: 'long-trip', text: 'Un long voyage, sans itinéraire ni date de retour.', weights: { hiking: 0.8, climbing: 0.3 } },
@@ -176,7 +169,6 @@ export const sports: Quiz = {
     },
     {
       id: 'good-competition',
-      category: 'themed',
       text: 'Pour toi, une compétition réussie, c’est…',
       answers: [
         { id: 'win', text: 'Gagner. Le reste, ce sont des excuses.', weights: { 'ping-pong': 1 } },
@@ -190,7 +182,6 @@ export const sports: Quiz = {
     },
     {
       id: 'cancelled-evening',
-      category: 'social',
       text: 'Un·e ami·e annule votre soirée à la dernière minute. Tu…',
       answers: [
         { id: 'not-ok', text: 'Lui dis que ça ne se fait pas.', weights: { boxing: 1 } },
@@ -203,7 +194,6 @@ export const sports: Quiz = {
     },
     {
       id: 'favorite-song',
-      category: 'funny',
       text: 'Ta chanson préférée passe dans un magasin. Tu…',
       answers: [
         { id: 'move', text: 'Te mets à bouger au milieu du rayon, sans même t’en rendre compte.', weights: { dance: 1 } },
@@ -215,7 +205,6 @@ export const sports: Quiz = {
     },
     {
       id: 'pet-body',
-      category: 'absurd-scenario',
       text: 'Tu te réveilles dans la peau de ton animal de compagnie. Tu…',
       answers: [
         { id: 'enjoy', text: 'En profites : siestes, câlins et croquettes à volonté.', weights: { 'video-games': 0.6, petanque: 0.5 } },
@@ -227,7 +216,6 @@ export const sports: Quiz = {
     },
     {
       id: 'public-speech',
-      category: 'stress',
       text: 'Tu dois parler devant cent personnes dans cinq minutes. Tu…',
       answers: [
         { id: 'improvise', text: 'Te réjouis : tu vas pouvoir improviser.', weights: { dance: 0.8, petanque: 0.4 } },
@@ -239,7 +227,6 @@ export const sports: Quiz = {
     },
     {
       id: 'pe-teacher',
-      category: 'nostalgia',
       text: 'Au collège, ton·ta prof de sport disait de toi…',
       answers: [
         { id: 'observes-first', text: '« Observe longtemps avant de tenter quoi que ce soit. »', weights: { climbing: 0.8, chess: 0.5 } },
@@ -251,7 +238,6 @@ export const sports: Quiz = {
     },
     {
       id: 'minor-injury',
-      category: 'themed',
       text: 'Tu te fais un peu mal en plein match. Tu…',
       answers: [
         { id: 'get-treated', text: 'Sors te faire soigner : pas la peine d’aggraver ça.', weights: { yoga: 0.8, hiking: 0.3 } },

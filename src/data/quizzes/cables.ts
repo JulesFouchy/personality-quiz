@@ -88,7 +88,6 @@ export const cables: Quiz = {
   questions: [
     {
       id: 'saturday-night',
-      category: 'social',
       text: 'Samedi soir, c’est toi qui choisis le programme. Tu proposes…',
       answers: [
         { id: 'video-games', text: 'Une soirée jeux vidéo, chacun·e chez soi, en vocal.', weights: { ethernet: 1 } },
@@ -102,7 +101,6 @@ export const cables: Quiz = {
     },
     {
       id: 'blackout',
-      category: 'themed',
       text: 'Panne de courant dans tout le quartier, un soir d’hiver. Tu…',
       answers: [
         { id: 'flashlight', text: 'Trouves la lampe de poche du premier coup.', weights: { 'usb-c': 1 } },
@@ -116,7 +114,6 @@ export const cables: Quiz = {
     },
     {
       id: 'bag',
-      category: 'habits',
       text: 'Qu’est-ce qu’on trouve dans ton sac ?',
       answers: [
         { id: 'everything', text: 'De quoi faire face à tout : ciseaux, mouchoirs, scotch, une barre de céréales.', weights: { 'usb-c': 1 } },
@@ -130,7 +127,6 @@ export const cables: Quiz = {
     },
     {
       id: 'recharge',
-      category: 'introspection',
       text: 'Qu’est-ce qui te recharge vraiment ?',
       answers: [
         { id: 'evening-home', text: 'Une soirée chez toi, sans rien de prévu.', weights: { hdmi: 1 } },
@@ -144,7 +140,6 @@ export const cables: Quiz = {
     },
     {
       id: 'locked-store',
-      category: 'absurd-scenario',
       text: 'Tu te retrouves enfermé·e toute une nuit dans un grand magasin. Tu…',
       answers: [
         { id: 'loud-music', text: 'Montes le son des enceintes à fond.', weights: { dmx: 1 } },
@@ -158,7 +153,6 @@ export const cables: Quiz = {
     },
     {
       id: 'broken-washer',
-      category: 'themed',
       text: 'Ta machine à laver tombe en panne. Tu…',
       answers: [
         { id: 'fix-it', text: 'La démontes toi-même, un tutoriel à la main.', weights: { 'usb-c': 1 } },
@@ -171,7 +165,6 @@ export const cables: Quiz = {
     },
     {
       id: 'mood',
-      category: 'aesthetic',
       text: 'Choisis une ambiance.',
       answers: [
         { id: 'dim-light', text: 'Lumière tamisée et pluie contre la fenêtre.', weights: { hdmi: 1 } },
@@ -184,7 +177,6 @@ export const cables: Quiz = {
     },
     {
       id: 'caterer-cancels',
-      category: 'stress',
       text: 'Le matin du mariage de ton·ta cousin·e, le service traiteur annule. Tu…',
       answers: [
         { id: 'take-charge', text: 'Prends les choses en main, calmement, et répartis les tâches.', weights: { 'jumper-cables': 1, 'usb-c': 0.4 } },
@@ -198,7 +190,6 @@ export const cables: Quiz = {
     },
     {
       id: 'old-box',
-      category: 'nostalgia',
       text: 'Chez tes parents, tu retrouves un carton de tes vieilles affaires. Tu…',
       answers: [
         { id: 'keep-all', text: 'Repars avec tout. Hors de question de jeter quoi que ce soit.', weights: { scart: 1 } },
@@ -211,7 +202,6 @@ export const cables: Quiz = {
     },
     {
       id: 'borrowed',
-      category: 'habits',
       text: 'Quelqu’un te prête quelque chose. Tu…',
       answers: [
         { id: 'on-time', text: 'Le rends à la date prévue, en parfait état.', weights: { ethernet: 0.8 } },
@@ -223,7 +213,6 @@ export const cables: Quiz = {
     },
     {
       id: 'concert',
-      category: 'themed',
       text: 'Tu vas à un concert. Où es-tu ?',
       answers: [
         { id: 'front-row', text: 'Au premier rang, à sauter du début à la fin.', weights: { dmx: 1 } },
@@ -236,7 +225,6 @@ export const cables: Quiz = {
     },
     {
       id: 'hurt-someone',
-      category: 'introspection',
       text: 'Tu as blessé quelqu’un sans le vouloir. Tu…',
       answers: [
         { id: 'apologize', text: 'T’excuses tout de suite, sans tourner autour du pot.', weights: { 'bare-wire': 0.6, 'jumper-cables': 0.3 } },
@@ -248,7 +236,6 @@ export const cables: Quiz = {
     },
     {
       id: 'profile-picture',
-      category: 'funny',
       text: 'Ta photo de profil, c’est…',
       answers: [
         { id: 'game-character', text: 'Un personnage de jeu vidéo.', weights: { ethernet: 1 } },
@@ -261,7 +248,6 @@ export const cables: Quiz = {
     },
     {
       id: 'friend-moves-away',
-      category: 'social',
       text: 'Ton·ta meilleur·e ami·e part vivre dans un autre pays. Tu…',
       answers: [
         { id: 'stay-in-touch', text: 'Restes en contact par messages, comme si de rien n’était.', weights: { ethernet: 1 } },
@@ -275,7 +261,6 @@ export const cables: Quiz = {
     },
     {
       id: 'matters-most',
-      category: 'values',
       text: 'Ce qui compte le plus pour toi ?',
       answers: [
         { id: 'be-there', text: 'Être là pour les autres quand il le faut.', weights: { 'jumper-cables': 0.8, ethernet: 0.5 } },

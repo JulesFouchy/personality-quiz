@@ -102,7 +102,6 @@ export const lolChampions: Quiz = {
   questions: [
     {
       id: 'exam-eve',
-      category: 'stress',
       text: 'La veille d’un gros examen, tu…',
       answers: [
         { id: 'weeks-ahead', text: 'Révises tranquillement : tu as commencé il y a trois semaines.', weights: { nasus: 1, 'lee-sin': 0.4 } },
@@ -115,7 +114,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'losing-game',
-      category: 'themed',
       text: 'Ton équipe perd 0-10 à la 15e minute. Tu…',
       answers: [
         { id: 'give-up', text: 'Arrêtes de forcer et attends que ça passe.', weights: { yuumi: 1 } },
@@ -129,7 +127,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'karaoke',
-      category: 'social',
       text: 'Soirée karaoké. Tu…',
       answers: [
         { id: 'mic', text: 'Prends le micro en premier et ne le lâches plus.', weights: { 'miss-fortune': 1, ezreal: 0.4 } },
@@ -141,7 +138,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'queue-jumper',
-      category: 'stress',
       text: 'Quelqu’un te passe devant dans une file d’attente. Tu…',
       answers: [
         { id: 'politely', text: 'Le lui fais remarquer, poliment mais fermement.', weights: { 'lee-sin': 0.5, braum: 0.4 } },
@@ -154,7 +150,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'dream-trip',
-      category: 'values',
       text: 'Ton voyage idéal ?',
       answers: [
         { id: 'unknown-language', text: 'Partir à l’aventure dans un pays dont tu ne parles pas la langue.', weights: { ezreal: 1 } },
@@ -167,7 +162,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'flamed',
-      category: 'themed',
       text: 'Quelqu’un de ton équipe te flame dans le chat. Tu…',
       answers: [
         { id: 'irony', text: 'Réponds par un pavé plein d’ironie.', weights: { cassiopeia: 1 } },
@@ -179,7 +173,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'flatmate',
-      category: 'social',
       text: 'En colocation, tu es…',
       answers: [
         { id: 'schedule', text: 'La personne qui respecte le planning de ménage à la lettre.', weights: { 'lee-sin': 0.8 } },
@@ -191,7 +184,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'phone',
-      category: 'habits',
       text: 'Ton téléphone, c’est…',
       answers: [
         { id: 'selfies', text: 'Des centaines de photos de toi.', weights: { 'miss-fortune': 1 } },
@@ -203,7 +195,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'favorite-moment',
-      category: 'themed',
       text: 'Ton moment préféré dans une partie :',
       answers: [
         { id: 'thanked', text: 'Le moment où ton équipe te remercie de l’avoir sauvée.', weights: { braum: 1, lux: 0.3 } },
@@ -216,7 +207,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'in-ten-years',
-      category: 'values',
       text: 'Dans dix ans, tu te vois…',
       answers: [
         { id: 'backpack', text: 'Sac sur le dos, quelque part à l’autre bout du monde.', weights: { ezreal: 1 } },
@@ -228,7 +218,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'movie-role',
-      category: 'funny',
       text: 'Dans un film, tu serais…',
       answers: [
         { id: 'optimist', text: 'Le personnage optimiste qui finit par réconcilier tout le monde.', weights: { lux: 1, braum: 0.4 } },
@@ -241,7 +230,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'friend-in-trouble',
-      category: 'values',
       text: 'Ton ami·e a un gros problème. Tu…',
       answers: [
         { id: 'hug', text: 'Débarques chez ellui avec à manger et un gros câlin.', weights: { braum: 1 } },
@@ -253,7 +241,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'pentakill',
-      category: 'themed',
       text: 'Un pentakill t’attend, mais ton support est en danger à l’autre bout de la map. Tu…',
       answers: [
         { id: 'save', text: 'Fonces sauver ton support. Le pentakill attendra.', weights: { braum: 1, 'lee-sin': 0.6, lux: 0.5 } },
@@ -266,7 +253,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'secret',
-      category: 'introspection',
       text: 'Un secret que tu caches :',
       answers: [
         { id: 'pretend-fine', text: 'Tu fais semblant que tout va bien plus souvent qu’on ne le croit.', weights: { yasuo: 0.8, jinx: 0.6, lux: 0.3 } },
@@ -279,7 +265,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'unknown-topic',
-      category: 'social',
       text: 'On te demande ton avis sur un sujet que tu ne connais pas du tout. Tu…',
       answers: [
         { id: 'confident', text: 'Donnes ton avis quand même, avec aplomb.', weights: { ezreal: 0.8, darius: 0.5 } },
@@ -291,7 +276,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'rules',
-      category: 'values',
       text: 'Les règles, pour toi…',
       answers: [
         { id: 'respect', text: 'Sont faites pour être respectées.', weights: { 'lee-sin': 0.7, darius: 0.3 } },
@@ -302,7 +286,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'summer-job',
-      category: 'nostalgia',
       text: 'Ton premier job d’été, ça s’est passé comment ?',
       answers: [
         { id: 'never-late', text: 'Pas un jour de retard, pas une plainte.', weights: { 'lee-sin': 0.8 } },
@@ -315,7 +298,6 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'perfect-gift',
-      category: 'funny',
       text: 'Le cadeau parfait pour toi :',
       answers: [
         { id: 'luxury', text: 'Un objet magnifique et hors de prix.', weights: { cassiopeia: 1, 'miss-fortune': 0.5 } },

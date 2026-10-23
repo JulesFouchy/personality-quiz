@@ -94,7 +94,6 @@ export const minecraftMobs: Quiz = {
   questions: [
     {
       id: 'monday-alarm',
-      category: 'habits',
       text: 'Ton réveil sonne un lundi matin. Tu…',
       answers: [
         { id: 'up', text: 'Te lèves direct, tu as déjà mille choses prévues.', weights: { bee: 1, 'iron-golem': 0.5, villager: 0.5 } },
@@ -106,7 +105,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'new-world',
-      category: 'themed',
       text: 'Tu lances un nouveau monde Minecraft. Ta première action ?',
       answers: [
         { id: 'method', text: 'Couper du bois, faire des outils, survivre méthodiquement.', weights: { 'iron-golem': 0.7, bee: 0.6, villager: 0.4 } },
@@ -118,7 +116,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'party',
-      category: 'social',
       text: 'Tu arrives à une soirée où tu ne connais presque personne.',
       answers: [
         { id: 'friends', text: 'Tu repères tes potes et tu ne les lâches plus.', weights: { wolf: 1, creeper: 0.3 } },
@@ -130,7 +127,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'anger',
-      category: 'introspection',
       text: 'Quand tu es en colère, ça ressemble à quoi ?',
       answers: [
         { id: 'replay', text: 'Tu dis que ça va, et tu te refais la dispute dans ta tête pendant des jours.', weights: { creeper: 1, phantom: 0.3 } },
@@ -144,7 +140,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'first-night',
-      category: 'themed',
       text: 'La première nuit tombe et les monstres arrivent. Tu…',
       answers: [
         { id: 'cozy-shelter', text: 'Es déjà à l’abri dans une petite cabane, tu attends le matin.', weights: { villager: 1, bee: 0.5 } },
@@ -157,7 +152,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'superpower-tradeoff',
-      category: 'dilemma',
       text: 'Tu préfères…',
       answers: [
         { id: 'vanish', text: 'Pouvoir t’échapper de n’importe quelle conversation gênante, mais ne plus jamais savoir ce qu’on dit de toi après.', weights: { enderman: 1, creeper: 0.5 } },
@@ -168,7 +162,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'we-need-to-talk',
-      category: 'stress',
       text: 'Tu reçois un message : « Il faut qu’on parle. » Rien d’autre. Tu…',
       answers: [
         { id: 'of-what', text: 'Réponds « Oui, de quoi ? » et attends tranquillement.', weights: { 'glow-squid': 0.6, zombie: 0.5, 'iron-golem': 0.4 } },
@@ -182,7 +175,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'empty-sunday',
-      category: 'habits',
       text: 'Un dimanche sans rien de prévu. Tu…',
       answers: [
         { id: 'project', text: 'Avances sur un projet qui te tient à cœur.', weights: { bee: 1 } },
@@ -194,7 +186,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'diamonds',
-      category: 'themed',
       text: 'Tu tombes sur un énorme tas de diamants. Tu…',
       answers: [
         { id: 'gear', text: 'T’en sers tout de suite pour t’équiper, puis te remets au travail.', weights: { bee: 0.7, 'iron-golem': 0.5 } },
@@ -207,7 +198,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'group-project',
-      category: 'social',
       text: 'Dans un projet de groupe, tu es…',
       answers: [
         { id: 'worker', text: 'La personne qui fait tout le boulot pendant que les autres discutent.', weights: { bee: 1, 'iron-golem': 0.6 } },
@@ -220,7 +210,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'keep-one-thing',
-      category: 'values',
       text: 'Tu ne peux garder qu’une seule chose de ta vie actuelle. Laquelle ?',
       answers: [
         { id: 'friends', text: 'Tes proches.', weights: { wolf: 1, bee: 0.5, villager: 0.3 } },
@@ -231,7 +220,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'zombie-apocalypse',
-      category: 'absurd-scenario',
       text: 'Une apocalypse zombie commence. Ton plan ?',
       answers: [
         { id: 'lead', text: 'Tu prends la tête de la résistance et tu protèges les survivant·es.', weights: { 'iron-golem': 1, wolf: 0.6 } },
@@ -245,7 +233,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'bedroom',
-      category: 'habits',
       text: 'Ta chambre, c’est plutôt…',
       answers: [
         { id: 'organized-mess', text: 'Un joyeux bazar, mais tu sais exactement où est chaque chose.', weights: { enderman: 1 } },
@@ -258,7 +245,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'stared-at',
-      category: 'social',
       text: 'Quelqu’un te dévisage dans le métro. Tu…',
       answers: [
         { id: 'look-away', text: 'Détournes le regard, un peu mal à l’aise.', weights: { creeper: 1 } },
@@ -271,7 +257,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'house-blown-up',
-      category: 'themed',
       text: 'Un creeper vient de faire exploser ta maison. Tu…',
       answers: [
         { id: 'rebuild', text: 'Reconstruis tout, en mieux, dès ce soir.', weights: { bee: 1, 'iron-golem': 0.5 } },
@@ -284,7 +269,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'friends-say',
-      category: 'introspection',
       text: 'Qu’est-ce que tes ami·es disent de toi quand tu n’es pas là ?',
       answers: [
         { id: 'reliable', text: 'Qu’on peut toujours compter sur toi.', weights: { 'iron-golem': 1, wolf: 0.6, bee: 0.4 } },
@@ -298,7 +282,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'childhood-game',
-      category: 'nostalgia',
       text: 'Enfant, ton jeu préféré, c’était…',
       answers: [
         { id: 'hide', text: 'Cache-cache : le meilleur moment, c’était d’attendre caché·e sans bouger.', weights: { enderman: 0.8, creeper: 0.5 } },
@@ -312,7 +295,6 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'favorite-food',
-      category: 'funny',
       text: 'Ton repas idéal ?',
       answers: [
         { id: 'anything', text: 'Tout ce qui se mange, tant qu’il y en a beaucoup.', weights: { zombie: 1 } },

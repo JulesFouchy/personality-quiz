@@ -95,7 +95,6 @@ export const zodiac: Quiz = {
   questions: [
     {
       id: 'bad-horoscope',
-      category: 'themed',
       text: 'Ton horoscope du jour annonce une journée difficile. Tu…',
       answers: [
         { id: 'go-anyway', text: 'Fonces quand même : tu as des choses à faire.', weights: { aries: 0.8, capricorn: 0.4 } },
@@ -107,7 +106,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'friends-weekend',
-      category: 'social',
       text: 'Tu pars en week-end avec des ami·es, mais rien n’est encore décidé. Tu…',
       answers: [
         { id: 'spreadsheet', text: 'As déjà fait un tableau avec les dates, le budget et les options.', weights: { virgo: 1, capricorn: 0.5 } },
@@ -120,7 +118,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'flaw',
-      category: 'introspection',
       text: 'Le défaut que tu as du mal à admettre ?',
       answers: [
         { id: 'procrastinate', text: 'Tu remets tout au lendemain.', weights: { taurus: 0.7, pisces: 0.6 } },
@@ -134,7 +131,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'computer-crash',
-      category: 'stress',
       text: 'Ton ordinateur plante et tu perds deux heures de travail. Tu…',
       answers: [
         { id: 'bang-table', text: 'Tapes sur la table, puis t’y remets cinq minutes plus tard.', weights: { aries: 0.8 } },
@@ -146,7 +142,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'smell',
-      category: 'aesthetic',
       text: 'Choisis une odeur.',
       answers: [
         { id: 'bread', text: 'Du pain chaud qui sort du four.', weights: { taurus: 1, cancer: 0.3 } },
@@ -156,7 +151,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'asked-sign',
-      category: 'themed',
       text: 'Quelqu’un te demande ton signe astrologique. Tu…',
       answers: [
         { id: 'just-say', text: 'Le dis, sans en faire toute une histoire.', weights: { capricorn: 0.6, taurus: 0.5 } },
@@ -169,7 +163,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'calendar',
-      category: 'habits',
       text: 'Ton agenda, c’est…',
       answers: [
         { id: 'planned', text: 'Rempli des mois à l’avance, avec tes objectifs de l’année en première page.', weights: { capricorn: 1, virgo: 0.5 } },
@@ -181,7 +174,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'failed-creation',
-      category: 'social',
       text: 'Ton·ta meilleur·e ami·e te montre une création dont iel est très fier·ère, et c’est raté. Tu…',
       answers: [
         { id: 'honest-fixes', text: 'Lui dis franchement ce qui ne va pas, et comment l’améliorer.', weights: { sagittarius: 0.7, virgo: 0.7 } },
@@ -193,7 +185,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'alien-visit',
-      category: 'absurd-scenario',
       text: 'Un·e extraterrestre te demande de lui présenter l’humanité. Tu l’emmènes où ?',
       answers: [
         { id: 'terrace', text: 'Sur une terrasse au soleil, autour d’un bon repas.', weights: { taurus: 1 } },
@@ -206,7 +197,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'wrong-dish',
-      category: 'funny',
       text: 'Au restaurant, on t’apporte un plat que tu n’as pas commandé. Tu…',
       answers: [
         { id: 'eat-anyway', text: 'Le manges quand même : tu n’oses pas déranger.', weights: { pisces: 1, libra: 0.4 } },
@@ -217,7 +207,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'secret-told',
-      category: 'stress',
       text: 'Tu découvres qu’un·e ami·e a raconté un de tes secrets. Tu…',
       answers: [
         { id: 'confront', text: 'Vas lui dire ta façon de penser, devant tout le monde.', weights: { aries: 1, sagittarius: 0.4 } },
@@ -230,7 +219,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'childhood-dream',
-      category: 'nostalgia',
       text: 'Petit·e, tu voulais faire quoi plus tard ?',
       answers: [
         { id: 'star', text: 'Star de la chanson ou du cinéma.', weights: { leo: 1 } },
@@ -243,7 +231,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'proudest',
-      category: 'values',
       text: 'Ce qui te rend le plus fier·ère ?',
       answers: [
         { id: 'goal', text: 'Avoir atteint un objectif que tu t’étais fixé depuis des années.', weights: { capricorn: 1 } },
@@ -255,7 +242,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'public-compliment',
-      category: 'social',
       text: 'Quelqu’un te fait un compliment devant tout le monde. Tu…',
       answers: [
         { id: 'savor', text: 'Savoures. Tu en reprendrais bien un deuxième.', weights: { leo: 1 } },
@@ -268,7 +254,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'asking-advice',
-      category: 'introspection',
       text: 'Quand tu doutes, tu demandes conseil à qui ?',
       answers: [
         { id: 'no-one', text: 'À personne : tu te débrouilles seul·e.', weights: { capricorn: 0.7, aquarius: 0.5, scorpio: 0.5 } },
@@ -281,7 +266,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'board-games',
-      category: 'social',
       text: 'Soirée jeux de société. Tu es la personne qui…',
       answers: [
         { id: 'rematch', text: 'Demande une revanche dès que la partie est finie.', weights: { aries: 1 } },
@@ -294,7 +278,6 @@ export const zodiac: Quiz = {
     },
     {
       id: 'change-world',
-      category: 'values',
       text: 'Si tu pouvais changer une seule chose dans le monde ?',
       answers: [
         { id: 'equality', text: 'Fini les injustices : tout le monde à égalité.', weights: { aquarius: 1, libra: 0.3 } },
