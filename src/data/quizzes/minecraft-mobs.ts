@@ -4,7 +4,7 @@ export const minecraftMobs: Quiz = {
   id: 'minecraft-mobs',
   title: 'Quel mob Minecraft es-tu ?',
   emoji: '⛏️',
-  description: 'Creeper explosif, enderman mystérieux ou calamar luisant toujours content ? Découvre quel mob se cache en toi.',
+  description: 'Creeper explosif, enderman mystérieux ou poulpe luisant toujours content ? Découvre quel mob se cache en toi.',
   personalities: [
     {
       id: 'creeper',
@@ -78,7 +78,7 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'glow-squid',
-      name: 'Calamar luisant',
+      name: 'Poulpe luisant',
       emoji: '🦑',
       description:
         'Rayonnant·e sans même essayer, toujours de bonne humeur, tu t’émerveilles d’un rien. Un peu naïf·ve, parfois à côté de la plaque, tu fais sourire tout le monde… même quand on n’est pas sûr·e que tu aies compris la blague.',
