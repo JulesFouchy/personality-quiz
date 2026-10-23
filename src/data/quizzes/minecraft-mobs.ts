@@ -174,6 +174,7 @@ export const minecraftMobs: Quiz = {
         { id: 'of-what', text: 'Réponds « Oui, de quoi ? » et attends tranquillement.', weights: { 'glow-squid': 0.6, zombie: 0.5, 'iron-golem': 0.4 } },
         { id: 'call-now', text: 'Appelles tout de suite pour savoir ce qui se passe.', weights: { wolf: 0.8, phantom: 0.6, 'iron-golem': 0.4 } },
         { id: 'reread', text: 'Relis toute la conversation pour chercher ce que tu as fait.', weights: { creeper: 1, bee: 0.3 } },
+        { id: 'imagine-worst', text: 'Réponds « Oui ? » et te fais tous les films de la planète dans ta tête en attendant.', weights: { creeper: 0.6 } },
         { id: 'ask-around', text: 'Demandes discrètement à un·e ami·e commun·e si iel sait quelque chose.', weights: { villager: 0.8, phantom: 0.4 } },
         { id: 'joke', text: 'Réponds par une blague pour détendre l’atmosphère.', weights: { skeleton: 0.7, 'glow-squid': 0.4 } },
         { id: 'later', text: 'Laisses ça pour plus tard, on verra bien.', weights: { zombie: 0.8, bat: 0.6, enderman: 0.4 } },
