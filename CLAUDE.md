@@ -13,7 +13,7 @@ Every push to `main` deploys the site to GitHub Pages (`.github/workflows/deploy
 
 ## Committing (Claude)
 
-In this repo Claude commits and pushes itself, but only once the user has validated the changes, since every push goes live.
+In this repo Claude commits and pushes itself, but only once the user has validated the changes, since every push goes live. Commit messages never include a "Co-Authored-By" (or any other attribution) trailer.
 
 ## Conventions
 
