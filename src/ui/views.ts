@@ -40,7 +40,7 @@ export function homeView(): Node {
     'main',
     { class: 'page' },
     el('h1', { class: 'site-title' }, 'Quiz de personnalité'),
-    el('p', { class: 'muted' }, 'Réponds honnêtement… ou pas. Puis compare avec tes ami·es.'),
+    el('p', { class: 'muted' }, 'Tu es plutôt creeper ou petit pois ? Compare avec tes ami·es.'),
     el(
       'ul',
       { class: 'quiz-list' },

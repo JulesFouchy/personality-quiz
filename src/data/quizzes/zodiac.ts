@@ -2,7 +2,7 @@ import type { Quiz } from '../../types';
 
 export const zodiac: Quiz = {
   id: 'zodiac',
-  title: 'Quel est ton (vrai) signe astrologique ?',
+  title: 'Quel est ton (véritable) signe astrologique ?',
   emoji: '🔮',
   description: 'Oublie ta date de naissance : ici, c’est ta personnalité qui décide.',
   hidden: true,

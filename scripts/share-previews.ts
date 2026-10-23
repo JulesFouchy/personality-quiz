@@ -30,8 +30,7 @@ async function loadSite(): Promise<Site> {
 }
 
 const SITE_NAME = 'Quiz de personnalité';
-const SITE_TAGLINE = 'Réponds honnêtement… ou pas. Puis compare avec tes ami·es.';
-// Disguised, as players may be ("…ou pas").
+const SITE_TAGLINE = 'Tu es plutôt creeper ou petit pois ? Compare avec tes ami·es.';
 const SITE_EMOJI = '🥸';
 const WIDTH = 1200;
 const HEIGHT = 630;
