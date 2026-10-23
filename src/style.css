@@ -103,8 +103,10 @@ h2 {
   transition: transform 0.15s;
 }
 
-.quiz-card:hover {
-  transform: scale(1.015);
+/* Hovering the list item, which doesn't move, so a pointer near the card's left edge
+   doesn't fall off it and make it flicker back and forth. */
+.quiz-list li:hover .quiz-card {
+  transform: translateX(4px);
 }
 
 .quiz-card.done {
