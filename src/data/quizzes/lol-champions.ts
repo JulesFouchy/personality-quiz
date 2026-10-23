@@ -173,13 +173,13 @@ export const lolChampions: Quiz = {
     },
     {
       id: 'flatmate',
-      text: 'En colocation, tu es…',
+      text: 'En colocation, tu es la personne…',
       answers: [
-        { id: 'schedule', text: 'La personne qui respecte le planning de ménage à la lettre.', weights: { 'lee-sin': 0.8 } },
-        { id: 'cook', text: 'La personne qui cuisine pour tout le monde.', weights: { braum: 1 } },
-        { id: 'never-seen', text: 'La personne qu’on ne voit presque jamais.', weights: { yasuo: 0.7, ezreal: 0.4 } },
-        { id: 'messy', text: 'La personne dont les affaires traînent partout.', weights: { jinx: 1, yuumi: 0.4 } },
-        { id: 'squatter', text: 'La personne qui squatte le canapé et les lits des autres.', weights: { yuumi: 1 } },
+        { id: 'schedule', text: 'Qui respecte le planning de ménage à la lettre.', weights: { 'lee-sin': 0.8 } },
+        { id: 'cook', text: 'Qui cuisine pour tout le monde.', weights: { braum: 1 } },
+        { id: 'never-seen', text: 'Qu’on ne voit presque jamais.', weights: { yasuo: 0.7, ezreal: 0.4 } },
+        { id: 'messy', text: 'Dont les affaires traînent partout.', weights: { jinx: 1, yuumi: 0.4 } },
+        { id: 'squatter', text: 'Qui squatte le canapé et les lits des autres.', weights: { yuumi: 1 } },
       ],
     },
     {

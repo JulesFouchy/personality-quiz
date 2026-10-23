@@ -118,11 +118,11 @@ export const cables: Quiz = {
       answers: [
         { id: 'everything', text: 'De quoi faire face à tout : ciseaux, mouchoirs, scotch, une barre de céréales.', weights: { 'usb-c': 1 } },
         { id: 'essentials', text: 'L’essentiel : clés, téléphone, portefeuille.', weights: { 'usb-c': 0.6, lightning: 0.3 } },
-        { id: 'no-idea', text: 'Aucune idée, et tu n’es pas sûr·e de savoir où il est.', weights: { 'tangled-earphones': 1 } },
         { id: 'feelings-notebook', text: 'Un carnet que personne n’a le droit de lire.', weights: { jack: 0.8 } },
         { id: 'old-ticket', text: 'Un ticket de cinéma d’il y a dix ans, gardé on ne sait pas trop pourquoi.', weights: { scart: 0.8 } },
         { id: 'others-stuff', text: 'Les clés d’un·e ami·e, le livre d’un·e autre, un colis pour ton·ta voisin·e…', weights: { 'power-strip': 1 } },
         { id: 'nice-wallet', text: 'Un très beau portefeuille, et pas grand-chose d’autre.', weights: { lightning: 1 } },
+        { id: 'no-idea', text: 'Aucune idée, et tu n’es pas sûr·e de savoir où il est.', weights: { 'tangled-earphones': 1 } },
       ],
     },
     {

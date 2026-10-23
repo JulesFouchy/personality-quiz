@@ -116,13 +116,13 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'party',
-      text: 'Tu arrives à une soirée où tu ne connais presque personne.',
+      text: 'Tu arrives à une soirée où tu ne connais presque personne. Tu…',
       answers: [
-        { id: 'friends', text: 'Tu repères tes potes et tu ne les lâches plus.', weights: { wolf: 1, creeper: 0.3 } },
-        { id: 'everyone', text: 'Tu fais le tour de la pièce et tu parles à tout le monde.', weights: { villager: 1, zombie: 0.3 } },
-        { id: 'corner', text: 'Tu t’installes dans un coin et tu observes.', weights: { enderman: 1, creeper: 0.6, skeleton: 0.4 } },
-        { id: 'first-person', text: 'Tu restes avec la première personne qui te parle et tu suis le mouvement.', weights: { zombie: 0.8, wolf: 0.3 } },
-        { id: 'join-in', text: 'Tu t’incrustes dans une conversation déjà lancée.', weights: { phantom: 0.8, villager: 0.4 } },
+        { id: 'friends', text: 'Repères tes potes et ne les lâches plus.', weights: { wolf: 1, creeper: 0.3 } },
+        { id: 'everyone', text: 'Fais le tour de la pièce et parles à tout le monde.', weights: { villager: 1, zombie: 0.3 } },
+        { id: 'corner', text: 'T’installes dans un coin et observes.', weights: { enderman: 1, creeper: 0.6, skeleton: 0.4 } },
+        { id: 'first-person', text: 'Restes avec la première personne qui te parle et suis le mouvement.', weights: { zombie: 0.8, wolf: 0.3 } },
+        { id: 'join-in', text: 'T’incrustes dans une conversation déjà lancée.', weights: { phantom: 0.8, villager: 0.4 } },
       ],
     },
     {
@@ -198,14 +198,14 @@ export const minecraftMobs: Quiz = {
     },
     {
       id: 'group-project',
-      text: 'Dans un projet de groupe, tu es…',
+      text: 'Dans un projet de groupe, tu es la personne qui…',
       answers: [
-        { id: 'worker', text: 'La personne qui fait tout le boulot pendant que les autres discutent.', weights: { bee: 1, 'iron-golem': 0.6 } },
-        { id: 'matchmaker', text: 'La personne qui va voir tout le monde pour s’assurer que chaque personne ait une tâche qui lui plaît.', weights: { villager: 1 } },
-        { id: 'follower', text: 'La personne qui fait ce qu’on lui dit, sans trop se poser de questions.', weights: { zombie: 1 } },
-        { id: 'critic', text: 'La personne qui critique tout, mais qui a souvent raison.', weights: { skeleton: 1 } },
-        { id: 'ghost', text: 'La personne qui disparaît, puis revient à la fin avec un truc bizarre mais génial.', weights: { enderman: 1 } },
-        { id: 'late-reminders', text: 'La personne qui relance le groupe tous les soirs à 23 h.', weights: { phantom: 0.8, bee: 0.5 } },
+        { id: 'worker', text: 'Fait tout le boulot pendant que les autres discutent.', weights: { bee: 1, 'iron-golem': 0.6 } },
+        { id: 'matchmaker', text: 'Va voir tout le monde pour s’assurer que chaque personne ait une tâche qui lui plaît.', weights: { villager: 1 } },
+        { id: 'follower', text: 'Fait ce qu’on lui dit, sans trop se poser de questions.', weights: { zombie: 1 } },
+        { id: 'critic', text: 'Critique tout, mais a souvent raison.', weights: { skeleton: 1 } },
+        { id: 'ghost', text: 'Disparaît, puis revient à la fin avec un truc bizarre mais génial.', weights: { enderman: 1 } },
+        { id: 'late-reminders', text: 'Relance le groupe tous les soirs à 23 h.', weights: { phantom: 0.8, bee: 0.5 } },
       ],
     },
     {

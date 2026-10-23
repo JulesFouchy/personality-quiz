@@ -160,11 +160,11 @@ export const sports: Quiz = {
       text: 'Tu gagnes au loto. Ta première dépense ?',
       answers: [
         { id: 'long-trip', text: 'Un long voyage, sans itinéraire ni date de retour.', weights: { hiking: 0.8, climbing: 0.3 } },
-        { id: 'think-first', text: 'Rien tout de suite : tu prends le temps d’y réfléchir.', weights: { chess: 0.6, yoga: 0.5 } },
         { id: 'big-party', text: 'Une énorme fête pour ton équipe, ton club, ta bande.', weights: { volleyball: 0.8, petanque: 0.6 } },
         { id: 'no-more-effort', text: 'Quelqu’un pour porter tes courses et monter les escaliers à ta place.', weights: { 'video-games': 0.8 } },
         { id: 'coach', text: 'Un·e coach personnel·le.', weights: { 'ping-pong': 0.7 } },
         { id: 'loved-ones', text: 'De quoi mettre tes proches à l’abri.', weights: { volleyball: 0.6 } },
+        { id: 'think-first', text: 'Rien tout de suite : tu prends le temps d’y réfléchir.', weights: { chess: 0.6, yoga: 0.5 } },
       ],
     },
     {
@@ -198,9 +198,9 @@ export const sports: Quiz = {
       answers: [
         { id: 'move', text: 'Te mets à bouger au milieu du rayon, sans même t’en rendre compte.', weights: { dance: 1 } },
         { id: 'sing-along', text: 'Chantes le refrain à voix haute, et embarques la personne à la caisse.', weights: { petanque: 0.8 } },
-        { id: 'focused', text: 'Ne l’entends même pas : tu es concentré·e sur ce que tu cherches.', weights: { chess: 0.6 } },
         { id: 'savor', text: 'Souris, et savoures le moment en silence.', weights: { yoga: 0.6 } },
         { id: 'hum-quietly', text: 'Fredonnes tout bas, pour que personne n’entende.', weights: { 'video-games': 0.7 } },
+        { id: 'focused', text: 'Ne l’entends même pas : tu es concentré·e sur ce que tu cherches.', weights: { chess: 0.6 } },
       ],
     },
     {
