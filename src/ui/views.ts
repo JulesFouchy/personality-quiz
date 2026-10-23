@@ -6,7 +6,7 @@ import type { Answers, Quiz } from '../types';
 import { animateDetails } from './details';
 import { el, frenchSpacing } from './dom';
 import { navigate, url } from './navigation';
-import { isComplete, loadProgress, loadSharedResult, loadShareName, saveProgress, saveSharedResult, saveShareName, senderId } from './progress';
+import { forgetSharedResult, isComplete, loadProgress, loadSharedResults, loadShareName, saveProgress, saveSharedResult, saveShareName, senderId } from './progress';
 
 const homeUrl = url('');
 /** Resolved by the router through `resumeUrl`, so a link to it is never stale. */
@@ -369,13 +369,71 @@ function shareSection(quiz: Quiz, onOwnResult: boolean): Node {
   );
 }
 
+/** A pill of the comparisons list; the page being viewed is shown dimmed, without a link. */
+function personPill(top: PersonalityScore[], name: string, href: string, extraClass: string, isCurrent: boolean, ...extra: Node[]): HTMLLIElement {
+  const content = [
+    el('span', { 'aria-hidden': 'true' }, top.map((s) => s.personality.emoji).join('')),
+    el('strong', {}, name),
+    el('span', { class: 'muted' }, top.map((s) => s.personality.name).join(', ')),
+    ...extra,
+  ];
+  return el(
+    'li',
+    { class: `person${extraClass}${isCurrent ? ' current' : ''}` },
+    isCurrent
+      ? el('span', { class: 'person-link', 'aria-current': 'page', title: 'Tu es déjà sur cette page' }, ...content)
+      : el('a', { class: 'person-link', href }, ...content),
+  );
+}
+
+/**
+ * The player's own result, then everyone whose shared result they opened, most compatible first, each linking to its page.
+ * `current` is the shared result being viewed, if any.
+ */
+function comparisonsSection(quiz: Quiz, yours: PersonalityScore[], current?: SharedResult): Node | '' {
+  const people = loadSharedResults(quiz)
+    .flatMap((shared) => {
+      // Expired links have nothing to compare.
+      const answers = decodeAnswers(quiz, shared.code);
+      if (!answers) return [];
+      const theirs = score(quiz, answers);
+      return [{ shared, top: winners(theirs), value: compatibility(theirs, yours) }];
+    })
+    .sort((a, b) => b.value - a.value);
+  if (people.length === 0) return '';
+  const section = el(
+    'section',
+    { class: 'comparisons' },
+    el('h2', {}, 'Tes comparaisons'),
+    el('p', { class: 'hint' }, 'Touche une personne pour revoir votre comparaison.'),
+  );
+  const list = el('ul', { class: 'people' }, personPill(winners(yours), 'Toi', ownResultUrl(quiz)!.href, ' own', !current));
+  let remaining = people.length;
+  for (const { shared, top, value } of people) {
+    const name = shared.name || 'Anonyme';
+    const isCurrent = current !== undefined && current.code === shared.code && current.sender === shared.sender && current.name === shared.name;
+    const forget = el('button', { class: 'person-forget', type: 'button', 'aria-label': `Oublier ${name}`, title: 'Oublier' }, '×');
+    const item = personPill(top, name, resultUrl(quiz, shared), '', isCurrent, el('span', { class: 'person-compat' }, percent(value)));
+    item.append(forget);
+    forget.addEventListener('click', () => {
+      const who = shared.name || 'cette personne';
+      if (!confirm(frenchSpacing(`Retirer ${who} de tes comparaisons ? Rouvrir son lien l’y remettra.`))) return;
+      forgetSharedResult(quiz, shared);
+      // Going back reopens their page, which remembers them again: an undo.
+      if (isCurrent) return navigate(ownResultUrl(quiz)!.href);
+      item.remove();
+      if (--remaining === 0) section.remove();
+    });
+    list.append(item);
+  }
+  section.append(list);
+  return section;
+}
+
 export function resultView(quiz: Quiz): Node {
   const progress = loadProgress(quiz);
   const ranking = score(quiz, progress.answers);
   const top = winners(ranking);
-  const shared = loadSharedResult(quiz);
-  // Not when the shared result is the player's own, opened to try the link.
-  const canCompare = shared !== undefined && decodeAnswers(quiz, shared.code) !== undefined && shared.sender !== senderId();
 
   return el(
     'main',
@@ -386,19 +444,14 @@ export function resultView(quiz: Quiz): Node {
     el('h2', {}, 'Ta répartition'),
     el('p', { class: 'hint' }, 'Touche une personnalité pour lire sa description.'),
     rankingList({ yours: ranking }, 'yours'),
-    canCompare &&
-      el('a', { class: 'card compare-link', href: resultUrl(quiz, shared) }, shared.name ? `Compare tes résultats avec ${shared.name} →` : 'Compare ton résultat avec celui de la personne qui t’a envoyé le lien →'),
+    comparisonsSection(quiz, ranking),
     shareSection(quiz, true),
     el('h2', {}, 'Tes réponses'),
     el('p', { class: 'hint' }, 'Touche une question pour revoir toutes les réponses possibles.'),
+    // Keeps the answers, so you can confirm or change each one.
+    el('div', { class: 'recap-actions' }, el('a', { class: 'button secondary small', href: questionUrl(quiz, 0) }, 'Modifier tes réponses')),
     recapList(quiz, progress.answers),
-    el(
-      'div',
-      { class: 'actions' },
-      // Keeps the answers, so you can confirm or change each one.
-      el('a', { class: 'button secondary', href: questionUrl(quiz, 0) }, 'Refaire le quiz'),
-      el('a', { class: 'button', href: homeUrl }, 'Autres quiz'),
-    ),
+    el('div', { class: 'actions' }, el('a', { class: 'button', href: homeUrl }, 'Autres quiz')),
   );
 }
 
@@ -449,7 +502,8 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
       el('div', { class: 'actions' }, el('a', { class: 'button', href: playUrl(quiz) }, 'Faire le quiz')),
     );
   }
-  saveSharedResult(quiz, shared);
+  // Not the player's own, opened from an older result of theirs.
+  if (shared.sender !== senderId()) saveSharedResult(quiz, shared);
   const { name } = shared;
   const sender = name || 'La personne qui t’a envoyé ce lien';
   const sortLabels: Sides = name ? { theirs: name, yours: 'Toi' } : { theirs: 'Son score', yours: 'Ton score' };
@@ -457,8 +511,7 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
   const ranking = score(quiz, answers);
   const top = winners(ranking);
   const progress = loadProgress(quiz);
-  const complete = isComplete(quiz, progress);
-  const yours = complete ? score(quiz, progress.answers) : undefined;
+  const yours = isComplete(quiz, progress) ? score(quiz, progress.answers) : undefined;
   const started = Object.keys(progress.answers).length > 0;
   const scores: RankingScores = { theirs: ranking, yours };
   const rankingSlot = el('div', {}, rankingList(scores, 'theirs'));
@@ -479,6 +532,7 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
     yours && sortControl(sortLabels, 'theirs', (side) => rankingSlot.replaceChildren(rankingList(scores, side))),
     el('p', { class: 'hint' }, 'Touche une personnalité pour lire sa description.'),
     rankingSlot,
+    yours && comparisonsSection(quiz, yours, shared),
     // Where the result page has its share card.
     yours
       ? shareSection(quiz, false)
@@ -491,11 +545,6 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
     el('h2', {}, 'Ses réponses'),
     el('p', { class: 'hint' }, 'Touche une question pour revoir toutes les réponses possibles.'),
     recapList(quiz, answers, { yours: yours && progress.answers, tags }),
-    el(
-      'div',
-      { class: 'actions' },
-      complete && el('a', { class: 'button secondary', href: ownResultUrl(quiz)!.href }, 'Voir mon résultat'),
-      el('a', { class: 'button', href: homeUrl }, 'Autres quiz'),
-    ),
+    el('div', { class: 'actions' }, el('a', { class: 'button', href: homeUrl }, 'Autres quiz')),
   );
 }

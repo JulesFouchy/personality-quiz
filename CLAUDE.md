@@ -5,7 +5,7 @@ Static Vite + TypeScript site, no backend. Each quiz is a self-contained file in
 ## Commands
 
 - `npm run dev`: local site
-- `npm test`: scoring tests + validation of every quiz
+- `npm test`: unit tests + validation of every quiz
 - `npm run balance`: win frequency per personality over random playthroughs (informational)
 - `npm run build`: typecheck + static build into `dist/`
 

@@ -37,25 +37,40 @@ export function isComplete(quiz: Quiz, progress: Progress): boolean {
 
 const sharedKey = (quiz: Quiz) => `quiz-shared:${quiz.id}`;
 
-/** The last shared result opened for this quiz, so its result page can offer to compare once the quiz is done. */
-export function loadSharedResult(quiz: Quiz): SharedResult | undefined {
+/** Whether two links come from the same person; a link from before sender ids only matches itself. */
+const sameSender = (a: SharedResult, b: SharedResult) => (a.sender ? a.sender === b.sender : !b.sender && a.code === b.code && a.name === b.name);
+
+/** Every shared result opened for this quiz, last opened first, so the result page can compare with each once the quiz is done. */
+export function loadSharedResults(quiz: Quiz): SharedResult[] {
   try {
-    const saved = JSON.parse(localStorage.getItem(sharedKey(quiz)) ?? 'null') as Partial<SharedResult> | null;
-    if (typeof saved?.code === 'string') {
-      return { code: saved.code, sender: typeof saved.sender === 'string' ? saved.sender : '', name: typeof saved.name === 'string' ? saved.name : '' };
-    }
+    const saved = JSON.parse(localStorage.getItem(sharedKey(quiz)) ?? '[]') as unknown;
+    // Only the last one opened used to be kept.
+    return (Array.isArray(saved) ? saved : [saved]).flatMap((entry: Partial<SharedResult> | null) =>
+      typeof entry?.code === 'string'
+        ? [{ code: entry.code, sender: typeof entry.sender === 'string' ? entry.sender : '', name: typeof entry.name === 'string' ? entry.name : '' }]
+        : [],
+    );
   } catch {
     // Storage unavailable or corrupted: nothing to compare with.
+    return [];
   }
-  return undefined;
 }
 
-export function saveSharedResult(quiz: Quiz, shared: SharedResult): void {
+function saveSharedResults(quiz: Quiz, list: SharedResult[]): void {
   try {
-    localStorage.setItem(sharedKey(quiz), JSON.stringify(shared));
+    localStorage.setItem(sharedKey(quiz), JSON.stringify(list));
   } catch {
     // The result page just won't offer to compare.
   }
+}
+
+/** Remembers a shared result, in place of an earlier link from the same person: they retook the quiz or changed their name since. */
+export function saveSharedResult(quiz: Quiz, shared: SharedResult): void {
+  saveSharedResults(quiz, [shared, ...loadSharedResults(quiz).filter((s) => !sameSender(s, shared))]);
+}
+
+export function forgetSharedResult(quiz: Quiz, shared: SharedResult): void {
+  saveSharedResults(quiz, loadSharedResults(quiz).filter((s) => !sameSender(s, shared)));
 }
 
 const SENDER_KEY = 'sender-id';
