@@ -320,8 +320,11 @@ function recapList(quiz: Quiz, answers: Answers, shared?: SharedRecap): Node {
   );
 }
 
-/** Copies the player's result link, or hands it to the system share sheet. The page's own URL is that link too. */
-function shareSection(quiz: Quiz): Node {
+/**
+ * Copies the player's result link, or hands it to the system share sheet.
+ * On their result page (`onOwnResult`), the page's own URL is that link too and follows the name.
+ */
+function shareSection(quiz: Quiz, onOwnResult: boolean): Node {
   // The share sheet beats the clipboard on phones; on desktop it's an unexpected dialog.
   const useShareSheet = 'share' in navigator && matchMedia('(pointer: coarse)').matches;
   const label = useShareSheet ? 'Partager le lien' : 'Copier le lien';
@@ -336,7 +339,7 @@ function shareSection(quiz: Quiz): Node {
   // Keeps the address bar on the link as shared, name included.
   input.addEventListener('input', () => {
     saveShareName(input.value.trim());
-    history.replaceState(null, '', ownResultUrl(quiz)!.href);
+    if (onOwnResult) history.replaceState(null, '', ownResultUrl(quiz)!.href);
   });
   const button = el('button', { class: 'button', type: 'button' }, label);
   button.addEventListener('click', async () => {
@@ -385,7 +388,7 @@ export function resultView(quiz: Quiz): Node {
     rankingList({ yours: ranking }, 'yours'),
     canCompare &&
       el('a', { class: 'card compare-link', href: resultUrl(quiz, shared) }, shared.name ? `Compare tes résultats avec ${shared.name} →` : 'Compare ton résultat avec celui de la personne qui t’a envoyé le lien →'),
-    shareSection(quiz),
+    shareSection(quiz, true),
     el('h2', {}, 'Tes réponses'),
     el('p', { class: 'hint' }, 'Touche une question pour revoir toutes les réponses possibles.'),
     recapList(quiz, progress.answers),
@@ -477,13 +480,14 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
     el('p', { class: 'hint' }, 'Touche une personnalité pour lire sa description.'),
     rankingSlot,
     // Where the result page has its share card.
-    !yours &&
-      el(
-        'section',
-        { class: 'card invite' },
-        el('p', {}, started ? 'Termine le quiz pour comparer vos résultats.' : 'Fais le quiz pour comparer vos résultats.'),
-        el('a', { class: 'button', href: playUrl(quiz) }, started ? 'Continuer le quiz' : 'Faire le quiz'),
-      ),
+    yours
+      ? shareSection(quiz, false)
+      : el(
+          'section',
+          { class: 'card invite' },
+          el('p', {}, started ? 'Termine le quiz pour comparer vos résultats.' : 'Fais le quiz pour comparer vos résultats.'),
+          el('a', { class: 'button', href: playUrl(quiz) }, started ? 'Continuer le quiz' : 'Faire le quiz'),
+        ),
     el('h2', {}, 'Ses réponses'),
     el('p', { class: 'hint' }, 'Touche une question pour revoir toutes les réponses possibles.'),
     recapList(quiz, answers, { yours: yours && progress.answers, tags }),
