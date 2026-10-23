@@ -462,7 +462,7 @@ function comparisonsSection(quiz: Quiz, yours: PersonalityScore[], current?: Sha
     const name = shared.name || 'Anonyme';
     const isCurrent = current !== undefined && current.code === shared.code && current.sender === shared.sender && current.name === shared.name;
     const forget = el('button', { class: 'person-forget', type: 'button', 'aria-label': `Oublier ${name}`, title: 'Oublier' }, '×');
-    const item = personPill(top, name, resultUrl(quiz, shared), '', isCurrent, el('span', { class: 'person-compat' }, percent(value)));
+    const item = personPill(top, name, resultUrl(quiz, shared), '', isCurrent, el('span', { class: 'person-compat', style: `--compat: ${Math.round(100 * value)}%` }, percent(value)));
     item.append(forget);
     forget.addEventListener('click', () => {
       const who = shared.name || 'cette personne';

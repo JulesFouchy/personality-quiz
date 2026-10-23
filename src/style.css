@@ -803,7 +803,6 @@ details[open]:not(.closing) > summary .chevron {
 
 .person-compat {
   font-weight: 700;
-  color: var(--compare-text);
 }
 
 .person-forget {
@@ -866,7 +865,11 @@ details[open]:not(.closing) > summary .chevron {
   font-weight: 800;
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
-  /* From the sender's orange at 0 % to the visitor's green at 100 %. */
+}
+
+/* From the sender's orange at 0 % to the visitor's green at 100 %. */
+.compat-score,
+.person-compat {
   color: color-mix(in oklch, var(--accent) var(--compat), var(--compare-text));
 }
 
