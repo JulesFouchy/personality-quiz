@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { answerContributions, score, winners } from './scoring';
+import { answerContributions, compatibility, score, winners } from './scoring';
 import type { Quiz } from './types';
 
 const quiz: Quiz = {
@@ -79,5 +79,19 @@ describe('answerContributions', () => {
   it('lists the personalities each answer pushed toward, strongest first', () => {
     const [, second] = answerContributions(quiz, { q1: 'x', q2: 'x' });
     expect(second?.toward.map((w) => w.personality.id)).toEqual(['a', 'generous']);
+  });
+});
+
+describe('compatibility', () => {
+  it('is 1 for identical answers and 0 for opposite profiles', () => {
+    const a = score(quiz, { q1: 'x', q2: 'x' });
+    expect(compatibility(a, score(quiz, { q1: 'x', q2: 'x' }))).toBeCloseTo(1);
+    expect(compatibility(a, score(quiz, { q1: 'y', q2: 'y' }))).toBeCloseTo(0);
+  });
+
+  it('is symmetric and ignores ranking order', () => {
+    const a = score(quiz, { q1: 'x', q2: 'y' });
+    const b = score(quiz, { q1: 'y', q2: 'y' });
+    expect(compatibility(a, b)).toBeCloseTo(compatibility(b, a));
   });
 });

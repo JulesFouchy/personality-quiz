@@ -11,6 +11,8 @@ Static Vite + TypeScript site, no backend. Each quiz is a self-contained file in
 
 Every push to `main` deploys the site to GitHub Pages (`.github/workflows/deploy.yml`). A quiz with `hidden: true` stays off the deployed site but is listed in `npm run dev`. Quizzes are prepared in advance and pushed hidden; only the user decides when one is released by removing `hidden`.
 
+Share links (`src/share.ts`) store each answer's position plus a fingerprint of the question and answer ids. On a released quiz, adding, removing, reordering or renaming questions or answers turns every link already shared into "Lien périmé"; editing texts and weights is safe.
+
 ## Committing (Claude)
 
 In this repo Claude commits and pushes itself, but only once the user has validated the changes, since every push goes live. Commit messages never include a "Co-Authored-By" (or any other attribution) trailer.
@@ -20,7 +22,10 @@ In this repo Claude commits and pushes itself, but only once the user has valida
 - Code is English only, with American spelling (identifiers, ids, file names, comments). Only user-facing text is French.
 - User-facing French is inclusive everywhere, with no exception: never default to the masculine for the player or for unspecified people. Prefer neutral wording ("les personnes qui…", "ton équipe"), "iel" for il/elle and "la·le" for le/la, otherwise use the point médian (`ami·e`, `ami·es`, `fort·es`). Always the point médian (·): never a period, and never "X ou Y" pairs (`ton·ta`, `la·le`, `chez ellui`, not "ton ou ta", "le ou la", "chez lui ou chez elle"). Use the established inclusive form for each word (e.g. "iel" as subject, "ellui" after a preposition) and look it up when unsure.
 - Use the typographic apostrophe (’) in user-facing French.
+- Write plain spaces before `? ! : ; %` and inside « »: `el()` in `src/ui/dom.ts` makes them non-breaking when the text is displayed.
+- A quiz's `description` is a witty, original hook, not a stock "Découvre le X qui te ressemble" ("Petit pois, piment ou pomme de terre ? Découvre en quel légume tu pourrais te réincarner.").
 - Names from a game, show or other franchise use their official French name, checked against an official French source (e.g. the French Minecraft wiki), never translated by guess ("Poulpe luisant", not "Calamar luisant"). Keep the original name when the French version does too (Phantom, Piglin, LoL champions).
+- Personality descriptions can be long: put in every witty or telling detail about the personality rather than trimming to the bare traits.
 - Don't reuse a question, or a close variant of its situation, from another quiz: people play them all and each quiz should feel fresh. Reuse is only acceptable between quizzes released about a month apart; hidden quizzes count, since their release order isn't known yet. `docs/question-ideas.md` is the pool of unscored ideas.
 
 ## Writing questions

@@ -80,3 +80,29 @@ export function answerContributions(quiz: Quiz, answers: Answers): AnswerContrib
     return answer ? [{ question, answer, toward: personalitiesFor(quiz, answer) }] : [];
   });
 }
+
+/**
+ * How alike two results are, in [0, 1]: the correlation of their match profiles, rescaled from [-1, 1].
+ * Two people who answer differently but land on similar personalities still come out compatible.
+ * Random pairs of players center around 0.5, so the full range gets used.
+ */
+export function compatibility(a: PersonalityScore[], b: PersonalityScore[]): number {
+  const bMatches = new Map(b.map((s) => [s.personality.id, s.match]));
+  const xs = a.map((s) => s.match);
+  const ys = a.map((s) => bMatches.get(s.personality.id) ?? 0);
+  const mean = (values: number[]) => values.reduce((sum, v) => sum + v, 0) / values.length;
+  const mx = mean(xs);
+  const my = mean(ys);
+  let covariance = 0;
+  let vx = 0;
+  let vy = 0;
+  for (const [i, x] of xs.entries()) {
+    const y = ys[i]!;
+    covariance += (x - mx) * (y - my);
+    vx += (x - mx) ** 2;
+    vy += (y - my) ** 2;
+  }
+  // A flat profile has no shape to compare with.
+  if (vx < EPSILON || vy < EPSILON) return 0.5;
+  return (covariance / Math.sqrt(vx * vy) + 1) / 2;
+}

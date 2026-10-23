@@ -8,6 +8,9 @@
   --accent-text: #ffffff;
   --accent-soft: #e6f0dc;
   --accent-2: #a3cf6e;
+  /* The visitor's side when comparing with a shared result. */
+  --compare: #d9893f;
+  --compare-text: #a65a17;
   --radius: 14px;
   color-scheme: light dark;
 }
@@ -23,6 +26,8 @@
     --accent-text: #14200b;
     --accent-soft: #2c3a22;
     --accent-2: #c3e597;
+    --compare: #e3a062;
+    --compare-text: #eaae75;
   }
 }
 
@@ -264,7 +269,8 @@ h2 {
   line-height: 1;
 }
 
-.winner h1 {
+.winner h1,
+.winner h2 {
   margin: 0.5rem 0;
   font-size: 2rem;
 }
@@ -345,7 +351,7 @@ details[open]:not(.closing) > summary .chevron {
 }
 
 .top .ranking-name,
-.top .ranking-percent {
+.ranking-percent .best {
   font-weight: 700;
   color: var(--text);
 }
@@ -365,6 +371,85 @@ details[open]:not(.closing) > summary .chevron {
   transform-origin: left;
   animation: grow 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
   animation-delay: calc(var(--index, 0) * 60ms);
+}
+
+.bar.theirs .bar-fill {
+  background: var(--compare);
+}
+
+.bars {
+  display: grid;
+  gap: 4px;
+}
+
+.compared .bar {
+  height: 7px;
+}
+
+.compared .ranking-percent {
+  display: grid;
+  font-size: 0.8rem;
+  line-height: 1.25;
+}
+
+.ranking-percent .theirs {
+  color: var(--compare-text);
+}
+
+.compared .ranking-percent .yours {
+  color: var(--accent);
+}
+
+/* Sorts a compared ranking; each option also shows its side's bar color. */
+.sort {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: -0.5rem 0 0.75rem;
+}
+
+.sort .meta {
+  margin-right: 0.2rem;
+}
+
+.sort-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.sort-option::before {
+  content: '';
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.sort-option.theirs::before {
+  background: var(--compare);
+}
+
+.sort-option[aria-pressed='true'] {
+  border-color: var(--text);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.sort-option:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 @keyframes grow {
@@ -442,6 +527,47 @@ details[open]:not(.closing) > summary .chevron {
 .recap-answer {
   font-weight: 600;
   margin: 0.4rem 0 0.5rem 2.1rem !important;
+}
+
+.recap-yours {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0.6rem 0 0 2.1rem !important;
+  font-size: 0.9rem;
+}
+
+.recap-yours.same {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.recap-yours.same::before {
+  content: '✓';
+}
+
+.all-answers li.theirs {
+  box-shadow: inset 0 0 0 1.5px var(--compare);
+}
+
+.tags {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.tag {
+  flex: none;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.tag.theirs {
+  background: var(--compare);
+  color: #1f1d1a;
 }
 
 .recap-item summary > .chips {
@@ -525,4 +651,128 @@ details[open]:not(.closing) > summary .chevron {
 .button.secondary {
   background: transparent;
   color: var(--accent);
+}
+
+/* Sharing and comparing */
+
+.compare-link + .share {
+  margin-top: 1rem;
+}
+
+.compare-link,
+.share,
+.invite {
+  margin-top: 2rem;
+}
+
+.share h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.share p {
+  margin: 0.25rem 0 0.85rem;
+  font-size: 0.9rem;
+}
+
+.share-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.share-name {
+  flex: 1 1 12rem;
+  min-width: 0;
+  font: inherit;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.share-name:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.compare-link {
+  border-color: var(--accent);
+  font-weight: 600;
+  color: var(--accent);
+  transition: background 0.15s;
+}
+
+.compare-link:hover {
+  background: var(--accent-soft);
+}
+
+.invite {
+  text-align: center;
+}
+
+/* Whose card it is, in the colors of the compared bars. */
+.winner.theirs {
+  border: 2px solid var(--compare);
+}
+
+.winner.yours {
+  border: 2px solid var(--accent);
+}
+
+/* The sender's and the visitor's cards, side by side once there's room. */
+.duo {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.duo .winner {
+  margin-top: 0;
+}
+
+/* Wider than the page column when the screen allows, keeping a gutter (and room for a scrollbar, which 100vw includes). */
+@media (min-width: 720px) {
+  .duo {
+    grid-template-columns: 1fr 1fr;
+    margin-inline: calc((100% - max(100%, min(48rem, 100vw - 48px))) / 2);
+  }
+}
+
+.compat {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.compat p {
+  margin: 0;
+}
+
+.compat-score {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  /* From the sender's orange at 0 % to the visitor's green at 100 %. */
+  color: color-mix(in oklch, var(--accent) var(--compat), var(--compare-text));
+}
+
+.compat-verdict {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0.4rem 0 0.75rem !important;
+}
+
+.compat-details {
+  font-size: 0.9rem;
+}
+
+.invite p {
+  margin: 0.25rem 0;
+}
+
+.invite .button {
+  display: inline-block;
+  margin-top: 0.75rem;
 }
