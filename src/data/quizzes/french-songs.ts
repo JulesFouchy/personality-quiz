@@ -24,7 +24,7 @@ export const frenchSongs: Quiz = {
     {
       id: 'my-fight',
       name: 'Mon fils ma bataille',
-      emoji: '🛡️',
+      emoji: '🧑‍🍼',
       description:
         'Comme le père de la chanson de Daniel Balavoine, tu deviens une forteresse dès qu’on touche à une personne que tu aimes. Tu te bats pour tes proches avec une énergie que rien n’arrête, ni les règles, ni les administrations, ni les gens qui crient plus fort que toi. Tu ne lâches rien quand c’est important, et tu sais te mettre en colère pour les bonnes raisons. Derrière la combativité, un cœur immense : tout ce que tu fais, c’est pour les tiens, et tu es toujours là quand l’un·e d’elleux a besoin d’aide.',
     },
