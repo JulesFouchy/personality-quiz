@@ -122,7 +122,7 @@ export const cables: Quiz = {
         { id: 'everything', text: 'De quoi faire face à tout : ciseaux, mouchoirs, scotch, une barre de céréales.', weights: { 'usb-c': 1 } },
         { id: 'essentials', text: 'L’essentiel : clés, téléphone, portefeuille.', weights: { 'usb-c': 0.6, lightning: 0.3 } },
         { id: 'no-idea', text: 'Aucune idée, et tu n’es pas sûr·e de savoir où il est.', weights: { 'tangled-earphones': 1 } },
-        { id: 'feelings-notebook', text: 'Un carnet où tu notes ce que tu ressens.', weights: { jack: 0.8 } },
+        { id: 'feelings-notebook', text: 'Un carnet que personne n’a le droit de lire.', weights: { jack: 0.8 } },
         { id: 'old-ticket', text: 'Un ticket de cinéma d’il y a dix ans, gardé on ne sait pas trop pourquoi.', weights: { scart: 0.8 } },
         { id: 'others-stuff', text: 'Les clés d’un·e ami·e, le livre d’un·e autre, un colis pour ton·ta voisin·e…', weights: { 'power-strip': 1 } },
         { id: 'nice-wallet', text: 'Un très beau portefeuille, et pas grand-chose d’autre.', weights: { lightning: 1 } },
@@ -185,12 +185,12 @@ export const cables: Quiz = {
     {
       id: 'caterer-cancels',
       category: 'stress',
-      text: 'Le matin du mariage de ton·ta cousin·e, le traiteur annule. Tu…',
+      text: 'Le matin du mariage de ton·ta cousin·e, le service traiteur annule. Tu…',
       answers: [
         { id: 'take-charge', text: 'Prends les choses en main, calmement, et répartis les tâches.', weights: { 'jumper-cables': 1, 'usb-c': 0.4 } },
         { id: 'pizzas', text: 'Commandes des pizzas pour quatre-vingts personnes en une heure.', weights: { 'usb-c': 1 } },
         { id: 'someone', text: 'Connais quelqu’un qui connaît quelqu’un qui fait traiteur.', weights: { 'power-strip': 1 } },
-        { id: 'call-caterer', text: 'Appelles le traiteur pour lui dire ce que tu en penses.', weights: { 'bare-wire': 1 } },
+        { id: 'call-caterer', text: 'Appelles le service traiteur pour dire ce que tu en penses.', weights: { 'bare-wire': 1 } },
         { id: 'barbecue', text: 'Proposes de transformer ça en grand barbecue.', weights: { dmx: 0.7, 'usb-c': 0.4 } },
         { id: 'help-out', text: 'Aides là où on te le demande.', weights: { 'power-strip': 0.6, 'usb-c': 0.3 } },
         { id: 'late', text: 'Ne vois le message qu’en arrivant… en retard.', weights: { 'tangled-earphones': 1 } },
