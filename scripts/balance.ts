@@ -18,10 +18,11 @@ ${quiz.emoji} ${quiz.title} (${PLAYTHROUGHS} random playthroughs, fair share ${(
       mainAnswers: mainAnswerCount(quiz, p.id),
     }))
     .sort((a, b) => b.winRate - a.winRate);
+  const nameWidth = Math.max(...rows.map((row) => row.name.length));
   for (const row of rows) {
     const bar = '█'.repeat(Math.round(row.winRate / 2));
     console.log(
-      `  ${row.name.padEnd(18)} ${row.winRate.toFixed(1).padStart(5)} %  ${bar.padEnd(25)} weighted on ${row.coverage}/${quiz.questions.length} questions, main answer of ${row.mainAnswers}`,
+      `  ${row.name.padEnd(nameWidth)}${row.winRate.toFixed(1).padStart(5)} %  ${bar.padEnd(25)} weighted on ${row.coverage}/${quiz.questions.length} questions, main answer of ${row.mainAnswers}`,
     );
   }
 }
