@@ -5,21 +5,17 @@ import { animateDetails } from './details';
 import { el } from './dom';
 import { isComplete, loadProgress, saveProgress } from './progress';
 
-/** Resolved by the router through `resumeHash`, from the first question, so a link to it is never stale. */
+/** Resolved by the router through `resumeHash`, so a link to it is never stale. */
 export const playHash = (quiz: Quiz) => `#/quiz/${quiz.id}`;
 /** Question numbers in the URL start at 1. */
 export const questionHash = (quiz: Quiz, index: number) => `#/quiz/${quiz.id}/${index + 1}`;
 export const resultHash = (quiz: Quiz) => `#/quiz/${quiz.id}/result`;
 
-/** The first unanswered question from `from` on, wrapping around to the start, or the result once there is none. */
-export function resumeHash(quiz: Quiz, from = 0): string {
+/** Where `playHash` leads: the first unanswered question, or the result once there is none. */
+export function resumeHash(quiz: Quiz): string {
   const progress = loadProgress(quiz);
-  const total = quiz.questions.length;
-  for (let offset = 0; offset < total; offset++) {
-    const index = (from + offset) % total;
-    if (progress.answers[quiz.questions[index]!.id] === undefined) return questionHash(quiz, index);
-  }
-  return resultHash(quiz);
+  const index = quiz.questions.findIndex((q) => progress.answers[q.id] === undefined);
+  return index === -1 ? resultHash(quiz) : questionHash(quiz, index);
 }
 
 export function homeView(): Node {
@@ -84,13 +80,10 @@ export function playView(quiz: Quiz, index: number): Node {
   const progress = loadProgress(quiz);
   const question = quiz.questions[index]!;
   const total = quiz.questions.length;
-  // Goes to the next unanswered question, or the result once there is none. Only when changing an answer in a
-  // finished quiz does it step to the next question instead, so the answers can be reviewed one by one.
   const choose = (answerId: string) => {
-    const reviewing = isComplete(quiz, progress);
     progress.answers[question.id] = answerId;
     saveProgress(quiz, progress);
-    location.hash = reviewing && index + 1 < total ? questionHash(quiz, index + 1) : resumeHash(quiz, index + 1);
+    location.hash = index + 1 < total ? questionHash(quiz, index + 1) : resultHash(quiz);
   };
 
   return el(
