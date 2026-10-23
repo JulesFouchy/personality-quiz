@@ -1,13 +1,4 @@
-import type { Answers, Personality, Quiz } from './types';
-
-/** Longest sender name kept in a link. */
-export const MAX_NAME_LENGTH = 30;
-
-/**
- * The static page a share link points to, relative to the site root: it gives link previews this personality's card, then
- * forwards to the shared result. Generated at build time by `scripts/share-previews.ts`, so it only exists for released quizzes.
- */
-export const previewPath = (quiz: Quiz, personality: Personality) => `s/${quiz.id}/${personality.id}.html`;
+import type { Answers, Quiz } from './types';
 
 const DIGITS = '0123456789abcdefghijklmnopqrstuvwxyz';
 

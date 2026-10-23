@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { sharePreviews } from './scripts/share-previews.ts';
 
 export default defineConfig({
-  // Relative asset paths so the build works from any sub-path (e.g. GitHub Pages).
-  base: './',
+  // Absolute, since each route has its own page at its own depth: the site's path on GitHub Pages, or the root.
+  base: process.env.SITE_URL ? new URL(process.env.SITE_URL).pathname.replace(/\/?$/, '/') : '/',
   plugins: [sharePreviews()],
 });

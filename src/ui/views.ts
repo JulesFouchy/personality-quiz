@@ -1,25 +1,38 @@
 import { playableQuizzes } from '../quizzes';
 import { answerContributions, compatibility, personalitiesFor, score, winners, type PersonalityScore, type PersonalityWeight } from '../scoring';
-import { decodeAnswers, encodeAnswers, MAX_NAME_LENGTH, previewPath } from '../share';
-import type { Answers, Personality, Quiz } from '../types';
+import { MAX_NAME_LENGTH, questionPath, quizPath, resultHash, resultPath, type SharedResult } from '../routes';
+import { decodeAnswers, encodeAnswers } from '../share';
+import type { Answers, Quiz } from '../types';
 import { animateDetails } from './details';
 import { el, frenchSpacing } from './dom';
-import { isComplete, loadProgress, loadSharedResult, loadShareName, saveProgress, saveSharedResult, saveShareName, type SharedResult } from './progress';
+import { navigate, url } from './navigation';
+import { isComplete, loadProgress, loadSharedResult, loadShareName, saveProgress, saveSharedResult, saveShareName } from './progress';
 
-/** Resolved by the router through `resumeHash`, so a link to it is never stale. */
-export const playHash = (quiz: Quiz) => `#/quiz/${quiz.id}`;
-/** Question numbers in the URL start at 1. */
-export const questionHash = (quiz: Quiz, index: number) => `#/quiz/${quiz.id}/${index + 1}`;
-export const resultHash = (quiz: Quiz) => `#/quiz/${quiz.id}/result`;
-/** A shared result as it follows "#" in a share link: the answers' code, then the sender's name if any. */
-const sharedFragment = ({ code, name }: SharedResult) => `${code}${name ? `/${encodeURIComponent(name)}` : ''}`;
-export const sharedHash = (quiz: Quiz, shared: SharedResult) => `#/quiz/${quiz.id}/shared/${sharedFragment(shared)}`;
+const homeUrl = url('');
+/** Resolved by the router through `resumeUrl`, so a link to it is never stale. */
+const playUrl = (quiz: Quiz) => url(quizPath(quiz.id));
+const questionUrl = (quiz: Quiz, index: number) => url(questionPath(quiz.id, index));
 
-/** Where `playHash` leads: the first unanswered question, or the result once there is none. */
-export function resumeHash(quiz: Quiz): string {
+/** A result's URL, which is also its share link: the path names its top match, for the link preview. */
+function resultUrl(quiz: Quiz, shared: SharedResult): string {
+  const answers = decodeAnswers(quiz, shared.code);
+  const top = answers && winners(score(quiz, answers))[0];
+  return url(resultPath(quiz.id, top?.personality.id)) + resultHash(shared);
+}
+
+/** The player's own result, with the name they share it under, once the quiz is done. */
+export function ownResultUrl(quiz: Quiz): { code: string; href: string } | undefined {
+  const progress = loadProgress(quiz);
+  if (!isComplete(quiz, progress)) return undefined;
+  const code = encodeAnswers(quiz, progress.answers);
+  return { code, href: resultUrl(quiz, { code, name: loadShareName() }) };
+}
+
+/** Where `playUrl` leads: the first unanswered question, or the result once there is none. */
+export function resumeUrl(quiz: Quiz): string {
   const progress = loadProgress(quiz);
   const index = quiz.questions.findIndex((q) => progress.answers[q.id] === undefined);
-  return index === -1 ? resultHash(quiz) : questionHash(quiz, index);
+  return index === -1 ? ownResultUrl(quiz)!.href : questionUrl(quiz, index);
 }
 
 export function homeView(): Node {
@@ -37,7 +50,7 @@ export function homeView(): Node {
           {},
           el(
             'a',
-            { class: `card quiz-card${isComplete(quiz, loadProgress(quiz)) ? ' done' : ''}`, href: playHash(quiz) },
+            { class: `card quiz-card${isComplete(quiz, loadProgress(quiz)) ? ' done' : ''}`, href: playUrl(quiz) },
             el('span', { class: 'quiz-emoji', 'aria-hidden': 'true' }, quiz.emoji),
             el(
               'span',
@@ -76,7 +89,7 @@ function statusBadge(quiz: Quiz): Node | '' {
 }
 
 export function notFoundView(): Node {
-  return el('main', { class: 'page' }, el('h1', {}, 'Quiz introuvable'), el('a', { href: '#/' }, '← Retour aux quiz'));
+  return el('main', { class: 'page' }, el('h1', {}, 'Quiz introuvable'), el('a', { href: homeUrl }, '← Retour aux quiz'));
 }
 
 /** Shows question `index`; each question has its own history entry, so the browser's back and forward buttons move between them. */
@@ -87,13 +100,13 @@ export function playView(quiz: Quiz, index: number): Node {
   const choose = (answerId: string) => {
     progress.answers[question.id] = answerId;
     saveProgress(quiz, progress);
-    location.hash = index + 1 < total ? questionHash(quiz, index + 1) : resultHash(quiz);
+    navigate(index + 1 < total ? questionUrl(quiz, index + 1) : resumeUrl(quiz));
   };
 
   return el(
     'main',
     { class: 'page' },
-    el('a', { class: 'back-link', href: '#/' }, '← Tous les quiz'),
+    el('a', { class: 'back-link', href: homeUrl }, '← Tous les quiz'),
     el('p', { class: 'quiz-name' }, `${quiz.emoji} ${quiz.title}`),
     el(
       'nav',
@@ -101,7 +114,7 @@ export function playView(quiz: Quiz, index: number): Node {
       ...quiz.questions.map((q, i) => {
         const answered = progress.answers[q.id] !== undefined;
         const label = `Question ${i + 1}${answered ? ' (répondue)' : ''}`;
-        const dot = el('a', { class: `progress-dot${answered ? ' answered' : ''}`, href: questionHash(quiz, i), 'aria-label': label, title: label });
+        const dot = el('a', { class: `progress-dot${answered ? ' answered' : ''}`, href: questionUrl(quiz, i), 'aria-label': label, title: label });
         if (i === index) dot.setAttribute('aria-current', 'step');
         return dot;
       }),
@@ -126,7 +139,7 @@ export function playView(quiz: Quiz, index: number): Node {
 /** Ends the row of question dots; opens the result once every question is answered. */
 function resultFlag(quiz: Quiz, complete: boolean): Node {
   const label = complete ? 'Voir mon résultat' : 'Réponds à toutes les questions pour voir ton résultat';
-  const flag = el('button', { class: 'progress-flag', type: 'button', 'aria-label': label, title: label, onclick: () => (location.hash = resultHash(quiz)) }, '🏁');
+  const flag = el('button', { class: 'progress-flag', type: 'button', 'aria-label': label, title: label, onclick: () => navigate(ownResultUrl(quiz)!.href) }, '🏁');
   if (!complete) flag.disabled = true;
   return flag;
 }
@@ -307,9 +320,8 @@ function recapList(quiz: Quiz, answers: Answers, shared?: SharedRecap): Node {
   );
 }
 
-/** A link to these answers, copied or handed to the system share sheet; its preview shows `personality`, the sender's top match. */
-function shareSection(quiz: Quiz, answers: Answers, personality: Personality): Node {
-  const code = encodeAnswers(quiz, answers);
+/** Copies the player's result link, or hands it to the system share sheet. The page's own URL is that link too. */
+function shareSection(quiz: Quiz): Node {
   // The share sheet beats the clipboard on phones; on desktop it's an unexpected dialog.
   const useShareSheet = 'share' in navigator && matchMedia('(pointer: coarse)').matches;
   const label = useShareSheet ? 'Partager le lien' : 'Copier le lien';
@@ -321,11 +333,14 @@ function shareSection(quiz: Quiz, answers: Answers, personality: Personality): N
     'aria-label': 'Ton pseudo',
     value: loadShareName(),
   });
+  // Keeps the address bar on the link as shared, name included.
+  input.addEventListener('input', () => {
+    saveShareName(input.value.trim());
+    history.replaceState(null, '', ownResultUrl(quiz)!.href);
+  });
   const button = el('button', { class: 'button', type: 'button' }, label);
   button.addEventListener('click', async () => {
-    const name = input.value.trim();
-    saveShareName(name);
-    const url = new URL(`${previewPath(quiz, personality)}#${sharedFragment({ code, name })}`, location.href).href;
+    const url = new URL(ownResultUrl(quiz)!.href, location.origin).href;
     if (useShareSheet) {
       try {
         await navigator.share({ title: quiz.title, text: 'Compare ton résultat avec le mien !', url });
@@ -353,10 +368,6 @@ function shareSection(quiz: Quiz, answers: Answers, personality: Personality): N
 
 export function resultView(quiz: Quiz): Node {
   const progress = loadProgress(quiz);
-  if (!isComplete(quiz, progress)) {
-    location.replace(playHash(quiz));
-    return document.createDocumentFragment();
-  }
   const ranking = score(quiz, progress.answers);
   const top = winners(ranking);
   const shared = loadSharedResult(quiz);
@@ -366,15 +377,15 @@ export function resultView(quiz: Quiz): Node {
   return el(
     'main',
     { class: 'page' },
-    el('a', { class: 'back-link', href: '#/' }, '← Tous les quiz'),
+    el('a', { class: 'back-link', href: homeUrl }, '← Tous les quiz'),
     el('p', { class: 'quiz-name' }, `${quiz.emoji} ${quiz.title}`),
     winnerCard(top, top.length > 1 ? 'Égalité ! Tu es à la fois…' : 'Tu es…'),
     el('h2', {}, 'Ta répartition'),
     el('p', { class: 'hint' }, 'Touche une personnalité pour lire sa description.'),
     rankingList({ yours: ranking }, 'yours'),
     canCompare &&
-      el('a', { class: 'card compare-link', href: sharedHash(quiz, shared) }, shared.name ? `Compare tes résultats avec ${shared.name} →` : 'Compare ton résultat avec celui de la personne qui t’a envoyé le lien →'),
-    shareSection(quiz, progress.answers, top[0]!.personality),
+      el('a', { class: 'card compare-link', href: resultUrl(quiz, shared) }, shared.name ? `Compare tes résultats avec ${shared.name} →` : 'Compare ton résultat avec celui de la personne qui t’a envoyé le lien →'),
+    shareSection(quiz),
     el('h2', {}, 'Tes réponses'),
     el('p', { class: 'hint' }, 'Touche une question pour revoir toutes les réponses possibles.'),
     recapList(quiz, progress.answers),
@@ -382,8 +393,8 @@ export function resultView(quiz: Quiz): Node {
       'div',
       { class: 'actions' },
       // Keeps the answers, so you can confirm or change each one.
-      el('a', { class: 'button secondary', href: questionHash(quiz, 0) }, 'Refaire le quiz'),
-      el('a', { class: 'button', href: '#/' }, 'Autres quiz'),
+      el('a', { class: 'button secondary', href: questionUrl(quiz, 0) }, 'Refaire le quiz'),
+      el('a', { class: 'button', href: homeUrl }, 'Autres quiz'),
     ),
   );
 }
@@ -429,10 +440,10 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
     return el(
       'main',
       { class: 'page' },
-      el('a', { class: 'back-link', href: '#/' }, '← Tous les quiz'),
+      el('a', { class: 'back-link', href: homeUrl }, '← Tous les quiz'),
       el('h1', {}, 'Lien périmé'),
       el('p', { class: 'muted' }, 'Ce lien ne correspond pas à la version actuelle du quiz, qui a sans doute changé depuis le partage.'),
-      el('div', { class: 'actions' }, el('a', { class: 'button', href: playHash(quiz) }, 'Faire le quiz')),
+      el('div', { class: 'actions' }, el('a', { class: 'button', href: playUrl(quiz) }, 'Faire le quiz')),
     );
   }
   saveSharedResult(quiz, shared);
@@ -452,7 +463,7 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
   return el(
     'main',
     { class: 'page' },
-    el('a', { class: 'back-link', href: '#/' }, '← Tous les quiz'),
+    el('a', { class: 'back-link', href: homeUrl }, '← Tous les quiz'),
     el('p', { class: 'quiz-name' }, `${quiz.emoji} ${quiz.title}`),
     el(
       'div',
@@ -471,7 +482,7 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
         'section',
         { class: 'card invite' },
         el('p', {}, started ? 'Termine le quiz pour comparer vos résultats.' : 'Fais le quiz pour comparer vos résultats.'),
-        el('a', { class: 'button', href: playHash(quiz) }, started ? 'Continuer le quiz' : 'Faire le quiz'),
+        el('a', { class: 'button', href: playUrl(quiz) }, started ? 'Continuer le quiz' : 'Faire le quiz'),
       ),
     el('h2', {}, 'Ses réponses'),
     el('p', { class: 'hint' }, 'Touche une question pour revoir toutes les réponses possibles.'),
@@ -479,8 +490,8 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
     el(
       'div',
       { class: 'actions' },
-      complete && el('a', { class: 'button secondary', href: resultHash(quiz) }, 'Voir mon résultat'),
-      el('a', { class: 'button', href: '#/' }, 'Autres quiz'),
+      complete && el('a', { class: 'button secondary', href: ownResultUrl(quiz)!.href }, 'Voir mon résultat'),
+      el('a', { class: 'button', href: homeUrl }, 'Autres quiz'),
     ),
   );
 }

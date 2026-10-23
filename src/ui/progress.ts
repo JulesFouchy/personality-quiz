@@ -1,3 +1,4 @@
+import type { SharedResult } from '../routes';
 import type { Answers, Quiz } from '../types';
 
 export interface Progress {
@@ -32,13 +33,6 @@ export function saveProgress(quiz: Quiz, progress: Progress): void {
 
 export function isComplete(quiz: Quiz, progress: Progress): boolean {
   return quiz.questions.every((q) => progress.answers[q.id] !== undefined);
-}
-
-/** A result someone shared, as found in their link. */
-export interface SharedResult {
-  code: string;
-  /** Empty when the sender left it out. */
-  name: string;
 }
 
 const sharedKey = (quiz: Quiz) => `quiz-shared:${quiz.id}`;

@@ -11,7 +11,9 @@ Static Vite + TypeScript site, no backend. Each quiz is a self-contained file in
 
 Every push to `main` deploys the site to GitHub Pages (`.github/workflows/deploy.yml`). A quiz with `hidden: true` stays off the deployed site but is listed in `npm run dev`. Quizzes are prepared in advance and pushed hidden; only the user decides when one is released by removing `hidden`.
 
-Share links (`src/share.ts`) store each answer's position plus a fingerprint of the question and answer ids. On a released quiz, adding, removing, reordering or renaming questions or answers turns every link already shared into "Lien périmé"; editing texts and weights is safe. Links open a preview page generated per personality at build time (`scripts/share-previews.ts`), so renaming a personality id breaks the links that point to it.
+Share links (`src/share.ts`) store each answer's position plus a fingerprint of the question and answer ids. On a released quiz, adding, removing, reordering or renaming questions or answers turns every link already shared into "Lien périmé"; editing texts and weights is safe. A result page's URL is its share link (`src/routes.ts`).
+
+URLs are real paths, and the build gives each route of a released quiz its own copy of the page with that quiz's link preview (`scripts/share-previews.ts`); a result page's path names its top match, whose card the preview shows. A path without its own page (a hidden quiz, a renamed personality) falls back to `404.html`: the app, with the default preview.
 
 ## Committing (Claude)
 
