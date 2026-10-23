@@ -6,7 +6,7 @@ import type { Answers, Quiz } from '../types';
 import { animateDetails } from './details';
 import { el, frenchSpacing } from './dom';
 import { navigate, url } from './navigation';
-import { isComplete, loadProgress, loadSharedResult, loadShareName, saveProgress, saveSharedResult, saveShareName } from './progress';
+import { isComplete, loadProgress, loadSharedResult, loadShareName, saveProgress, saveSharedResult, saveShareName, senderId } from './progress';
 
 const homeUrl = url('');
 /** Resolved by the router through `resumeUrl`, so a link to it is never stale. */
@@ -21,11 +21,11 @@ function resultUrl(quiz: Quiz, shared: SharedResult): string {
 }
 
 /** The player's own result, with the name they share it under, once the quiz is done. */
-export function ownResultUrl(quiz: Quiz): { code: string; href: string } | undefined {
+export function ownResultUrl(quiz: Quiz): (SharedResult & { href: string }) | undefined {
   const progress = loadProgress(quiz);
   if (!isComplete(quiz, progress)) return undefined;
-  const code = encodeAnswers(quiz, progress.answers);
-  return { code, href: resultUrl(quiz, { code, name: loadShareName() }) };
+  const own = { code: encodeAnswers(quiz, progress.answers), sender: senderId(), name: loadShareName() };
+  return { ...own, href: resultUrl(quiz, own) };
 }
 
 /** Where `playUrl` leads: the first unanswered question, or the result once there is none. */
@@ -372,7 +372,7 @@ export function resultView(quiz: Quiz): Node {
   const top = winners(ranking);
   const shared = loadSharedResult(quiz);
   // Not when the shared result is the player's own, opened to try the link.
-  const canCompare = shared !== undefined && decodeAnswers(quiz, shared.code) !== undefined && shared.code !== encodeAnswers(quiz, progress.answers);
+  const canCompare = shared !== undefined && decodeAnswers(quiz, shared.code) !== undefined && shared.sender !== senderId();
 
   return el(
     'main',

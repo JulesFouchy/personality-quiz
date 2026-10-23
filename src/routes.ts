@@ -9,6 +9,8 @@ export const MAX_NAME_LENGTH = 30;
 export interface SharedResult {
   /** The answers, from `encodeAnswers`. */
   code: string;
+  /** The sender's browser, from `senderId`: tells a friend's link from the player's own, even with the same answers and name. */
+  sender: string;
   /** Empty when the sender left it out. */
   name: string;
 }
@@ -27,7 +29,7 @@ export const quizPath = (quizId: string) => `quiz/${quizId}/`;
 export const questionPath = (quizId: string, index: number) => `quiz/${quizId}/${index + 1}/`;
 /** `personalityId` is the result's top match, whose card the link preview shows. */
 export const resultPath = (quizId: string, personalityId?: string) => `quiz/${quizId}/result/${personalityId ? `${personalityId}/` : ''}`;
-export const resultHash = ({ code, name }: SharedResult) => `#${code}${name ? `/${encodeURIComponent(name)}` : ''}`;
+export const resultHash = ({ code, sender, name }: SharedResult) => `#${code}/${sender}${name ? `/${encodeURIComponent(name)}` : ''}`;
 
 /** The name from a link; a garbled one is dropped rather than shown. */
 function decodeName(segment: string): string {
@@ -44,11 +46,10 @@ export function parseRoute(path: string, hash: string): Route {
   if (section !== 'quiz' || !quizId) return { page: 'home' };
   if (sub === undefined) return { page: 'quiz', quizId };
   if (sub === 'result' && rest.length <= 1) {
-    const fragment = hash.replace(/^#/, '');
-    if (!fragment) return { page: 'result', quizId };
-    const slash = fragment.indexOf('/');
-    const shared = slash === -1 ? { code: fragment, name: '' } : { code: fragment.slice(0, slash), name: decodeName(fragment.slice(slash + 1)) };
-    return { page: 'result', quizId, shared };
+    // The name is URI-encoded, so it has no "/" of its own.
+    const [code, sender = '', name = ''] = hash.replace(/^#/, '').split('/');
+    if (!code) return { page: 'result', quizId };
+    return { page: 'result', quizId, shared: { code, sender, name: decodeName(name) } };
   }
   const number = Number(sub);
   if (rest.length === 0 && Number.isInteger(number)) return { page: 'question', quizId, number };

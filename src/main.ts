@@ -23,7 +23,7 @@ function route(): void {
       const own = ownResultUrl(quiz);
       if (route.page === 'question' && route.number >= 1 && route.number <= quiz.questions.length) {
         view = playView(quiz, route.number - 1);
-      } else if (route.page === 'result' && route.shared && own?.code === route.shared.code) {
+      } else if (route.page === 'result' && route.shared && own?.sender === route.shared.sender && own.code === route.shared.code) {
         // The player's own result, under the URL they'd share: keep it up to date with their current name and top match.
         if (own.href !== location.pathname + location.hash) history.replaceState(null, '', own.href);
         view = resultView(quiz);

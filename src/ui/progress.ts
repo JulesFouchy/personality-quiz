@@ -41,7 +41,9 @@ const sharedKey = (quiz: Quiz) => `quiz-shared:${quiz.id}`;
 export function loadSharedResult(quiz: Quiz): SharedResult | undefined {
   try {
     const saved = JSON.parse(localStorage.getItem(sharedKey(quiz)) ?? 'null') as Partial<SharedResult> | null;
-    if (typeof saved?.code === 'string') return { code: saved.code, name: typeof saved.name === 'string' ? saved.name : '' };
+    if (typeof saved?.code === 'string') {
+      return { code: saved.code, sender: typeof saved.sender === 'string' ? saved.sender : '', name: typeof saved.name === 'string' ? saved.name : '' };
+    }
   } catch {
     // Storage unavailable or corrupted: nothing to compare with.
   }
@@ -54,6 +56,29 @@ export function saveSharedResult(quiz: Quiz, shared: SharedResult): void {
   } catch {
     // The result page just won't offer to compare.
   }
+}
+
+const SENDER_KEY = 'sender-id';
+let sessionSenderId: string | undefined;
+
+/** A random id for this browser, put in its result links so its own results are told apart from friends' ones. */
+export function senderId(): string {
+  try {
+    let id = localStorage.getItem(SENDER_KEY);
+    if (!id) {
+      id = randomId();
+      localStorage.setItem(SENDER_KEY, id);
+    }
+    return id;
+  } catch {
+    // Without storage, at least stay the same for this visit.
+    return (sessionSenderId ??= randomId());
+  }
+}
+
+/** Six base-36 characters: about two billion possibilities. */
+function randomId(): string {
+  return Array.from(crypto.getRandomValues(new Uint8Array(6)), (byte) => (byte % 36).toString(36)).join('');
 }
 
 const NAME_KEY = 'share-name';

@@ -10,17 +10,14 @@ describe('parseRoute', () => {
   });
 
   it('reads a result and its sender from the hash, whatever the personality in the path', () => {
-    const shared = { code: '0123-abcd', name: 'Léa / Jules' };
+    const shared = { code: '0123-abcd', sender: 'x7k2p9', name: 'Léa / Jules' };
     expect(parseRoute(resultPath('zodiac', 'aries'), resultHash(shared))).toEqual({ page: 'result', quizId: 'zodiac', shared });
-    expect(parseRoute(resultPath('zodiac'), resultHash({ code: '0123-abcd', name: '' }))).toEqual({
-      page: 'result',
-      quizId: 'zodiac',
-      shared: { code: '0123-abcd', name: '' },
-    });
+    const anonymous = { code: '0123-abcd', sender: 'x7k2p9', name: '' };
+    expect(parseRoute(resultPath('zodiac'), resultHash(anonymous))).toEqual({ page: 'result', quizId: 'zodiac', shared: anonymous });
   });
 
   it('drops a garbled name', () => {
-    expect(parseRoute(resultPath('zodiac', 'aries'), '#0123-abcd/%E0%A4%A')).toMatchObject({ shared: { code: '0123-abcd', name: '' } });
+    expect(parseRoute(resultPath('zodiac', 'aries'), '#0123-abcd/x7k2p9/%E0%A4%A')).toMatchObject({ shared: { code: '0123-abcd', name: '' } });
   });
 
   it('sends unknown paths home or to the quiz', () => {
