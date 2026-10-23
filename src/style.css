@@ -100,18 +100,15 @@ h2 {
   display: flex;
   gap: 1rem;
   align-items: center;
-  transition: border-color 0.15s, transform 0.15s;
+  transition: transform 0.15s;
 }
 
 .quiz-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-1px);
+  transform: scale(1.015);
 }
 
-/* Two pixels wide, so a finished quiz still stands out from the hover state. */
 .quiz-card.done {
   border-color: var(--accent);
-  box-shadow: inset 0 0 0 1px var(--accent);
 }
 
 .quiz-card > span:last-child {
