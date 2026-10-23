@@ -141,6 +141,12 @@ h2 {
   font-weight: 600;
 }
 
+.badge.changed {
+  border-color: var(--compare);
+  color: var(--compare-text);
+  font-weight: 600;
+}
+
 .quiz-emoji {
   font-size: 2.5rem;
 }
@@ -187,6 +193,11 @@ h2 {
 
 .progress-dot.answered::before {
   background: var(--accent);
+}
+
+/* Added, or with new answers, since the player answered it. */
+.progress-dot.changed::before {
+  background: var(--compare);
 }
 
 .progress-dot:hover::before {
@@ -255,7 +266,28 @@ h2 {
   background: var(--accent-soft);
 }
 
+.tag.new {
+  margin-left: 0.5rem;
+  vertical-align: 0.1em;
+  background: var(--compare);
+  color: #1f1d1a;
+}
+
+.changed-hint {
+  color: var(--compare-text);
+}
+
 /* Result */
+
+.changed-note {
+  margin-top: 1rem;
+  border: 2px solid var(--compare);
+  text-align: center;
+}
+
+.changed-note p {
+  margin: 0 0 0.85rem;
+}
 
 .winner {
   text-align: center;

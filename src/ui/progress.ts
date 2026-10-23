@@ -1,11 +1,27 @@
 import type { SharedResult } from '../routes';
-import type { Answers, Quiz } from '../types';
+import { layoutOf, versionOf, versionsOf, type Layout } from '../share';
+import type { Answer, Answers, Question, Quiz } from '../types';
 
 export interface Progress {
   answers: Answers;
+  /** The answer ids each question had when the player last answered it, or when they started for the ones they hadn't reached. */
+  seen: Record<string, string[]>;
+  /** Whether the player has answered every question once: questions added since don't take their result away. */
+  finished: boolean;
 }
 
 const storageKey = (quiz: Quiz) => `quiz-progress:${quiz.id}`;
+
+const seenOf = (layout: Layout): Progress['seen'] => Object.fromEntries(layout);
+
+/**
+ * What a player who saved no `seen` had seen: the oldest version of the quiz their answers fit.
+ * Guessing too old only shows them a few unchanged questions as changed; guessing too new would hide real changes.
+ */
+function guessSeen(quiz: Quiz, answers: Answers): Progress['seen'] {
+  const fits = (layout: Layout) => Object.entries(answers).every(([questionId, answerId]) => layout.some(([q, ids]) => q === questionId && ids.includes(answerId)));
+  return seenOf(versionsOf(quiz).find(fits) ?? layoutOf(quiz));
+}
 
 /** Loads saved progress, dropping anything that no longer matches the quiz (e.g. after a content update). */
 export function loadProgress(quiz: Quiz): Progress {
@@ -20,8 +36,37 @@ export function loadProgress(quiz: Quiz): Progress {
     const answerId = saved.answers?.[question.id];
     if (question.answers.some((a) => a.id === answerId)) answers[question.id] = answerId!;
   }
-  return { answers };
+  if (Object.keys(answers).length === 0) return { answers, seen: seenOf(layoutOf(quiz)), finished: false };
+  const allAnswered = quiz.questions.every((q) => answers[q.id] !== undefined);
+  if (saved.seen && typeof saved.seen === 'object') {
+    const seen = Object.fromEntries(Object.entries(saved.seen).filter(([, ids]) => Array.isArray(ids)));
+    return { answers, seen, finished: allAnswered || saved.finished === true };
+  }
+  // Progress saved before `seen` existed: finished if it answered every question of the version it was guessed to be for.
+  const seen = guessSeen(quiz, saved.answers ?? {});
+  return { answers, seen, finished: allAnswered || Object.keys(seen).every((id) => saved.answers?.[id] !== undefined) };
 }
+
+/** Records an answer, and that the player has now seen every answer its question offers. */
+export function answer(quiz: Quiz, progress: Progress, question: Question, answerId: string): void {
+  progress.answers[question.id] = answerId;
+  progress.seen[question.id] = question.answers.map((a) => a.id);
+  if (quiz.questions.every((q) => progress.answers[q.id] !== undefined)) progress.finished = true;
+  saveProgress(quiz, progress);
+}
+
+/** The questions added, or whose answers changed, since the player last answered them; none before they start. */
+export function changedQuestions(quiz: Quiz, progress: Progress): Question[] {
+  if (Object.keys(progress.answers).length === 0) return [];
+  return quiz.questions.filter((question) => {
+    const seen = progress.seen[question.id];
+    return !seen || seen.length !== question.answers.length || question.answers.some((a) => !seen.includes(a.id));
+  });
+}
+
+/** The answers of a changed question the player hasn't seen yet; none for a question added since. */
+export const newAnswers = (progress: Progress, question: Question): Answer[] =>
+  question.answers.filter((a) => progress.seen[question.id] && !progress.seen[question.id]!.includes(a.id));
 
 export function saveProgress(quiz: Quiz, progress: Progress): void {
   try {
@@ -29,10 +74,6 @@ export function saveProgress(quiz: Quiz, progress: Progress): void {
   } catch {
     // Progress just won't be remembered.
   }
-}
-
-export function isComplete(quiz: Quiz, progress: Progress): boolean {
-  return quiz.questions.every((q) => progress.answers[q.id] !== undefined);
 }
 
 const sharedKey = (quiz: Quiz) => `quiz-shared:${quiz.id}`;
@@ -64,9 +105,15 @@ function saveSharedResults(quiz: Quiz, list: SharedResult[]): void {
   }
 }
 
-/** Remembers a shared result, in place of an earlier link from the same person: they retook the quiz or changed their name since. */
+/**
+ * Remembers a shared result, in place of an earlier link from the same person: they retook the quiz or changed their name since.
+ * A link made for an older version of the quiz than the one remembered is older too, so it doesn't replace it.
+ */
 export function saveSharedResult(quiz: Quiz, shared: SharedResult): void {
-  saveSharedResults(quiz, [shared, ...loadSharedResults(quiz).filter((s) => !sameSender(s, shared))]);
+  const saved = loadSharedResults(quiz);
+  const previous = saved.find((s) => sameSender(s, shared));
+  const kept = previous && versionOf(quiz, previous.code) > versionOf(quiz, shared.code) ? previous : shared;
+  saveSharedResults(quiz, [kept, ...saved.filter((s) => !sameSender(s, shared))]);
 }
 
 export function forgetSharedResult(quiz: Quiz, shared: SharedResult): void {

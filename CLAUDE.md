@@ -7,11 +7,12 @@ Static Vite + TypeScript site, no backend. Each quiz is a self-contained file in
 - `npm run dev`: local site
 - `npm test`: unit tests + validation of every quiz
 - `npm run balance`: win frequency per personality over random playthroughs (informational)
+- `npm run share-layouts`: archive the question and answer ids of every released quiz, so its share links survive edits
 - `npm run build`: typecheck + static build into `dist/`
 
 Every push to `main` deploys the site to GitHub Pages (`.github/workflows/deploy.yml`). A quiz with `hidden: true` stays off the deployed site but is listed in `npm run dev`. Quizzes are prepared in advance and pushed hidden; only the user decides when one is released by removing `hidden`.
 
-Share links (`src/share.ts`) store each answer's position plus a fingerprint of the question and answer ids. On a released quiz, adding, removing, reordering or renaming questions or answers turns every link already shared into "Lien périmé"; editing texts and weights is safe. A result page's URL is its share link (`src/routes.ts`).
+Share links (`src/share.ts`) store each answer's position plus a fingerprint of the question and answer ids. Every layout a released quiz has had is archived in `src/data/share-layouts.json`, so links shared before an edit still decode and are rescored on the current version. After adding, removing, reordering or renaming questions or answers of a released quiz, run `npm run share-layouts` (the tests fail until then). Old links lose their answer to a removed or renamed question or answer; editing texts and weights is safe. Saved progress remembers which answers each question had when the player answered it, so a question that gains, loses or renames an answer, or a new question, is shown to returning players as changed (`changedQuestions` in `src/ui/progress.ts`). Ids are the only thing tracked, so when rewording a released question or answer changes what it means, give it a new id. Old links then drop that answer and returning players see the question as changed. Keep the id when the meaning stays the same. A result page's URL is its share link (`src/routes.ts`).
 
 URLs are real paths, and the build gives each route of a released quiz its own copy of the page with that quiz's link preview (`scripts/share-previews.ts`); a result page's path names its top match, whose card the preview shows. A path without its own page (a hidden quiz, a renamed personality) falls back to `404.html`: the app, with the default preview.
 

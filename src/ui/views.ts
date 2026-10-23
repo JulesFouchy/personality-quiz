@@ -1,12 +1,24 @@
 import { playableQuizzes } from '../quizzes';
 import { answerContributions, compatibility, personalitiesFor, score, winners, type PersonalityScore, type PersonalityWeight } from '../scoring';
 import { MAX_NAME_LENGTH, questionPath, quizPath, resultHash, resultPath, type SharedResult } from '../routes';
-import { decodeAnswers, encodeAnswers } from '../share';
+import { decodeAnswers, encodeAnswers, isFromEarlierVersion } from '../share';
 import type { Answers, Quiz } from '../types';
 import { animateDetails } from './details';
 import { el, frenchSpacing } from './dom';
 import { navigate, url } from './navigation';
-import { forgetSharedResult, isComplete, loadProgress, loadSharedResults, loadShareName, saveProgress, saveSharedResult, saveShareName, senderId } from './progress';
+import {
+  answer as recordAnswer,
+  changedQuestions,
+  forgetSharedResult,
+  loadProgress,
+  loadSharedResults,
+  loadShareName,
+  newAnswers,
+  saveSharedResult,
+  saveShareName,
+  senderId,
+  type Progress,
+} from './progress';
 
 const homeUrl = url('');
 /** Resolved by the router through `resumeUrl`, so a link to it is never stale. */
@@ -23,16 +35,16 @@ function resultUrl(quiz: Quiz, shared: SharedResult): string {
 /** The player's own result, with the name they share it under, once the quiz is done. */
 export function ownResultUrl(quiz: Quiz): (SharedResult & { href: string }) | undefined {
   const progress = loadProgress(quiz);
-  if (!isComplete(quiz, progress)) return undefined;
+  if (!progress.finished) return undefined;
   const own = { code: encodeAnswers(quiz, progress.answers), sender: senderId(), name: loadShareName() };
   return { ...own, href: resultUrl(quiz, own) };
 }
 
-/** Where `playUrl` leads: the first unanswered question, or the result once there is none. */
+/** Where `playUrl` leads: the result once the quiz is finished, even if questions were added since, otherwise the first unanswered question. */
 export function resumeUrl(quiz: Quiz): string {
   const progress = loadProgress(quiz);
-  const index = quiz.questions.findIndex((q) => progress.answers[q.id] === undefined);
-  return index === -1 ? ownResultUrl(quiz)!.href : questionUrl(quiz, index);
+  if (progress.finished) return ownResultUrl(quiz)!.href;
+  return questionUrl(quiz, quiz.questions.findIndex((q) => progress.answers[q.id] === undefined));
 }
 
 export function homeView(): Node {
@@ -50,7 +62,7 @@ export function homeView(): Node {
           {},
           el(
             'a',
-            { class: `card quiz-card${isComplete(quiz, loadProgress(quiz)) ? ' done' : ''}`, href: playUrl(quiz) },
+            { class: `card quiz-card${loadProgress(quiz).finished ? ' done' : ''}`, href: playUrl(quiz) },
             el('span', { class: 'quiz-emoji', 'aria-hidden': 'true' }, quiz.emoji),
             el(
               'span',
@@ -72,7 +84,7 @@ const TOP_MATCHES_SHOWN = 3;
 /** Shows the top matches of a finished quiz, or how far along an unfinished one is. */
 function statusBadge(quiz: Quiz): Node | '' {
   const progress = loadProgress(quiz);
-  if (isComplete(quiz, progress)) {
+  if (progress.finished) {
     const ranking = score(quiz, progress.answers);
     const top = winners(ranking);
     // The top matches, and every personality tied for first even if that's more.
@@ -82,10 +94,31 @@ function statusBadge(quiz: Quiz): Node | '' {
       ...ranking.slice(0, Math.max(TOP_MATCHES_SHOWN, top.length)).map((s) =>
         el('span', { class: `badge${top.includes(s) ? ' done' : ''}` }, `${s.personality.emoji} ${s.personality.name} ${Math.round(100 * s.match)} %`),
       ),
+      changedBadge(quiz, progress),
     );
   }
   const answered = Object.keys(progress.answers).length;
-  return answered > 0 ? el('span', { class: 'badges' }, el('span', { class: 'badge' }, `En cours · ${answered}/${quiz.questions.length}`)) : '';
+  return answered > 0 ? el('span', { class: 'badges' }, el('span', { class: 'badge' }, `En cours · ${answered}/${quiz.questions.length}`), changedBadge(quiz, progress)) : '';
+}
+
+/** How many questions changed since the player answered them, on the home page. */
+function changedBadge(quiz: Quiz, progress: Progress): Node | '' {
+  const count = changedQuestions(quiz, progress).length;
+  return count > 0 ? el('span', { class: 'badge changed' }, `${changedCount(count)} : réponds-y pour mettre ton résultat à jour`) : '';
+}
+
+const changedCount = (count: number) => (count > 1 ? `${count} questions ont changé` : '1 question a changé');
+
+/** Tells a returning player the quiz changed since they answered it, and leads to the first question that did. */
+function changedNote(quiz: Quiz, progress: Progress): Node | '' {
+  const changed = changedQuestions(quiz, progress);
+  if (changed.length === 0) return '';
+  return el(
+    'section',
+    { class: 'card changed-note' },
+    el('p', {}, `Le quiz a évolué depuis tes réponses : ${changedCount(changed.length)}. Réponds-y pour mettre ton résultat à jour.`),
+    el('a', { class: 'button', href: questionUrl(quiz, quiz.questions.indexOf(changed[0]!)) }, 'Modifier mes réponses'),
+  );
 }
 
 export function notFoundView(): Node {
@@ -97,10 +130,15 @@ export function playView(quiz: Quiz, index: number): Node {
   const progress = loadProgress(quiz);
   const question = quiz.questions[index]!;
   const total = quiz.questions.length;
+  const changed = changedQuestions(quiz, progress);
+  const fresh = new Set(newAnswers(progress, question));
   const choose = (answerId: string) => {
-    progress.answers[question.id] = answerId;
-    saveProgress(quiz, progress);
-    navigate(index + 1 < total ? questionUrl(quiz, index + 1) : resumeUrl(quiz));
+    const wasChanged = changed.includes(question);
+    recordAnswer(quiz, progress, question, answerId);
+    // Going over what changed leads from one changed question to the next rather than through the whole quiz.
+    const nextChanged = changedQuestions(quiz, progress)[0];
+    if (wasChanged) navigate(nextChanged ? questionUrl(quiz, quiz.questions.indexOf(nextChanged)) : resumeUrl(quiz));
+    else navigate(index + 1 < total ? questionUrl(quiz, index + 1) : resumeUrl(quiz));
   };
 
   return el(
@@ -113,13 +151,15 @@ export function playView(quiz: Quiz, index: number): Node {
       { class: 'progress', 'aria-label': 'Questions' },
       ...quiz.questions.map((q, i) => {
         const answered = progress.answers[q.id] !== undefined;
-        const label = `Question ${i + 1}${answered ? ' (répondue)' : ''}`;
-        const dot = el('a', { class: `progress-dot${answered ? ' answered' : ''}`, href: questionUrl(quiz, i), 'aria-label': label, title: label });
+        const isChanged = changed.includes(q);
+        const label = `Question ${i + 1}${isChanged ? ' (du nouveau)' : answered ? ' (répondue)' : ''}`;
+        const dot = el('a', { class: `progress-dot${answered ? ' answered' : ''}${isChanged ? ' changed' : ''}`, href: questionUrl(quiz, i), 'aria-label': label, title: label });
         if (i === index) dot.setAttribute('aria-current', 'step');
         return dot;
       }),
-      resultFlag(quiz, isComplete(quiz, progress)),
+      resultFlag(quiz, progress.finished),
     ),
+    changed.length > 0 && el('p', { class: 'hint changed-hint' }, 'Le quiz a évolué depuis tes réponses : les questions en orange ont du nouveau.'),
     el('p', { class: 'meta' }, `Question ${index + 1} / ${total}`),
     el('h1', { class: 'question' }, question.text),
     el(
@@ -130,6 +170,7 @@ export function playView(quiz: Quiz, index: number): Node {
           'button',
           { class: `card answer${progress.answers[question.id] === answer.id ? ' selected' : ''}`, type: 'button', onclick: () => choose(answer.id) },
           answer.text,
+          fresh.has(answer) && el('span', { class: 'tag new' }, 'Nouvelle'),
         ),
       ),
     ),
@@ -264,10 +305,16 @@ interface SharedRecap {
  * The visitor's own choice is the highlighted one; on a shared result, the sender's choice is outlined instead.
  */
 function recapList(quiz: Quiz, answers: Answers, shared?: SharedRecap): Node {
+  const contributions = new Map(answerContributions(quiz, answers).map((c) => [c.question.id, c]));
   return el(
     'ol',
     { class: 'recap' },
-    ...answerContributions(quiz, answers).map(({ question, answer, toward }, index) => {
+    ...quiz.questions.flatMap((question, index) => {
+      // A question added since the player finished, or that a link from an earlier version of the quiz has no answer for.
+      const contribution = contributions.get(question.id);
+      if (!contribution && !shared) return [];
+      const answer = contribution?.answer;
+      const toward = contribution?.toward ?? [];
       const yourAnswer = shared ? question.answers.find((a) => a.id === shared.yours?.[question.id]) : answer;
       const compared = shared?.yours !== undefined;
       return el(
@@ -287,11 +334,13 @@ function recapList(quiz: Quiz, answers: Answers, shared?: SharedRecap): Node {
                 el('p', { class: 'recap-question' }, question.text),
                 el('span', { class: 'chevron', 'aria-hidden': 'true' }),
               ),
-              el('p', { class: 'recap-answer' }, answer.text),
+              answer
+                ? el('p', { class: 'recap-answer' }, answer.text)
+                : el('p', { class: 'recap-answer muted' }, 'Pas de réponse : la question a changé depuis sa participation.'),
               toward.length > 0 && chips(toward.slice(0, 3)),
               compared &&
                 yourAnswer &&
-                (yourAnswer.id === answer.id
+                (yourAnswer.id === answer?.id
                   ? el('p', { class: 'recap-yours same' }, 'Même réponse que toi')
                   : el('p', { class: 'recap-yours' }, tag(shared.tags.yours), el('span', {}, yourAnswer.text))),
             ),
@@ -300,7 +349,7 @@ function recapList(quiz: Quiz, answers: Answers, shared?: SharedRecap): Node {
               { class: 'all-answers' },
               ...question.answers.map((option) => {
                 const weights = personalitiesFor(quiz, option);
-                const isTheirs = shared !== undefined && option.id === answer.id;
+                const isTheirs = shared !== undefined && option.id === answer?.id;
                 const isYours = option.id === yourAnswer?.id;
                 return el(
                   'li',
@@ -393,7 +442,7 @@ function personPill(top: PersonalityScore[], name: string, href: string, extraCl
 function comparisonsSection(quiz: Quiz, yours: PersonalityScore[], current?: SharedResult): Node | '' {
   const people = loadSharedResults(quiz)
     .flatMap((shared) => {
-      // Expired links have nothing to compare.
+      // Invalid links have nothing to compare.
       const answers = decodeAnswers(quiz, shared.code);
       if (!answers) return [];
       const theirs = score(quiz, answers);
@@ -440,6 +489,7 @@ export function resultView(quiz: Quiz): Node {
     { class: 'page' },
     el('a', { class: 'back-link', href: homeUrl }, '← Tous les quiz'),
     el('p', { class: 'quiz-name' }, `${quiz.emoji} ${quiz.title}`),
+    changedNote(quiz, progress),
     winnerCard(top, top.length > 1 ? 'Égalité ! Tu es à la fois…' : 'Tu es…'),
     el('h2', {}, 'Ta répartition'),
     el('p', { class: 'hint' }, 'Touche une personnalité pour lire sa description.'),
@@ -449,7 +499,7 @@ export function resultView(quiz: Quiz): Node {
     el('h2', {}, 'Tes réponses'),
     el('p', { class: 'hint' }, 'Touche une question pour revoir toutes les réponses possibles.'),
     // Keeps the answers, so you can confirm or change each one.
-    el('div', { class: 'recap-actions' }, el('a', { class: 'button secondary small', href: questionUrl(quiz, 0) }, 'Modifier tes réponses')),
+    el('div', { class: 'recap-actions' }, el('a', { class: 'button secondary small', href: questionUrl(quiz, 0) }, 'Modifier mes réponses')),
     recapList(quiz, progress.answers),
     el('div', { class: 'actions' }, el('a', { class: 'button', href: homeUrl }, 'Autres quiz')),
   );
@@ -466,11 +516,13 @@ const COMPATIBILITY_VERDICTS: [minimum: number, verdict: string][] = [
 
 /** How alike the visitor and the sender are, and how many answers they have in common. */
 function compatibilityCard(quiz: Quiz, theirAnswers: Answers, yourAnswers: Answers, theirs: PersonalityScore[], yours: PersonalityScore[]): Node {
-  const same = quiz.questions.filter((q) => theirAnswers[q.id] === yourAnswers[q.id]).length;
+  // Questions added since either person finished, or left out of a link from an earlier version of the quiz, don't count.
+  const both = quiz.questions.filter((q) => theirAnswers[q.id] !== undefined && yourAnswers[q.id] !== undefined);
+  const same = both.filter((q) => theirAnswers[q.id] === yourAnswers[q.id]).length;
   const theirTop = winners(theirs);
   const sameResult = winners(yours).some((s) => theirTop.some((t) => t.personality.id === s.personality.id));
-  const total = quiz.questions.length;
-  // Identical answers always give the same result, so that case doesn't announce it.
+  const total = both.length;
+  // Identical answers (nearly) always give the same result, so that case doesn't announce it.
   const inCommon =
     same === total
       ? 'Vous avez donné exactement les mêmes réponses !'
@@ -497,8 +549,8 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
       'main',
       { class: 'page' },
       el('a', { class: 'back-link', href: homeUrl }, '← Tous les quiz'),
-      el('h1', {}, 'Lien périmé'),
-      el('p', { class: 'muted' }, 'Ce lien ne correspond pas à la version actuelle du quiz, qui a sans doute changé depuis le partage.'),
+      el('h1', {}, 'Lien invalide'),
+      el('p', { class: 'muted' }, 'Ce lien ne correspond à aucune version du quiz : il a peut-être été coupé en le copiant.'),
       el('div', { class: 'actions' }, el('a', { class: 'button', href: playUrl(quiz) }, 'Faire le quiz')),
     );
   }
@@ -511,7 +563,7 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
   const ranking = score(quiz, answers);
   const top = winners(ranking);
   const progress = loadProgress(quiz);
-  const yours = isComplete(quiz, progress) ? score(quiz, progress.answers) : undefined;
+  const yours = progress.finished ? score(quiz, progress.answers) : undefined;
   const started = Object.keys(progress.answers).length > 0;
   const scores: RankingScores = { theirs: ranking, yours };
   const rankingSlot = el('div', {}, rankingList(scores, 'theirs'));
@@ -521,6 +573,8 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
     { class: 'page' },
     el('a', { class: 'back-link', href: homeUrl }, '← Tous les quiz'),
     el('p', { class: 'quiz-name' }, `${quiz.emoji} ${quiz.title}`),
+    isFromEarlierVersion(quiz, shared.code) &&
+      el('p', { class: 'hint' }, 'Le quiz a évolué depuis ce partage : ce résultat est recalculé sur la version actuelle et peut avoir changé.'),
     el(
       'div',
       { class: `winners${yours ? ' duo' : ''}` },
