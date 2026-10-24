@@ -150,6 +150,7 @@ export const zodiac: Quiz = {
         { id: 'laundry', text: 'Le linge propre qui sort de la machine.', weights: { virgo: 0.8, taurus: 0.3 } },
         { id: 'perfume', text: 'Un grand parfum, un peu trop cher.', weights: { leo: 0.7, libra: 0.6 } },
         { id: 'loved-one', text: 'Le cou de la personne que tu aimes.', weights: { scorpio: 0.8, cancer: 0.4 } },
+        { id: 'coffee', text: 'Le café du matin, avant une grosse journée.', weights: { capricorn: 0.7 } },
         { id: 'gasoline', text: 'L’essence à la station-service. Et tu assumes.', weights: { aquarius: 0.8 } },
       ],
     },
