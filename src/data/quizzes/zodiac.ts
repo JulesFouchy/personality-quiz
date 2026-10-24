@@ -261,11 +261,11 @@ export const zodiac: Quiz = {
       id: 'asking-advice',
       text: 'Quand tu doutes, tu demandes conseil à qui ?',
       answers: [
-        { id: 'no-one', text: 'À personne : tu te débrouilles seul·e.', weights: { capricorn: 0.7, aquarius: 0.5, scorpio: 0.5 } },
         { id: 'family', text: 'À ta famille, toujours.', weights: { cancer: 1 } },
         { id: 'best-friend', text: 'À ton·ta meilleur·e ami·e.', weights: { cancer: 0.5, gemini: 0.4 } },
         { id: 'everyone', text: 'À tout le monde. Puis tu fais la moyenne des avis.', weights: { libra: 1, gemini: 0.4 } },
         { id: 'intuition', text: 'À ton intuition.', weights: { pisces: 0.8, scorpio: 0.3 } },
+        { id: 'no-one', text: 'À personne : tu te débrouilles seul·e.', weights: { capricorn: 0.7, aquarius: 0.5, scorpio: 0.5 } },
         { id: 'go-ahead', text: 'Tu ne doutes pas longtemps : tu te lances.', weights: { aries: 1, sagittarius: 0.3 } },
       ],
     },

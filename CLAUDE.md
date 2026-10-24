@@ -44,7 +44,7 @@ In this repo Claude commits and pushes itself, but only once the user has valida
 - A quiz has 10 to 20 questions (tested); both ends should be rare. Vary the length between quizzes.
 - A question doesn't need an answer for every personality: write the answers the situation naturally calls for, and let coverage come from the quiz as a whole. Answer counts should vary: some questions with 3 or 4 answers, a few with 6 or 7. Many personalities make that hard, so prefer fewer personalities over cramming answers.
 - Answers cover a wide spectrum, so everyone finds one that fits. Cover it with real answers first (up to about 7; 10 is too many). Add an escape hatch only when a common reaction would otherwise be missing (e.g. "Franchement, tu ne te mets presque jamais en colère."), not by default. An escape hatch is defined by the reaction it covers, not by its weights: like every answer, it must weigh on at least one personality whose traits fit it (tested), since an answer with no weight looks like a bug in the results recap. A common reaction no personality fits needs rewording until one does, or dropping.
-- An escape hatch, or any answer that rejects the question's premise ("Aucune, merci." to "Choisis ta musique d’entrée."), comes last.
+- Escape hatches and any answers that reject the question's premise ("Aucune, merci." to "Choisis ta musique d’entrée.") come last.
 
 ## Writing weights
 
