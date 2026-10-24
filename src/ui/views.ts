@@ -383,33 +383,17 @@ function recapList(quiz: Quiz, answers: Answers, shared?: SharedRecap): Node {
   );
 }
 
-/**
- * Copies the player's result link, or hands it to the system share sheet.
- * On their result page (`onOwnResult`), the page's own URL is that link too and follows the name.
- */
-function shareSection(quiz: Quiz, onOwnResult: boolean): Node {
+/** A button that copies a link, or hands it to the system share sheet. */
+function shareButton(labels: { share: string; copy: string }, extraClass: string, title: string, text: string, href: () => string): HTMLButtonElement {
   // The share sheet beats the clipboard on phones; on desktop it's an unexpected dialog.
   const useShareSheet = 'share' in navigator && matchMedia('(pointer: coarse)').matches;
-  const label = useShareSheet ? 'Partager le lien' : 'Copier le lien';
-  const input = el('input', {
-    class: 'share-name',
-    type: 'text',
-    maxlength: MAX_NAME_LENGTH,
-    placeholder: 'Ton pseudo',
-    'aria-label': 'Ton pseudo',
-    value: loadShareName(),
-  });
-  // Keeps the address bar on the link as shared, name included.
-  input.addEventListener('input', () => {
-    saveShareName(input.value.trim());
-    if (onOwnResult) history.replaceState(null, '', ownResultUrl(quiz)!.href);
-  });
-  const button = el('button', { class: 'button', type: 'button' }, label);
+  const label = useShareSheet ? labels.share : labels.copy;
+  const button = el('button', { class: `button${extraClass}`, type: 'button' }, label);
   button.addEventListener('click', async () => {
-    const url = new URL(ownResultUrl(quiz)!.href, location.origin).href;
+    const url = new URL(href(), location.origin).href;
     if (useShareSheet) {
       try {
-        await navigator.share({ title: quiz.title, text: 'Compare ton résultat avec le mien !', url });
+        await navigator.share({ title, text, url });
       } catch {
         // Share sheet dismissed.
       }
@@ -423,12 +407,36 @@ function shareSection(quiz: Quiz, onOwnResult: boolean): Node {
       prompt('Copie ce lien :', url);
     }
   });
+  return button;
+}
+
+/**
+ * Shares the player's result link, or just the quiz for those who'd rather keep their result to themselves.
+ * On their result page (`onOwnResult`), the page's own URL is the result link too and follows the name.
+ */
+function shareSection(quiz: Quiz, onOwnResult: boolean): Node {
+  const input = el('input', {
+    class: 'share-name',
+    type: 'text',
+    maxlength: MAX_NAME_LENGTH,
+    placeholder: 'Ton pseudo',
+    'aria-label': 'Ton pseudo',
+    value: loadShareName(),
+  });
+  // Keeps the address bar on the link as shared, name included.
+  input.addEventListener('input', () => {
+    saveShareName(input.value.trim());
+    if (onOwnResult) history.replaceState(null, '', ownResultUrl(quiz)!.href);
+  });
+  const resultButton = shareButton({ share: 'Partager le lien', copy: 'Copier le lien' }, '', quiz.title, 'Compare ton résultat avec le mien !', () => ownResultUrl(quiz)!.href);
+  const quizButton = shareButton({ share: 'Partager le quiz', copy: 'Copier le lien du quiz' }, ' secondary small', quiz.title, quiz.description, () => playUrl(quiz));
   return el(
     'section',
     { class: 'card share' },
     el('h2', {}, 'Partage ton résultat'),
     el('p', { class: 'muted' }, 'La personne qui ouvre le lien voit tout ton résultat, et peut le comparer au sien.'),
-    el('div', { class: 'share-form' }, input, button),
+    el('div', { class: 'share-form' }, input, resultButton),
+    el('div', { class: 'share-quiz' }, el('p', { class: 'muted' }, 'Ou partage juste le quiz, sans ton résultat :'), quizButton),
   );
 }
 
@@ -505,6 +513,8 @@ export function resultView(quiz: Quiz): Node {
     el('p', { class: 'quiz-name' }, `${quiz.emoji} ${quiz.title}`),
     changedNote(quiz, progress),
     winnerCard(top, top.length > 1 ? 'Égalité ! Tu es à la fois…' : 'Tu es…'),
+    // Many players stop at their personality, so the way to the next quiz doesn't wait for the end of the page.
+    el('div', { class: 'actions after-winner' }, el('a', { class: 'button', href: homeUrl }, 'Faire un autre quiz')),
     el('h2', {}, 'Ta répartition'),
     el('p', { class: 'hint' }, 'Touche une personnalité pour lire sa description.'),
     rankingList({ yours: ranking }, 'yours'),
@@ -515,7 +525,7 @@ export function resultView(quiz: Quiz): Node {
     // Keeps the answers, so you can confirm or change each one.
     el('div', { class: 'recap-actions' }, el('a', { class: 'button secondary small', href: questionUrl(quiz, 0) }, 'Modifier mes réponses')),
     recapList(quiz, progress.answers),
-    el('div', { class: 'actions' }, el('a', { class: 'button', href: homeUrl }, 'Autres quiz')),
+    el('div', { class: 'actions' }, el('a', { class: 'button', href: homeUrl }, 'Faire un autre quiz')),
   );
 }
 
@@ -613,6 +623,6 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
     el('h2', {}, 'Ses réponses'),
     el('p', { class: 'hint' }, 'Touche une question pour revoir toutes les réponses possibles.'),
     recapList(quiz, answers, { yours: yours && progress.answers, tags }),
-    el('div', { class: 'actions' }, el('a', { class: 'button', href: homeUrl }, 'Autres quiz')),
+    el('div', { class: 'actions' }, el('a', { class: 'button', href: homeUrl }, 'Faire un autre quiz')),
   );
 }

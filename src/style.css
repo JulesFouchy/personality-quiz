@@ -741,6 +741,11 @@ details[open]:not(.closing) > summary .chevron {
   font-size: 0.9rem;
 }
 
+.actions.after-winner {
+  justify-content: center;
+  margin-top: 1rem;
+}
+
 .recap-actions {
   margin-bottom: 1rem;
 }
@@ -770,6 +775,20 @@ details[open]:not(.closing) > summary .chevron {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+}
+
+.share-quiz {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.share .share-quiz p {
+  margin: 0;
 }
 
 .share-name {
