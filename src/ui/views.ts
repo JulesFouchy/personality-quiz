@@ -501,6 +501,11 @@ function comparisonsSection(quiz: Quiz, yours: PersonalityScore[], current?: Sha
   return section;
 }
 
+/** Many players stop at the top result, so the way to the next quiz doesn't wait for the end of the page. */
+function nextQuizButton(): Node {
+  return el('div', { class: 'actions next-quiz' }, el('a', { class: 'button', href: homeUrl }, 'Faire un autre quiz'));
+}
+
 export function resultView(quiz: Quiz): Node {
   const progress = loadProgress(quiz);
   const ranking = score(quiz, progress.answers);
@@ -513,13 +518,12 @@ export function resultView(quiz: Quiz): Node {
     el('p', { class: 'quiz-name' }, `${quiz.emoji} ${quiz.title}`),
     changedNote(quiz, progress),
     winnerCard(top, top.length > 1 ? 'Égalité ! Tu es à la fois…' : 'Tu es…'),
-    // Many players stop at their personality, so the way to the next quiz doesn't wait for the end of the page.
-    el('div', { class: 'actions after-winner' }, el('a', { class: 'button', href: homeUrl }, 'Faire un autre quiz')),
+    nextQuizButton(),
+    shareSection(quiz, true),
+    comparisonsSection(quiz, ranking),
     el('h2', {}, 'Ta répartition'),
     el('p', { class: 'hint' }, 'Touche une personnalité pour lire sa description.'),
     rankingList({ yours: ranking }, 'yours'),
-    comparisonsSection(quiz, ranking),
-    shareSection(quiz, true),
     el('h2', {}, 'Tes réponses'),
     el('p', { class: 'hint' }, 'Touche une question pour revoir toutes les réponses possibles.'),
     // Keeps the answers, so you can confirm or change each one.
@@ -606,11 +610,7 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
       yours && winnerCard(winners(yours), winners(yours).length > 1 ? 'Et toi, tu es à la fois…' : 'Et toi, tu es…', { extraClass: ' yours', heading: 'h2' }),
     ),
     yours && compatibilityCard(quiz, answers, progress.answers, ranking, yours),
-    el('h2', {}, yours ? 'Vos répartitions' : 'Sa répartition'),
-    yours && sortControl(sortLabels, 'theirs', (side) => rankingSlot.replaceChildren(rankingList(scores, side))),
-    el('p', { class: 'hint' }, 'Touche une personnalité pour lire sa description.'),
-    rankingSlot,
-    yours && comparisonsSection(quiz, yours, shared),
+    yours && nextQuizButton(),
     // Where the result page has its share card.
     yours
       ? shareSection(quiz, false)
@@ -620,6 +620,11 @@ export function sharedView(quiz: Quiz, shared: SharedResult): Node {
           el('p', {}, started ? 'Termine le quiz pour comparer vos résultats.' : 'Fais le quiz pour comparer vos résultats.'),
           el('a', { class: 'button', href: playUrl(quiz) }, started ? 'Continuer le quiz' : 'Faire le quiz'),
         ),
+    yours && comparisonsSection(quiz, yours, shared),
+    el('h2', {}, yours ? 'Vos répartitions' : 'Sa répartition'),
+    yours && sortControl(sortLabels, 'theirs', (side) => rankingSlot.replaceChildren(rankingList(scores, side))),
+    el('p', { class: 'hint' }, 'Touche une personnalité pour lire sa description.'),
+    rankingSlot,
     el('h2', {}, 'Ses réponses'),
     el('p', { class: 'hint' }, 'Touche une question pour revoir toutes les réponses possibles.'),
     recapList(quiz, answers, { yours: yours && progress.answers, tags }),

@@ -741,8 +741,12 @@ details[open]:not(.closing) > summary .chevron {
   font-size: 0.9rem;
 }
 
-.actions.after-winner {
+.actions.next-quiz {
   justify-content: center;
+  margin-top: 1rem;
+}
+
+.next-quiz + .share {
   margin-top: 1rem;
 }
 
@@ -751,10 +755,6 @@ details[open]:not(.closing) > summary .chevron {
 }
 
 /* Sharing and comparing */
-
-.comparisons + .share {
-  margin-top: 1.5rem;
-}
 
 .share,
 .invite {
