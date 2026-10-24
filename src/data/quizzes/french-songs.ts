@@ -5,7 +5,7 @@ export const frenchSongs: Quiz = {
   title: 'Quelle chanson française es-tu ?',
   emoji: '🎤',
   released: '2026-10-24T14:22',
-  description: 'Celle que tu massacres sous la douche n’est peut-être pas la bonne : trouve la chanson avec laquelle tu résonnes le plus.',
+  description: 'Plutôt Balavoine, Johnny ou Stromae ? Trouve ta chanson parfaite à chanter sous la douche.',
   personalities: [
     {
       id: 'no-regrets',
