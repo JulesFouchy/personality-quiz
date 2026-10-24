@@ -147,6 +147,10 @@ export const zodiac: Quiz = {
         { id: 'bread', text: 'Du pain chaud qui sort du four.', weights: { taurus: 1, cancer: 0.3 } },
         { id: 'sunscreen', text: 'La crème solaire des étés de ton enfance.', weights: { cancer: 1 } },
         { id: 'spices', text: 'Les épices d’un marché, dans un pays que tu découvres.', weights: { sagittarius: 0.8, gemini: 0.4 } },
+        { id: 'laundry', text: 'Le linge propre qui sort de la machine.', weights: { virgo: 0.8, taurus: 0.3 } },
+        { id: 'perfume', text: 'Un grand parfum, un peu trop cher.', weights: { leo: 0.7, libra: 0.6 } },
+        { id: 'loved-one', text: 'Le cou de la personne que tu aimes.', weights: { scorpio: 0.8, cancer: 0.4 } },
+        { id: 'gasoline', text: 'L’essence à la station-service. Et tu assumes.', weights: { aquarius: 0.8 } },
       ],
     },
     {
