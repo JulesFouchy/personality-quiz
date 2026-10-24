@@ -4,7 +4,6 @@ export const lolChampions: Quiz = {
   id: 'lol-champions',
   title: 'Quel champion de LoL es-tu ?',
   emoji: '🎮',
-  hidden: true,
   description: 'Yasuo, Lux, Teemo ou Nasus ? Découvre qui tu main dans la vraie vie.',
   personalities: [
     {

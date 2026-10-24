@@ -108,6 +108,18 @@ describe('changed questions', () => {
     expect(loadProgress(quiz).finished).toBe(false);
   });
 
+  it('remembers when the quiz was first finished, not when a changed question was answered again', () => {
+    vi.setSystemTime(1000);
+    const before: Quiz = { ...quiz, questions: rest };
+    const progress = loadProgress(before);
+    for (const question of before.questions) answer(before, progress, question, question.answers[0]!.id);
+    expect(loadProgress(quiz).finishedAt).toBe(1000);
+    vi.setSystemTime(2000);
+    answer(quiz, loadProgress(quiz), first!, first!.answers[0]!.id);
+    expect(loadProgress(quiz).finishedAt).toBe(1000);
+    vi.useRealTimers();
+  });
+
   it('does not count progress saved before tracking changes as finished while it misses a question of its version', () => {
     const answers = firstAnswers(quiz);
     delete answers[first!.id];
@@ -132,5 +144,27 @@ describe('changed questions', () => {
     const unreleased: Quiz = { ...quiz, id: 'never-released' };
     localStorage.setItem('quiz-progress:never-released', JSON.stringify({ answers: firstAnswers(unreleased) }));
     expect(changedQuestions(unreleased, loadProgress(unreleased))).toEqual([]);
+  });
+});
+
+describe('new quizzes', () => {
+  // The result is kept for the whole visit, so each visit needs a fresh copy of the module.
+  const visit = async (ids: string[]) => {
+    vi.resetModules();
+    return (await import('./progress')).newQuizIds(ids);
+  };
+
+  it('shows none as new on a first visit, then the ones added since the last visit', async () => {
+    expect(await visit(['a', 'b'])).toEqual(new Set());
+    expect(await visit(['a', 'b', 'c'])).toEqual(new Set(['c']));
+    expect(await visit(['a', 'b', 'c'])).toEqual(new Set());
+  });
+
+  it('keeps showing them as new until the page reloads', async () => {
+    await visit(['a']);
+    vi.resetModules();
+    const { newQuizIds } = await import('./progress');
+    expect(newQuizIds(['a', 'b'])).toEqual(new Set(['b']));
+    expect(newQuizIds(['a', 'b'])).toEqual(new Set(['b']));
   });
 });

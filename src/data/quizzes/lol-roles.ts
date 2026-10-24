@@ -4,7 +4,6 @@ export const lolRoles: Quiz = {
   id: 'lol-roles',
   title: 'Quel rôle de LoL est fait pour toi ?',
   emoji: '🗺️',
-  hidden: true,
   description: 'Exilé·e en haut, fantôme de la jungle ou star capricieuse du bas ? Trouve enfin le rôle où ton équipe aura raison de te flame.',
   personalities: [
     {

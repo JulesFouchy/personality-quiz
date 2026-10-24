@@ -4,7 +4,6 @@ export const cables: Quiz = {
   id: 'cables',
   title: 'Quel câble es-tu ?',
   emoji: '🔌',
-  hidden: true,
   description: 'Fiable comme un câble Ethernet, débrouillard·e comme un USB-C, ou emmêlé·e comme de vieux écouteurs ? Réveille le câble qui sommeille en toi.',
   personalities: [
     {

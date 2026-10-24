@@ -11,11 +11,11 @@ import { vegetables } from './data/quizzes/vegetables';
 import { zodiac } from './data/quizzes/zodiac';
 import type { Quiz } from './types';
 
-/** Every quiz, hidden ones included, so tests and the balance report cover them all. */
+/** Every quiz, unreleased ones included, so tests and the balance report cover them all. In creation order: the home page lists unreleased quizzes last created first. */
 export const quizzes: Quiz[] = [minecraftMobs, lolChampions, zodiac, sports, vegetables, fileFormats, cables, frenchSongs, villains, lolRoles, avatar];
 
 /** The quizzes players can see and play. */
-export const playableQuizzes: Quiz[] = import.meta.env?.DEV ? quizzes : quizzes.filter((q) => !q.hidden);
+export const playableQuizzes: Quiz[] = import.meta.env?.DEV ? quizzes : quizzes.filter((q) => q.released);
 
 export function findQuiz(id: string): Quiz | undefined {
   return playableQuizzes.find((q) => q.id === id);

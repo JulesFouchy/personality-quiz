@@ -87,7 +87,7 @@ describe('share codes', () => {
 });
 
 describe('share layout archive', () => {
-  it.each(quizzes.filter((q) => !q.hidden).map((quiz) => [quiz.id, quiz] as const))('has the current layout of %s (npm run share-layouts)', (_, quiz) => {
+  it.each(quizzes.filter((q) => q.released).map((quiz) => [quiz.id, quiz] as const))('has the current layout of %s (npm run share-layouts)', (_, quiz) => {
     expect(shareLayouts[quiz.id]?.find((layout) => fingerprint(layout) === fingerprint(layoutOf(quiz)))).toEqual(layoutOf(quiz));
   });
 

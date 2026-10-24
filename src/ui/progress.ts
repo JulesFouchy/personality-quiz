@@ -8,6 +8,8 @@ export interface Progress {
   seen: Record<string, string[]>;
   /** Whether the player has answered every question once: questions added since don't take their result away. */
   finished: boolean;
+  /** When the player first answered every question, in milliseconds since the epoch; unknown for quizzes finished before it was recorded. */
+  finishedAt?: number;
 }
 
 const storageKey = (quiz: Quiz) => `quiz-progress:${quiz.id}`;
@@ -40,7 +42,8 @@ export function loadProgress(quiz: Quiz): Progress {
   const allAnswered = quiz.questions.every((q) => answers[q.id] !== undefined);
   if (saved.seen && typeof saved.seen === 'object') {
     const seen = Object.fromEntries(Object.entries(saved.seen).filter(([, ids]) => Array.isArray(ids)));
-    return { answers, seen, finished: allAnswered || saved.finished === true };
+    const finishedAt = typeof saved.finishedAt === 'number' ? { finishedAt: saved.finishedAt } : {};
+    return { answers, seen, finished: allAnswered || saved.finished === true, ...finishedAt };
   }
   // Progress saved before `seen` existed: finished if it answered every question of the version it was guessed to be for.
   const seen = guessSeen(quiz, saved.answers ?? {});
@@ -51,7 +54,10 @@ export function loadProgress(quiz: Quiz): Progress {
 export function answer(quiz: Quiz, progress: Progress, question: Question, answerId: string): void {
   progress.answers[question.id] = answerId;
   progress.seen[question.id] = question.answers.map((a) => a.id);
-  if (quiz.questions.every((q) => progress.answers[q.id] !== undefined)) progress.finished = true;
+  if (!progress.finished && quiz.questions.every((q) => progress.answers[q.id] !== undefined)) {
+    progress.finished = true;
+    progress.finishedAt = Date.now();
+  }
   saveProgress(quiz, progress);
 }
 
@@ -73,6 +79,15 @@ export function saveProgress(quiz: Quiz, progress: Progress): void {
     localStorage.setItem(storageKey(quiz), JSON.stringify(progress));
   } catch {
     // Progress just won't be remembered.
+  }
+}
+
+/** Erases the player's answers to a quiz, as if they had never started it. */
+export function forgetProgress(quiz: Quiz): void {
+  try {
+    localStorage.removeItem(storageKey(quiz));
+  } catch {
+    // Nothing was stored anyway.
   }
 }
 
@@ -141,6 +156,27 @@ export function senderId(): string {
 /** Six base-36 characters: about two billion possibilities. */
 function randomId(): string {
   return Array.from(crypto.getRandomValues(new Uint8Array(6)), (byte) => (byte % 36).toString(36)).join('');
+}
+
+const KNOWN_QUIZZES_KEY = 'known-quizzes';
+let newThisVisit: Set<string> | undefined;
+
+/**
+ * The quizzes that weren't on the home page the last time the player opened the site; none on their first visit.
+ * Stays the same until the page reloads, so going back to the home page keeps showing them as new.
+ */
+export function newQuizIds(ids: string[]): Set<string> {
+  if (newThisVisit) return newThisVisit;
+  try {
+    const saved = JSON.parse(localStorage.getItem(KNOWN_QUIZZES_KEY) ?? 'null') as unknown;
+    const known = Array.isArray(saved) ? saved.filter((id): id is string => typeof id === 'string') : undefined;
+    newThisVisit = new Set(known ? ids.filter((id) => !known.includes(id)) : []);
+    localStorage.setItem(KNOWN_QUIZZES_KEY, JSON.stringify([...new Set([...(known ?? []), ...ids])]));
+  } catch {
+    // Without storage, nothing can be told apart as new.
+    newThisVisit = new Set();
+  }
+  return newThisVisit;
 }
 
 const NAME_KEY = 'share-name';

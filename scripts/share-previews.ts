@@ -16,7 +16,7 @@ type Routes = typeof RoutesModule;
 
 /** The site's modules this script uses, loaded fresh through Vite: this config can't import them directly, since they use extensionless imports. */
 interface Site {
-  /** Every quiz, hidden ones included. */
+  /** Every quiz, unreleased ones included. */
   quizzes: Quiz[];
   routes: Routes;
   frenchSpacing: typeof DomModule.frenchSpacing;
@@ -279,7 +279,7 @@ export function sharePreviews(): Plugin {
     async transformIndexHtml(html, context) {
       const site = await loadSite();
       if (!server) return html.replace('</head>', `  ${previewTags(site, previewOf(site, [], ''), siteUrl)}\n  </head>`);
-      // In `npm run dev`, each route gets its preview on request, hidden quizzes included.
+      // In `npm run dev`, each route gets its preview on request, unreleased quizzes included.
       const origin = server.resolvedUrls?.local[0] ?? '/';
       const path = new URL(context.originalUrl ?? context.path, 'http://localhost').pathname.slice(server.config.base.length);
       return withPreview(site, html.replace('</head>', `  ${START}${END}\n  </head>`), previewOf(site, site.quizzes, path), origin);
@@ -305,7 +305,7 @@ export function sharePreviews(): Plugin {
     },
     async generateBundle(_, bundle) {
       const site = await loadSite();
-      const released = site.quizzes.filter((quiz) => !quiz.hidden);
+      const released = site.quizzes.filter((quiz) => quiz.released);
       const page = bundle['index.html'];
       if (page?.type !== 'asset' || typeof page.source !== 'string') throw new Error('share-previews: the app page index.html is missing from the bundle');
       const html = page.source;

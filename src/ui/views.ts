@@ -9,11 +9,13 @@ import { navigate, url } from './navigation';
 import {
   answer as recordAnswer,
   changedQuestions,
+  forgetProgress,
   forgetSharedResult,
   loadProgress,
   loadSharedResults,
   loadShareName,
   newAnswers,
+  newQuizIds,
   saveSharedResult,
   saveShareName,
   senderId,
@@ -48,6 +50,7 @@ export function resumeUrl(quiz: Quiz): string {
 }
 
 export function homeView(): Node {
+  const newIds = newQuizIds(playableQuizzes.map((quiz) => quiz.id));
   return el(
     'main',
     { class: 'page' },
@@ -56,13 +59,17 @@ export function homeView(): Node {
     el(
       'ul',
       { class: 'quiz-list' },
-      ...playableQuizzes.map((quiz) =>
-        el(
+      ...homeOrder(playableQuizzes).map((quiz) => {
+        const progress = loadProgress(quiz);
+        // Only until the player starts it: they know about it by then.
+        const isNew = newIds.has(quiz.id) && Object.keys(progress.answers).length === 0;
+        return el(
           'li',
           {},
           el(
             'a',
-            { class: `card quiz-card${loadProgress(quiz).finished ? ' done' : ''}`, href: playUrl(quiz) },
+            { class: `card quiz-card${progress.finished ? ' done' : ''}${isNew ? ' new' : ''}`, href: playUrl(quiz) },
+            isNew ? el('span', { class: 'new-pill' }, 'Nouveau') : '',
             el('span', { class: 'quiz-emoji', 'aria-hidden': 'true' }, quiz.emoji),
             el(
               'span',
@@ -73,10 +80,30 @@ export function homeView(): Node {
               statusBadge(quiz),
             ),
           ),
-        ),
-      ),
+        );
+      }),
     ),
   );
+}
+
+/**
+ * The quizzes that need the player first: finished ones that changed since, then the ones in progress, then the ones not started, then the finished ones.
+ * Finished quizzes come last finished first, the ones finished before that was recorded after them.
+ * Unfinished ones come latest release first, with the unreleased ones of `npm run dev` before them all, last registered first: the order they were written in.
+ * A release without a time counts as the start of its day, and ties keep the registration order.
+ */
+function homeOrder(quizzes: Quiz[]): Quiz[] {
+  const key = (quiz: Quiz, index: number) => {
+    const progress = loadProgress(quiz);
+    if (progress.finished) return { rank: changedQuestions(quiz, progress).length > 0 ? 0 : 3, recency: new Date(progress.finishedAt ?? 0).toISOString() };
+    // ISO dates and times sort as strings, and '~' after all of them.
+    return { rank: Object.keys(progress.answers).length > 0 ? 1 : 2, recency: quiz.released ?? `~${String(index).padStart(6, '0')}` };
+  };
+  const keys = new Map(quizzes.map((quiz, index) => [quiz, key(quiz, index)]));
+  return [...quizzes].sort((a, b) => {
+    const [ka, kb] = [keys.get(a)!, keys.get(b)!];
+    return ka.rank - kb.rank || (kb.recency > ka.recency ? 1 : kb.recency < ka.recency ? -1 : 0);
+  });
 }
 
 const TOP_MATCHES_SHOWN = 3;
@@ -530,7 +557,17 @@ export function resultView(quiz: Quiz): Node {
     el('div', { class: 'recap-actions' }, el('a', { class: 'button secondary small', href: questionUrl(quiz, 0) }, 'Modifier mes réponses')),
     recapList(quiz, progress.answers),
     el('div', { class: 'actions' }, el('a', { class: 'button', href: homeUrl }, 'Faire un autre quiz')),
+    import.meta.env?.DEV ? forgetButton(quiz) : '',
   );
+}
+
+/** Dev only: erases your answers to the quiz, to replay it as a newcomer. */
+function forgetButton(quiz: Quiz): Node {
+  const forget = () => {
+    forgetProgress(quiz);
+    navigate(homeUrl);
+  };
+  return el('div', { class: 'actions' }, el('button', { class: 'button danger', type: 'button', onclick: forget }, 'Oublier mes résultats (dev)'));
 }
 
 /** What a compatibility score says about two people, from the most alike down. */

@@ -4,7 +4,6 @@ export const fileFormats: Quiz = {
   id: 'file-formats',
   title: 'Quel format de fichier es-tu ?',
   emoji: '💾',
-  hidden: true,
   description: 'txt, mp3 ou gif ? Ta personnalité en trois lettres.',
   personalities: [
     {

@@ -34,6 +34,14 @@ describe('validateQuiz', () => {
     expect(validateQuiz(base)).toEqual([]);
   });
 
+  it('rejects a release date that is neither YYYY-MM-DD nor YYYY-MM-DDTHH:MM', () => {
+    expect(validateQuiz({ ...base, released: '2026-10-24' })).toEqual([]);
+    expect(validateQuiz({ ...base, released: '2026-10-24T14:30' })).toEqual([]);
+    for (const released of ['24/10/2026', '2026-13-01', '2026-10-24 14:30', '2026-10-24T25:00']) {
+      expect(validateQuiz({ ...base, released }).join('\n')).toMatch(/neither YYYY-MM-DD nor YYYY-MM-DDTHH:MM/);
+    }
+  });
+
   it('rejects unknown personalities and out-of-range weights', () => {
     const errors = validateQuiz(
       withAnswers([

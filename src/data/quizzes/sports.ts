@@ -4,7 +4,6 @@ export const sports: Quiz = {
   id: 'sports',
   title: 'Quel sport est fait pour toi ?',
   emoji: '🏅',
-  hidden: true,
   description: 'Yoga, boxe, échecs ou pétanque ? Découvre le sport qui te ressemble vraiment, même si tu n’en fais jamais.',
   personalities: [
     {

@@ -4,7 +4,6 @@ export const vegetables: Quiz = {
   id: 'vegetables',
   title: 'Quel légume es-tu ?',
   emoji: '🥕',
-  hidden: true,
   description: 'Petit pois, piment ou pomme de terre ? Découvre en quel légume tu pourrais te réincarner.',
   personalities: [
     {

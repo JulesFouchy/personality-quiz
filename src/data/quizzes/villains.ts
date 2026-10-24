@@ -4,7 +4,6 @@ export const villains: Quiz = {
   id: 'villains',
   title: 'Quel·le méchant·e serais-tu ?',
   emoji: '😈',
-  hidden: true,
   description: 'Tout le monde a un côté obscur. Reste à savoir si le tien vole la lune, gâche la fête des voisin·es ou se prend pour un dieu.',
   personalities: [
     {

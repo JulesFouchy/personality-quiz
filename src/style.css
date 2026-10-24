@@ -109,6 +109,27 @@ h2 {
   transform: translateX(4px);
 }
 
+.quiz-card.new {
+  position: relative;
+}
+
+/* Keeps the title clear of the pill. */
+.quiz-card.new strong {
+  padding-right: 4.75rem;
+}
+
+.new-pill {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
 .quiz-card.done {
   border-color: var(--accent);
 }
@@ -734,6 +755,12 @@ details[open]:not(.closing) > summary .chevron {
 .button.secondary {
   background: transparent;
   color: var(--accent);
+}
+
+.button.danger {
+  border-color: #c62828;
+  background: #c62828;
+  color: #ffffff;
 }
 
 .button.small {

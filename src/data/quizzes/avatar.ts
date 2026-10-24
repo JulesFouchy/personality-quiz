@@ -4,7 +4,6 @@ export const avatar: Quiz = {
   id: 'avatar',
   title: 'Quel personnage d’Avatar es-tu ?',
   emoji: '🌀',
-  hidden: true,
   description: 'Sauver le monde, régner par la peur ou faire la sieste sur un bison volant : chacun·e son style dans les quatre nations.',
   personalities: [
     {

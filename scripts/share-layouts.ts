@@ -18,7 +18,7 @@ function formatArchive(archive: LayoutArchive): string {
 
 const archive: LayoutArchive = structuredClone(shareLayouts);
 for (const quiz of quizzes) {
-  if (quiz.hidden) continue;
+  if (!quiz.released) continue;
   const layout = layoutOf(quiz);
   const check = fingerprint(layout);
   const archived = archive[quiz.id]?.find((l) => fingerprint(l) === check);
