@@ -174,7 +174,17 @@ export function playView(quiz: Quiz, index: number): Node {
         ),
       ),
     ),
+    moreAnswersHint(),
   );
+}
+
+/** Fades out the bottom of the screen while the last answers are below it, which a phone otherwise gives no sign of. */
+function moreAnswersHint(): Node {
+  const end = el('div', { class: 'answers-end' });
+  const fade = el('div', { class: 'more-answers', 'aria-hidden': 'true' });
+  // Gone once the end of the answers is above the fade's opaque part.
+  new IntersectionObserver(([entry]) => fade.classList.toggle('shown', !entry!.isIntersecting), { rootMargin: '0px 0px -24px 0px' }).observe(end);
+  return el('div', {}, end, fade);
 }
 
 /** Ends the row of question dots; opens the result once every question is answered. */
