@@ -166,6 +166,14 @@ export function playView(quiz: Quiz, index: number): Node {
     if (wasChanged) navigate(nextChanged ? questionUrl(quiz, quiz.questions.indexOf(nextChanged)) : resumeUrl(quiz));
     else navigate(index + 1 < total ? questionUrl(quiz, index + 1) : resumeUrl(quiz));
   };
+  const answers = question.answers.map((answer) =>
+    el(
+      'button',
+      { class: `card answer${progress.answers[question.id] === answer.id ? ' selected' : ''}`, type: 'button', onclick: () => choose(answer.id) },
+      answer.text,
+      fresh.has(answer) && el('span', { class: 'tag new' }, 'Nouvelle'),
+    ),
+  );
 
   return el(
     'main',
@@ -188,33 +196,24 @@ export function playView(quiz: Quiz, index: number): Node {
     changed.length > 0 && el('p', { class: 'hint changed-hint' }, 'Le quiz a évolué depuis tes réponses : les questions en orange ont du nouveau.'),
     el('p', { class: 'meta' }, `Question ${index + 1} / ${total}`),
     el('h1', { class: 'question' }, question.text),
-    el(
-      'div',
-      { class: 'answers' },
-      ...question.answers.map((answer) =>
-        el(
-          'button',
-          { class: `card answer${progress.answers[question.id] === answer.id ? ' selected' : ''}`, type: 'button', onclick: () => choose(answer.id) },
-          answer.text,
-          fresh.has(answer) && el('span', { class: 'tag new' }, 'Nouvelle'),
-        ),
-      ),
-    ),
-    moreAnswersHint(),
+    el('div', { class: 'answers' }, ...answers),
+    moreAnswersHint(answers.at(-1)!),
   );
 }
 
-/** Floats at the bottom of the screen while the last answers are below it, which a phone otherwise gives no sign of. */
-function moreAnswersHint(): Node {
-  const end = el('div', { class: 'answers-end' });
+/** Floats at the bottom of the screen while more than half of the last answer is below it, which a phone otherwise gives no sign of. */
+function moreAnswersHint(lastAnswer: Element): Node {
   const hint = el(
     'button',
     { class: 'more-answers', type: 'button', onclick: () => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' }) },
     'Scroll pour voir la suite',
   );
-  // Hidden once the end of the answers clears the hint's own height above the bottom of the screen.
-  new IntersectionObserver(([entry]) => hint.classList.toggle('shown', !entry!.isIntersecting), { rootMargin: '0px 0px -48px 0px' }).observe(end);
-  return el('div', {}, end, hint);
+  // The answers above the last one are then at least half visible too. A last answer cut off at the top of the screen means the player scrolled past it.
+  new IntersectionObserver(
+    ([entry]) => hint.classList.toggle('shown', entry!.intersectionRatio < 0.5 && entry!.boundingClientRect.bottom > window.innerHeight),
+    { threshold: 0.5 },
+  ).observe(lastAnswer);
+  return hint;
 }
 
 /** Ends the row of question dots; opens the result once every question is answered. */

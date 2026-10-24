@@ -287,12 +287,6 @@ h2 {
   background: var(--accent-soft);
 }
 
-/* Marks where the answers end. */
-.answers-end {
-  height: 1px;
-  margin-bottom: -1px;
-}
-
 .more-answers {
   position: fixed;
   left: 50%;
