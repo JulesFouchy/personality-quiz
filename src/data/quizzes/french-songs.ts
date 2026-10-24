@@ -4,6 +4,7 @@ export const frenchSongs: Quiz = {
   id: 'french-songs',
   title: 'Quelle chanson française es-tu ?',
   emoji: '🎤',
+  released: '2026-10-24',
   description: 'Celle que tu massacres sous la douche n’est peut-être pas la bonne : trouve la chanson avec laquelle tu résonnes le plus.',
   personalities: [
     {

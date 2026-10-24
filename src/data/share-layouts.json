@@ -121,5 +121,21 @@
       ["board-games",["rematch","show","bluff","strategy","rules","for-fun"]],
       ["change-world",["equality","more-magic","freedom","long-weekends"]]
     ]
+  ],
+  "french-songs": [
+    [
+      ["solo-concert",["go-alone","impulse","make-friends","insist","next-time","gift-ticket"]],
+      ["train-neighbor",["swap-numbers","headphones","whole-car","rather-sleep","elsewhere"]],
+      ["bad-haircut",["own-it","laugh-first","wait","go-out","reinvent"]],
+      ["time-of-day",["dawn","nap","busy-noon","sunset","late-party","night-ideas"]],
+      ["mocked-relative",["step-in","dry-remark","comfort","turn-joke","let-go"]],
+      ["lost-in-town",["ask-stranger","wander","gps","perfect-spot","terrace","worry"]],
+      ["resolutions",["long-list","what-for","every-day","biggest-party","see-loved-ones","let-go","me-time"]],
+      ["lyrics",["louder","dissect","old-ones","rhythm","someone","say-nothing"]],
+      ["stuck-paperwork",["call-yourself","short-email","change-scenery","be-patient","worry-more","network"]],
+      ["show-love",["little-surprises","be-there","say-it","out-loud","slow-day"]],
+      ["insomnia",["tomorrow","busy-hands","quiet","scroll","who-is-up","help-someone","never"]],
+      ["risky-project",["do-it","quietly","bring-friend","weigh","shelve"]]
+    ]
   ]
 }
