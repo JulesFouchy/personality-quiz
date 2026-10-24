@@ -25,10 +25,7 @@ export interface Quiz {
   title: string;
   emoji: string;
   description: string;
-  /**
-   * When the quiz went live on the deployed site, as YYYY-MM-DD, or YYYY-MM-DDTHH:MM to order quizzes released the same day.
-   * Without it the quiz is only in `npm run dev`.
-   */
+  /** When the quiz went live on the deployed site, as YYYY-MM-DDTHH:MM in French time. Without it the quiz is only in `npm run dev`. */
   released?: string;
   personalities: Personality[];
   questions: Question[];

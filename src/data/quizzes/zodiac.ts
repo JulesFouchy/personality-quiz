@@ -4,7 +4,7 @@ export const zodiac: Quiz = {
   id: 'zodiac',
   title: 'Quel est ton (véritable) signe astrologique ?',
   emoji: '🔮',
-  released: '2026-10-24',
+  released: '2026-10-24T13:13',
   description: 'Oublie ta date de naissance : ici, c’est ta personnalité qui décide.',
   personalities: [
     {

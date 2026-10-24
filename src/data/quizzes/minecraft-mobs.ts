@@ -4,7 +4,7 @@ export const minecraftMobs: Quiz = {
   id: 'minecraft-mobs',
   title: 'Quel mob Minecraft es-tu ?',
   emoji: '⛏️',
-  released: '2026-10-22',
+  released: '2026-10-22T21:01',
   description: 'Creeper explosif, enderman mystérieux ou poulpe luisant toujours content ? Découvre quel mob se cache en toi.',
   personalities: [
     {

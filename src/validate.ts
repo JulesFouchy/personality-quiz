@@ -47,8 +47,8 @@ export function validateQuiz(quiz: Quiz): string[] {
   for (const id of duplicates(quiz.questions.map((q) => q.id))) at('questions', `duplicate id "${id}"`);
   if (quiz.personalities.length < 2) at('personalities', 'needs at least 2 personalities');
   if (quiz.questions.length === 0) at('questions', 'needs at least 1 question');
-  if (quiz.released !== undefined && !(/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?$/.test(quiz.released) && !Number.isNaN(Date.parse(quiz.released)))) {
-    at('released', `"${quiz.released}" is neither YYYY-MM-DD nor YYYY-MM-DDTHH:MM`);
+  if (quiz.released !== undefined && !(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(quiz.released) && !Number.isNaN(Date.parse(quiz.released)))) {
+    at('released', `"${quiz.released}" is not YYYY-MM-DDTHH:MM`);
   }
 
   for (const question of quiz.questions) {

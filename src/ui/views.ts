@@ -90,7 +90,6 @@ export function homeView(): Node {
  * The quizzes that need the player first: finished ones that changed since, then the ones in progress, then the ones not started, then the finished ones.
  * Finished quizzes come last finished first, the ones finished before that was recorded after them.
  * Unfinished ones come latest release first, with the unreleased ones of `npm run dev` before them all, last registered first: the order they were written in.
- * A release without a time counts as the start of its day, and ties keep the registration order.
  */
 function homeOrder(quizzes: Quiz[]): Quiz[] {
   const key = (quiz: Quiz, index: number) => {
