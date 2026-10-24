@@ -18,7 +18,7 @@ URLs are real paths, and the build gives each route of a released quiz its own c
 
 ## Committing (Claude)
 
-In this repo Claude commits and pushes itself, but only once the user has validated the changes, since every push goes live. Commit messages never include a "Co-Authored-By" (or any other attribution) trailer.
+In this repo Claude commits and pushes itself. A change that doesn't alter what the deployed site shows (tooling, tests, docs, unreleased quizzes) is pushed right away; any other change waits until the user explicitly says to push it. Agreeing on what a change should be is not that go-ahead. Commit messages never include a "Co-Authored-By" (or any other attribution) trailer.
 
 ## Conventions
 
