@@ -12,7 +12,7 @@ export const lolChampions: Quiz = {
       name: 'Teemo',
       emoji: '🍄',
       description:
-        'Toujours de bonne humeur, petit·e et mignon·ne, tu as l’air de la personne la plus inoffensive du monde. Grave erreur. Tu adores jouer des tours, et personne n’en trouve jamais la·le responsable. Tu agaces avec un talent rare, tu le sais, et ça t’amuse encore plus. Certaines personnes te trouvent adorable, d’autres te détestent sincèrement, et les deux ont raison.',
+        'Toujours de bonne humeur, petit·e et mignon·ne, tu as l’air de la personne la plus inoffensive du monde. Grave erreur. Tu adores jouer des tours, et personne n’en trouve jamais le·la responsable. Tu agaces avec un talent rare, tu le sais, et ça t’amuse encore plus. Certaines personnes te trouvent adorable, d’autres te détestent sincèrement, et les deux ont raison.',
     },
     {
       id: 'yasuo',
@@ -222,11 +222,11 @@ export const lolChampions: Quiz = {
       text: 'Dans un film, tu serais…',
       answers: [
         { id: 'optimist', text: 'Le personnage optimiste qui finit par réconcilier tout le monde.', weights: { lux: 1, braum: 0.4 } },
-        { id: 'villain', text: 'La·le méchant·e élégant·e qu’on adore détester.', weights: { cassiopeia: 1, jhin: 0.6 } },
+        { id: 'villain', text: 'Le·la méchant·e élégant·e qu’on adore détester.', weights: { cassiopeia: 1, jhin: 0.6 } },
         { id: 'mysterious', text: 'Le personnage mystérieux qui n’apparaît que deux fois.', weights: { yasuo: 0.8 } },
         { id: 'sidekick', text: 'L’acolyte qui fait rire toute la salle.', weights: { teemo: 1 } },
         { id: 'revenge', text: 'Le personnage qui a une revanche à prendre.', weights: { 'miss-fortune': 1 } },
-        { id: 'mentor', text: 'La·le mentor·e qui guide le personnage principal.', weights: { nasus: 1 } },
+        { id: 'mentor', text: 'Le·la mentor·e qui guide le personnage principal.', weights: { nasus: 1 } },
       ],
     },
     {

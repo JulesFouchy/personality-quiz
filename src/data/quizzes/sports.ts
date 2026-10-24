@@ -103,7 +103,7 @@ export const sports: Quiz = {
         { id: 'learn-on-the-go', text: 'Te lances sans attendre les explications, et apprends sur le tas.', weights: { 'video-games': 0.8, climbing: 0.4 } },
         { id: 'watch-others', text: 'Regardes d’abord comment font les autres.', weights: { chess: 0.7, climbing: 0.6, 'video-games': 0.4 } },
         { id: 'bring-group', text: 'Embarques tout ton groupe pour essayer ensemble.', weights: { volleyball: 1 } },
-        { id: 'no-pressure', text: 'Y vas sans pression, tu n’es pas là pour être la·le meilleur·e.', weights: { yoga: 1, petanque: 0.5 } },
+        { id: 'no-pressure', text: 'Y vas sans pression, tu n’es pas là pour être le·la meilleur·e.', weights: { yoga: 1, petanque: 0.5 } },
         { id: 'hardest', text: 'Vises tout de suite l’exercice le plus dur.', weights: { climbing: 0.8, boxing: 0.4 } },
         { id: 'first-match', text: 'Réclames un vrai match au bout de dix minutes.', weights: { 'ping-pong': 0.8 } },
       ],
@@ -231,7 +231,7 @@ export const sports: Quiz = {
       answers: [
         { id: 'observes-first', text: '« Observe longtemps avant de tenter quoi que ce soit. »', weights: { climbing: 0.8, chess: 0.5 } },
         { id: 'bird', text: '« S’arrête au milieu du cross pour regarder un oiseau. »', weights: { hiking: 1 } },
-        { id: 'holidays', text: '« La·le seul·e à s’entraîner pendant les vacances. »', weights: { running: 1 } },
+        { id: 'holidays', text: '« Le·la seul·e à s’entraîner pendant les vacances. »', weights: { running: 1 } },
         { id: 'excuse', text: '« Toujours une dispense, jamais la même excuse. »', weights: { 'video-games': 1 } },
         { id: 'contests', text: '« Conteste chaque décision de l’arbitre. »', weights: { boxing: 0.8, 'ping-pong': 0.6 } },
       ],

@@ -177,7 +177,7 @@ export const villains: Quiz = {
       answers: [
         { id: 'charming', text: 'Y vas, et tu es charmant·e du début à la fin.', weights: { loki: 0.8, 'light-yagami': 0.5 } },
         { id: 'team-up', text: 'Y vas, et lui proposes de faire équipe.', weights: { silco: 0.8, loki: 0.3 } },
-        { id: 'read-them', text: 'Y vas pour la·le cerner, sans rien laisser paraître.', weights: { 'light-yagami': 1 } },
+        { id: 'read-them', text: 'Y vas pour le·la cerner, sans rien laisser paraître.', weights: { 'light-yagami': 1 } },
         { id: 'brag', text: 'Y vas, et passes la soirée à te vanter.', weights: { gru: 0.8, heisenberg: 0.6 } },
         { id: 'expensive', text: 'Commandes la bouteille la plus chère, et la laisses payer.', weights: { joker: 0.6 } },
         { id: 'refuse', text: 'Refuses. Tu ne bois pas avec n’importe qui.', weights: { 'darth-vader': 0.6, grinch: 0.4 } },

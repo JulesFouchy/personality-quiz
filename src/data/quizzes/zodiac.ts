@@ -230,7 +230,7 @@ export const zodiac: Quiz = {
     },
     {
       id: 'proudest',
-      text: 'Ce qui te rend le plus fier·ère ?',
+      text: 'Ce qui te rend le·la plus fier·ère ?',
       answers: [
         { id: 'goal', text: 'Avoir atteint un objectif que tu t’étais fixé depuis des années.', weights: { capricorn: 1 } },
         { id: 'old-friendship', text: 'Une amitié qui dure depuis l’école.', weights: { cancer: 0.8, taurus: 0.5 } },

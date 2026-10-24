@@ -216,7 +216,7 @@ export const cables: Quiz = {
       text: 'Tu vas à un concert. Où es-tu ?',
       answers: [
         { id: 'front-row', text: 'Au premier rang, à sauter du début à la fin.', weights: { dmx: 1 } },
-        { id: 'watch-hands', text: 'Assez près pour voir les doigts de la·le guitariste.', weights: { jack: 1 } },
+        { id: 'watch-hands', text: 'Assez près pour voir les doigts de le·la guitariste.', weights: { jack: 1 } },
         { id: 'new-friends', text: 'Au milieu, en train de sympathiser avec tes voisin·es.', weights: { 'power-strip': 0.8, dmx: 0.3 } },
         { id: 'at-the-back', text: 'Au fond, tranquille.', weights: { hdmi: 0.6 } },
         { id: 'vip', text: 'En loge.', weights: { lightning: 0.8 } },
@@ -256,7 +256,7 @@ export const cables: Quiz = {
         { id: 'reassure', text: 'Lui dis qu’iel va s’en sortir, et que tu restes là au besoin.', weights: { 'jumper-cables': 0.7 } },
         { id: 'boxes', text: 'L’aides à faire ses cartons et à tout organiser.', weights: { 'usb-c': 0.8, 'power-strip': 0.4 } },
         { id: 'bad-idea', text: 'Lui dis que c’est une mauvaise idée.', weights: { 'bare-wire': 0.8, scart: 0.5 } },
-        { id: 'someday', text: 'Te dis que tu iras la·le voir un jour, sans date précise.', weights: { 'tangled-earphones': 0.7 } },
+        { id: 'someday', text: 'Te dis que tu iras le·la voir un jour, sans date précise.', weights: { 'tangled-earphones': 0.7 } },
       ],
     },
     {
