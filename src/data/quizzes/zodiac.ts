@@ -206,8 +206,8 @@ export const zodiac: Quiz = {
       answers: [
         { id: 'eat-anyway', text: 'Le manges quand même : tu n’oses pas déranger.', weights: { pisces: 1, libra: 0.4 } },
         { id: 'taste', text: 'Le goûtes : tu ne connaissais pas, c’est l’occasion.', weights: { gemini: 0.7, sagittarius: 0.5 } },
-        { id: 'point-out', text: 'Signales poliment l’erreur, en rappelant exactement ce que tu avais demandé.', weights: { virgo: 1 } },
-        { id: 'insist', text: 'Attends ton plat. Tu sais ce que tu veux, et tu ne mangeras rien d’autre.', weights: { taurus: 1 } },
+        { id: 'right-table', text: 'Signales l’erreur, en indiquant à quelle table ce plat devait aller.', weights: { virgo: 1 } },
+        { id: 'insist', text: 'Le renvoies, même s’il a l’air bon.', weights: { taurus: 1 } },
       ],
     },
     {
